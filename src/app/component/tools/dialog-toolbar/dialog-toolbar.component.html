@@ -1,0 +1,12 @@
+<mat-toolbar color="primary" class="mat-elevation-z3">
+  <mat-toolbar-row>
+    <button tabindex="-1" matTooltip="Atras, Cancelar" mat-icon-button type="button" *ngIf="back" (click)="clickBack()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <button tabindex="-1" mat-icon-button type="button" *ngIf="back" (click)="clickBack()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span>{{title}}</span>
+    <span class="spacer-row"></span>
+  </mat-toolbar-row>
+</mat-toolbar>

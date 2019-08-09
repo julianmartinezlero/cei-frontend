@@ -1,0 +1,30 @@
+<div class="menu-navigation">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <!--      <mat-selection-list>-->
+      <button mat-icon-button type="button" (click)="sideService.openMenu()">
+        <mat-icon mat-list-icon>menu</mat-icon>
+      </button>
+      <!--      <div class="img"><img src="/assets/user.svg" alt=""></div>-->
+      <!--      <span *ngIf="authService.getUser()">{{user.name}}</span>-->
+      <span class="spacer-row"></span>
+      <button mat-icon-button [matMenuTriggerFor]="menu">
+        <mat-icon>more_vertical</mat-icon>
+      </button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-selection-list>
+    <button mat-menu-item type="button" *ngFor="let fol of routes" [routerLink]="fol.route" routerLinkActive="active-r">
+      <mat-icon mat-list-icon>{{fol.icon}}</mat-icon>
+      {{fol.name}}
+    </button>
+  </mat-selection-list>
+
+</div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item (click)="logout()">
+    <mat-icon>exit_to_app</mat-icon>
+    <span>Salir</span>
+  </button>
+</mat-menu>

@@ -1,1 +1,117 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+//*:not(.mat-icon){
+//  font-size: 12px !important;
+//}
+body {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.mat-elevation-z1 {
+  box-shadow: none;
+  border-bottom: solid 1px #e0e0e0;
+}
+
+.mat-icon-button {
+  overflow: hidden !important;
+}
+
+.spacer-row {
+  flex: 1 1 auto;
+}
+
+.number {
+  text-align: right !important;
+  min-width: 40px;
+}
+
+.position {
+  width: 40px !important;
+}
+
+td.mat-cell, th.mat-cell {
+  padding: 0 15px !important;
+}
+
+.table-container {
+  width: 100%;
+  height: calc(100% - 79px);
+  overflow: hidden auto;
+  padding: 15px 0 0 0;
+}
+
+mat-sidenav-content {
+  background-color: #d0d0d04d;
+}
+
+.mat-dialog-container {
+  padding: 0 !important;
+}
+
+mat-card-actions {
+  display: flex !important;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+form {
+  mat-card {
+    margin: 21px auto !important;
+    width: 300px !important;
+
+    mat-card-actions {
+      display: flex !important;
+    }
+  }
+}
+
+.crud-card {
+  width: 500px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.mat-dialog-content {
+  margin: 0 !important;
+  padding: 24px !important;
+}
+
+.mat-menu-item-highlighted:not([disabled]), .mat-menu-item.cdk-keyboard-focused:not([disabled]), .mat-menu-item.cdk-program-focused:not([disabled]), .mat-menu-item:hover:not([disabled]) {
+  background: rgb(63, 63, 63);
+}
+
+mat-dialog-container mat-toolbar-row:not(.delete) {
+  background: #4a4a4a;
+  color: white;
+}
+
+td .mat-form-field-appearance-outline .mat-form-field-wrapper {
+  margin: 0;
+  padding: 0;
+}
+
+table {
+  width: auto;
+  margin: auto;
+
+  div.options {
+    width: max-content;
+  }
+}
+
+table th.mat-header-cell {
+  padding: 0 15px !important;
+}
+
+input[type="number"] {
+  text-align: right;
+}
+
+button.mat-accent {
+  //background-color: #3f3f3f !important;
+}

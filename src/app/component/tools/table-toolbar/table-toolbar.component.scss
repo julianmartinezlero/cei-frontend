@@ -1,0 +1,13 @@
+.mat-toolbar.mat-primary {
+  background: #fff;
+  color: #505050;
+}
+
+mat-progress-bar {
+  position: absolute !important;
+  z-index: 101;
+}
+
+mat-toolbar-row span {
+  font-size: 15px !important;
+}

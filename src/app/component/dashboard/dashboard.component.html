@@ -1,0 +1,9 @@
+<div class="router-primary-content" [ngStyle]="hidden()">
+  <mat-sidenav-container [ngStyle]="hidden()" (backdropClick)="closedNav()">
+    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"
+                 [fixedInViewport]="mobileQuery.matches" [opened]="sidenav.sideMenu">
+      <app-panel-navigation></app-panel-navigation>
+    </mat-sidenav>
+    <ng-content></ng-content>
+  </mat-sidenav-container>
+</div>
