@@ -21,7 +21,6 @@ import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertsModule} from '../alerts/alerts.module';
 import {TutorEditComponent} from './tutor-edit/tutor-edit.component';
-import {RouterModule} from '@angular/router';
 import {TutorIndexComponent} from './tutor-index/tutor-index.component';
 
 @NgModule({

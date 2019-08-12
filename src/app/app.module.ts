@@ -9,6 +9,7 @@ import {TutorModule} from './component/tutor/tutor.module';
 import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_DIALOG_DEFAULT_OPTIONS} from '@angular/material';
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {ProfessionalModule} from './component/professional/professional.module';
+import {ChildrenModule} from './component/children/children.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {ProfessionalModule} from './component/professional/professional.module';
     BrowserModule,
     DashboardModule,
     TutorModule,
+    ChildrenModule,
     ProfessionalModule,
     AppRoutingModule
   ],

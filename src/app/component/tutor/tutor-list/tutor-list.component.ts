@@ -67,5 +67,4 @@ export class TutorListComponent implements OnInit, CrudComponent {
     sessionStorage.setItem('tutor', JSON.stringify(value));
     this.router.navigate([this.tutorService.route + '/edit']);
   }
-
 }

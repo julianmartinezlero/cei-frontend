@@ -54,8 +54,6 @@ export class ProfessionalFormComponent implements OnInit {
   }
 
   ngOnInit() {
-    // if (this.professionalSelect) {
-    // }
   }
 
   accept() {

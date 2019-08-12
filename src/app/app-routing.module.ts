@@ -9,7 +9,8 @@ const routes: Routes = [
   {
     path: 'professional', loadChildren: () => import('./component/professional/professional.module')
       .then(r => r.ProfessionalModule)
-  }
+  },
+  {path: 'child', loadChildren: () => import('./component/children/children.module').then(r => r.ChildrenModule)},
 ];
 
 @NgModule({
