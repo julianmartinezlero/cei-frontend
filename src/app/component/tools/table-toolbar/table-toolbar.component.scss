@@ -11,3 +11,8 @@ mat-progress-bar {
 mat-toolbar-row span {
   font-size: 15px !important;
 }
+
+mat-toolbar {
+  position: absolute;
+  z-index: 999;
+}

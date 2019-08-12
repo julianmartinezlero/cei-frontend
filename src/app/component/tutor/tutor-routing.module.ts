@@ -2,10 +2,18 @@ import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {TutorListComponent} from './tutor-list/tutor-list.component';
 import {TutorFormComponent} from './tutor-form/tutor-form.component';
+import {TutorEditComponent} from './tutor-edit/tutor-edit.component';
 
 const routes: Routes = [
-  {path: '', component: TutorListComponent},
+  // {path: '', component: TutorIndexComponent, children: [
+  //     {path: 'index', component: TutorListComponent},
+  //     {path: 'create', component: TutorFormComponent},
+  //     {path: 'edit', component: TutorEditComponent},
+  //   ]},
+  {path: '', redirectTo: 'index', pathMatch: 'full'},
+  {path: 'index', component: TutorListComponent},
   {path: 'create', component: TutorFormComponent},
+  {path: 'edit', component: TutorEditComponent},
 ];
 
 @NgModule({

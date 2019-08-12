@@ -1,8 +1,10 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
-import {TutorFormComponent} from './tutor-form/tutor-form.component';
-import {TutorListComponent} from './tutor-list/tutor-list.component';
-import {TutorService} from './services/tutor.service';
+import {ProfessionalListComponent} from './professional-list/professional-list.component';
+import {ProfessionalFormComponent} from './professional-form/professional-form.component';
+import {ProfessionalService} from './services/professional.service';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
@@ -12,24 +14,16 @@ import {
   MatInputModule,
   MatSelectModule,
   MatSortModule,
-  MatStepperModule,
   MatTableModule
 } from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
-import {TutorRoutingModule} from './tutor-routing.module';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertsModule} from '../alerts/alerts.module';
-import {TutorEditComponent} from './tutor-edit/tutor-edit.component';
-import {RouterModule} from '@angular/router';
-import {TutorIndexComponent} from './tutor-index/tutor-index.component';
+import {ProfessionalRoutingModule} from './professional-routing.module';
 
 @NgModule({
   declarations: [
-    TutorFormComponent,
-    TutorListComponent,
-    TutorEditComponent,
-    TutorIndexComponent,
+    ProfessionalListComponent,
+    ProfessionalFormComponent
   ],
   imports: [
     CommonModule,
@@ -41,18 +35,17 @@ import {TutorIndexComponent} from './tutor-index/tutor-index.component';
     MatSortModule,
     MatButtonModule,
     MatIconModule,
-    TutorRoutingModule,
+    ProfessionalRoutingModule,
     MatCardModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatStepperModule,
   ],
   providers: [
-    TutorService
+    ProfessionalService
   ]
 })
-export class TutorModule {
+export class ProfessionalModule {
 }

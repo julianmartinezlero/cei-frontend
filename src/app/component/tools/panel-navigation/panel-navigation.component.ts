@@ -12,10 +12,10 @@ export class PanelNavigationComponent implements OnInit {
   // user: User;
   // items = [];
   private routes = [
+    {name: 'Inicio', icon: 'home', route: '/home'},
     {name: 'Tutores', icon: 'account_box', route: '/tutor'},
-    {name: 'Productos', icon: 'ballot', route: '/products'},
-    {name: 'Clientes', icon: 'group', route: '/client'},
-    {name: 'Vehiculos', icon: 'kitchen', route: '/vehicle'},
+    {name: 'Niños(as)', icon: 'child_care', route: '/child'},
+    {name: 'Profesionales', icon: 'assignment_ind', route: '/professional'},
     {name: 'Usuarios', icon: 'verified_user', route: '/user'}
   ];
 

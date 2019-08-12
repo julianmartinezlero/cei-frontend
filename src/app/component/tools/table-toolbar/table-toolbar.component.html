@@ -8,21 +8,12 @@
     </button>
     <span>{{title}}</span>
     <span class="spacer-row"></span>
-    <!--    <mat-form-field appearance="outline" class="search">-->
-    <!--      <mat-label>Buscar</mat-label>-->
-    <!--      <input #sear (keyup)="keyUp(sear.value)" matInput placeholder="Buscar">-->
-    <!--      <div *ngIf="sear.value.length == 0" style="width: 24px" matSuffix></div>-->
-    <!--      <mat-icon style="cursor: pointer" *ngIf="sear.value.length > 0" (click)="sear.value='';keyUp('')" matSuffix>-->
-    <!--        close-->
-    <!--      </mat-icon>-->
-    <!--    </mat-form-field>-->
     <button tabindex="-1" mat-icon-button *ngIf="onPrint" (click)="print_p()">
       <mat-icon aria-hidden="false" aria-label="Example heart icon">print</mat-icon>
     </button>
     <button tabindex="-1" mat-icon-button *ngIf="onNew" (click)="create()">
       <mat-icon aria-hidden="false" aria-label="Example heart icon">add</mat-icon>
     </button>
-    <!--    <button tabindex="-1" mat-icon-button (click)="fresh()"><mat-icon aria-hidden="false" aria-label="Example heart icon">refresh</mat-icon></button>-->
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-progress-bar mode="query" *ngIf="loader"></mat-progress-bar>

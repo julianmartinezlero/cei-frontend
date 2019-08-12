@@ -4,6 +4,6 @@ import {PrincipalService} from '../../../services/principal.service';
 @Injectable({
   providedIn: 'root'
 })
-export class TutorService extends PrincipalService {
-  route = 'tutor';
+export class ProfessionalService extends PrincipalService {
+  route = 'professional';
 }

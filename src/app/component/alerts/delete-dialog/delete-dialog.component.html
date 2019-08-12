@@ -1,0 +1,19 @@
+<mat-toolbar color="primary" class="mat-elevation-z1">
+  <mat-toolbar-row class="delete">
+    <span>Eliminar</span>
+    <span class="spacer-row"></span>
+  </mat-toolbar-row>
+</mat-toolbar>
+<!--<mat-progress-bar mode="query" *ngIf="sideService.loaderForm"></mat-progress-bar>-->
+<form>
+  <mat-card>
+    <mat-card-content>
+      Cuidado!! Usted va a eliminar el registro {{data}}
+    </mat-card-content>
+    <mat-card-actions>
+      <button type="button" (click)="cancel()" mat-raised-button>Cancelar</button>
+      <span class="spacer-row"></span>
+      <button cdkFocusInitial color="warn" type="button" (click)="accept()" mat-raised-button>Aceptar</button>
+    </mat-card-actions>
+  </mat-card>
+</form>

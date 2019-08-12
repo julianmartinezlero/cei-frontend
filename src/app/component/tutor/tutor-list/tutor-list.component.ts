@@ -4,6 +4,7 @@ import {Tutor} from '../../../interfaces/models/tutor.model';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {CrudComponent} from '../../../interfaces/crudComponent.interface';
 import {Router} from '@angular/router';
+import {DialogService} from '../../alerts/dialog.service';
 
 @Component({
   selector: 'app-tutor-list',
@@ -25,6 +26,7 @@ export class TutorListComponent implements OnInit, CrudComponent {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private tutorService: TutorService,
+              private dialogService: DialogService,
               private router: Router) {
   }
 
@@ -36,6 +38,8 @@ export class TutorListComponent implements OnInit, CrudComponent {
     this.tutorService.get().subscribe((t: Tutor[]) => {
       this.dataSource = new MatTableDataSource<Tutor>(t);
       this.dataSource.sort = this.sort;
+    }, error1 => {
+      this.dialogService.toastDialog('error');
     });
   }
 
@@ -43,13 +47,25 @@ export class TutorListComponent implements OnInit, CrudComponent {
     this.router.navigate([this.tutorService.route + '/create']);
   }
 
-  delete(id: any) {
+  delete(ele: Tutor) {
+    this.dialogService.deleteDialog(ele.name + ' ' + ele.lastName).subscribe(re => {
+      if (re === 1) {
+        this.tutorService.delete(ele.id).subscribe(del => {
+          this.dialogService.toastDialog('delete');
+          this.all();
+        }, error1 => {
+          this.dialogService.toastDialog('error');
+        });
+      }
+    });
   }
 
   show(id: any) {
   }
 
   update(value: any) {
+    sessionStorage.setItem('tutor', JSON.stringify(value));
+    this.router.navigate([this.tutorService.route + '/edit']);
   }
 
 }

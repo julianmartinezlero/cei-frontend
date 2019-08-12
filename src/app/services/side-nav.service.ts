@@ -12,12 +12,12 @@ export class SideNavService {
 
   openMenu() {
     this.sideMenu = !this.sideMenu;
-    sessionStorage.setItem('menu', this.sideMenu ? 'o' : 'i');
+    localStorage.setItem('menu', this.sideMenu ? 'o' : 'i');
   }
 
   closeMenu() {
     this.sideMenu = false;
-    sessionStorage.setItem('menu', 'i');
+    localStorage.setItem('menu', 'i');
   }
 
   openRight() {

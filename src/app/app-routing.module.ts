@@ -1,10 +1,15 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {AppComponent} from './app.component';
+import {HomeComponent} from './component/dashboard/home/home.component';
 
 const routes: Routes = [
-  {path: '', component: AppComponent},
-  {path: 'tutor', loadChildren: () => import('./component/tutor/tutor.module').then(r => r.TutorModule)}
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
+  {path: 'tutor', loadChildren: () => import('./component/tutor/tutor.module').then(r => r.TutorModule)},
+  {
+    path: 'professional', loadChildren: () => import('./component/professional/professional.module')
+      .then(r => r.ProfessionalModule)
+  }
 ];
 
 @NgModule({

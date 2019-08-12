@@ -1,7 +1,7 @@
 <app-table-toolbar [title]="title" (new)="create()"></app-table-toolbar>
 <div class="table-container">
   <table mat-table [dataSource]="dataSource" matSort>
-    <ng-container matColumnDef="position">
+    <ng-container matColumnDef="pos">
       <th mat-header-cell *matHeaderCellDef class="position">#</th>
       <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
     </ng-container>
@@ -24,6 +24,14 @@
     <ng-container matColumnDef="email">
       <th mat-header-cell mat-sort-header *matHeaderCellDef>Correo</th>
       <td mat-cell *matCellDef="let element" class="number"> {{element.email}} </td>
+    </ng-container>
+    <ng-container matColumnDef="position">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Cargo</th>
+      <td mat-cell *matCellDef="let element" class="number"> {{element.position}} </td>
+    </ng-container>
+    <ng-container matColumnDef="profession">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Profesion</th>
+      <td mat-cell *matCellDef="let element" class="number"> {{element.profession}} </td>
     </ng-container>
     <ng-container matColumnDef="options">
       <th mat-header-cell *matHeaderCellDef>Opciones</th>
