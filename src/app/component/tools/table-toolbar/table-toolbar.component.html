@@ -11,8 +11,10 @@
     <button tabindex="-1" mat-icon-button *ngIf="onPrint" (click)="print_p()">
       <mat-icon aria-hidden="false" aria-label="Example heart icon">print</mat-icon>
     </button>
-    <button tabindex="-1" mat-icon-button *ngIf="onNew" (click)="create()">
+    <button color="primary" style="border-radius: 20px;" tabindex="-1" mat-raised-button *ngIf="onNew"
+            (click)="create()">
       <mat-icon aria-hidden="false" aria-label="Example heart icon">add</mat-icon>
+      Nuevo
     </button>
   </mat-toolbar-row>
 </mat-toolbar>

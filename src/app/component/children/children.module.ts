@@ -7,7 +7,7 @@ import {
   MatButtonModule,
   MatCardModule, MatDatepickerModule,
   MatFormFieldModule,
-  MatIconModule, MatInputModule,
+  MatIconModule, MatInputModule, MatRippleModule,
   MatSelectModule,
   MatSortModule,
   MatTableModule
@@ -15,9 +15,10 @@ import {
 import {ChildrenRoutingModule} from './children-routing.module';
 import {ChildrenFormComponent} from './children-form/children-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
+import {ChildrenShowComponent} from './childer-show/children-show.component';
 
 @NgModule({
-  declarations: [ChildrenListComponent, ChildrenFormComponent],
+  declarations: [ChildrenListComponent, ChildrenFormComponent, ChildrenShowComponent],
   imports: [
     CommonModule,
     ToolsModule,
@@ -32,6 +33,7 @@ import {ReactiveFormsModule} from '@angular/forms';
     MatSelectModule,
     MatDatepickerModule,
     MatInputModule,
+    MatRippleModule,
   ],
   providers: [
     ChildrenService

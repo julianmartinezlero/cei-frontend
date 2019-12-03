@@ -10,4 +10,5 @@ export interface Child {
   createdAt?: Date;
   updatedAt?: Date;
   tutor?: Tutor;
+  photo?: string;
 }

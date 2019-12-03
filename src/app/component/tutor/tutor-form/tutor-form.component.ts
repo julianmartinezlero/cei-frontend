@@ -60,7 +60,8 @@ export class TutorFormComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.minLength(3)]],
       ci: [null, [Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
       sex: [null, Validators.required],
-      birthDate: [null, Validators.required]
+      birthDate: [null, Validators.required],
+      photo: [null]
     });
   }
 
@@ -97,5 +98,38 @@ export class TutorFormComponent implements OnInit {
     localStorage.removeItem('tutor');
     this.dialogService.toastDialog('cancel');
     this.router.navigate(['/tutor']);
+  }
+
+
+  changeListener($event, pos): void {
+    this.readThis($event.target, pos);
+  }
+
+  readThis(inputValue: any, pos): void {
+    const file: File = inputValue.files[0];
+    const myReader: FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.children[pos].get('photo').setValue(myReader.result);
+    };
+    myReader.readAsDataURL(file);
+  }
+
+  onFileChange(event, pos) {
+    const reader = new FileReader();
+
+    if (event.target.files && event.target.files.length) {
+      const [file] = event.target.files;
+      reader.readAsDataURL(file);
+
+      reader.onload = () => {
+        this.children[pos].patchValue({
+          photo: reader.result
+        });
+
+        // need to run CD since file load runs outside of zone
+        // this.cd.markForCheck();
+      };
+    }
   }
 }

@@ -155,6 +155,9 @@
                 Debe Seleccionar o ingresar la Fecha de Nacimiento
               </mat-error>
             </mat-form-field>
+            <div>
+              <input type="file" accept="image/*" (change)="onFileChange($event, i)">
+            </div>
           </mat-card-content>
         </mat-card>
       </form>

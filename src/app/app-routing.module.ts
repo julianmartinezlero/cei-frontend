@@ -11,6 +11,7 @@ const routes: Routes = [
       .then(r => r.ProfessionalModule)
   },
   {path: 'child', loadChildren: () => import('./component/children/children.module').then(r => r.ChildrenModule)},
+  {path: 'question-test', loadChildren: () => import('./component/question-test/question-test.module').then(r => r.QuestionTestModule)},
 ];
 
 @NgModule({

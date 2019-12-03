@@ -64,7 +64,9 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     });
   }
 
-  show(id: any) {
+  show(data) {
+    sessionStorage.setItem('child', JSON.stringify(data));
+    this.router.navigate([this.childrenService.route + '/show']);
   }
 
   update(value: any) {

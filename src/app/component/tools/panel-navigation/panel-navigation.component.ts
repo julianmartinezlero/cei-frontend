@@ -16,6 +16,7 @@ export class PanelNavigationComponent implements OnInit {
     {name: 'Tutores', icon: 'account_box', route: '/tutor'},
     {name: 'Niños(as)', icon: 'child_care', route: '/child'},
     {name: 'Profesionales', icon: 'assignment_ind', route: '/professional'},
+    {name: 'Pruebas', icon: 'assignment', route: '/question-test'},
     {name: 'Usuarios', icon: 'verified_user', route: '/user'}
   ];
 

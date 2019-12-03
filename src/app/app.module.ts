@@ -10,6 +10,7 @@ import {DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE, MAT_DIALOG_DEFAULT_OPTIO
 import {MAT_MOMENT_DATE_FORMATS, MomentDateAdapter} from '@angular/material-moment-adapter';
 import {ProfessionalModule} from './component/professional/professional.module';
 import {ChildrenModule} from './component/children/children.module';
+import {QuestionTestModule} from './component/question-test/question-test.module';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import {ChildrenModule} from './component/children/children.module';
     TutorModule,
     ChildrenModule,
     ProfessionalModule,
+    QuestionTestModule,
     AppRoutingModule
   ],
   providers: [

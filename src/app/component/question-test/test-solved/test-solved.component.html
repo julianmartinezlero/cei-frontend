@@ -1,0 +1,25 @@
+<app-table-toolbar
+  [title]="title"
+  [onBank]="true"
+  [onNew]="false"
+>
+</app-table-toolbar>
+<div class="table-container">
+  <form [formGroup]="testForm" autocomplete="off">
+    <mat-card class="customQuestion">
+      <mat-card-title>Prueba</mat-card-title>
+    </mat-card>
+    <mat-card *ngFor="let question of questions" class="customQuestion">
+      <mat-card-title>{{question.question}}</mat-card-title>
+      <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
+      <mat-card-content>
+        <mat-radio-group aria-label="Select an option">
+          <mat-radio-button *ngFor="let option of question.questionOptions"
+                            [value]="option.id">{{option.description}}</mat-radio-button>
+        </mat-radio-group>
+      </mat-card-content>
+    </mat-card>
+  </form>
+</div>
+
+

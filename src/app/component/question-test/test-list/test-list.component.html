@@ -1,0 +1,52 @@
+<app-table-toolbar [title]="title" [onNew]="true"
+                   (new)="create()"></app-table-toolbar>
+<div class="table-container">
+  <table mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="position">
+      <th mat-header-cell *matHeaderCellDef class="position">#</th>
+      <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>
+    </ng-container>
+    <ng-container matColumnDef="code">
+      <th mat-header-cell mat-sort-header="" *matHeaderCellDef>Codigo</th>
+      <td mat-cell *matCellDef="let element"> {{element.code}} </td>
+    </ng-container>
+    <ng-container matColumnDef="name">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Nombre Ni&ntilde;o</th>
+      <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+    </ng-container>
+    <ng-container matColumnDef="tutor">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Evaluador</th>
+      <td mat-cell *matCellDef="let element"> {{element.tutor}} </td>
+    </ng-container>
+    <ng-container matColumnDef="date">
+      <th mat-header-cell mat-sort-header class="number" *matHeaderCellDef>Fecha</th>
+      <td mat-cell *matCellDef="let element" class="number">{{element.createdAt}}</td>
+    </ng-container>
+    <ng-container matColumnDef="questionState">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Estado</th>
+      <td mat-cell *matCellDef="let element" class="number">{{element.questionState ? 'Terminado' : 'Pendinte'}}</td>
+    </ng-container>
+    <ng-container matColumnDef="result">
+      <th mat-header-cell mat-sort-header *matHeaderCellDef>Resultado</th>
+      <td mat-cell *matCellDef="let element" class="number">{{element.result}}</td>
+    </ng-container>
+    <ng-container matColumnDef="options">
+      <th mat-header-cell *matHeaderCellDef>Opciones</th>
+      <td mat-cell *matCellDef="let element">
+        <div class="options">
+          <button mat-icon-button matTooltip="Resolver" (click)="solved(element)">
+            <mat-icon>playlist_add_check</mat-icon>
+          </button>
+          <button mat-icon-button (click)="update(element)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="delete(element)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </td>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let dataRow; columns: displayedColumns;" (click)="show(dataRow)"></tr>
+  </table>
+</div>

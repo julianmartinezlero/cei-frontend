@@ -27,4 +27,8 @@ export class PrincipalService {
   delete(id) {
     return this.http.delete(`${this.server}/${this.route}/${id}`);
   }
+
+  getCustom(param) {
+    return this.http.get(`${this.server}/${this.route}/${param}`);
+  }
 }
