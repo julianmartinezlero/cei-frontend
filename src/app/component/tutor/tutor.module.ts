@@ -9,7 +9,7 @@ import {
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatSelectModule,
   MatSortModule,
   MatStepperModule,
@@ -17,7 +17,6 @@ import {
 } from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
 import {TutorRoutingModule} from './tutor-routing.module';
-import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertsModule} from '../alerts/alerts.module';
 import {TutorEditComponent} from './tutor-edit/tutor-edit.component';
@@ -32,7 +31,6 @@ import {TutorIndexComponent} from './tutor-index/tutor-index.component';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     FormsModule,
     MatTableModule,
     ToolsModule,
@@ -48,9 +46,13 @@ import {TutorIndexComponent} from './tutor-index/tutor-index.component';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatStepperModule,
+    MatListModule,
   ],
   providers: [
-    TutorService
+    TutorService,
+  ],
+  entryComponents: [
+    TutorFormComponent,
   ]
 })
 export class TutorModule {

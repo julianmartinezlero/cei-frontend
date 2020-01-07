@@ -5,6 +5,7 @@ import {MatSort, MatTableDataSource} from '@angular/material';
 import {CrudComponent} from '../../../interfaces/crudComponent.interface';
 import {Router} from '@angular/router';
 import {DialogService} from '../../alerts/dialog.service';
+import {TutorFormComponent} from '../tutor-form/tutor-form.component';
 
 @Component({
   selector: 'app-tutor-list',
@@ -44,7 +45,13 @@ export class TutorListComponent implements OnInit, CrudComponent {
   }
 
   create() {
-    this.router.navigate([this.tutorService.route + '/create']);
+    // this.router.navigate([this.tutorService.route + '/create']);
+    this.dialogService.openDialog(TutorFormComponent, {
+      width: '600px',
+      maxHeight: '600px'
+    }).subscribe(res => {
+      console.log(res);
+    });
   }
 
   delete(ele: Tutor) {

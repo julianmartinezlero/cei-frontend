@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Child} from '../../../interfaces/models/child.model';
 import {Router} from '@angular/router';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-children-show',
@@ -8,8 +9,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./children-show.component.scss']
 })
 export class ChildrenShowComponent implements OnInit {
-
-  title = 'Atras';
+  defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
   hide = true;
   stringChild = sessionStorage.getItem('child');
   titleForm = 'Detalles del Niño(a)';
@@ -24,7 +24,7 @@ export class ChildrenShowComponent implements OnInit {
     photo: null
   };
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private dialogRef: MatDialogRef<ChildrenShowComponent>) {
   }
 
   ngOnInit() {
@@ -33,6 +33,7 @@ export class ChildrenShowComponent implements OnInit {
 
   cancel() {
     sessionStorage.removeItem('child');
-    this.router.navigate(['/child']);
+    this.dialogRef.close();
+    // this.router.navigate(['/child']);
   }
 }

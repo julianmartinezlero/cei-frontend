@@ -6,6 +6,7 @@ import {CrudComponent} from '../../../interfaces/crudComponent.interface';
 import {ChildrenService} from '../services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
 import * as moment from 'moment';
+import {ChildrenShowComponent} from '../childer-show/children-show.component';
 
 @Component({
   selector: 'app-children-list',
@@ -25,6 +26,7 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     'options'
   ];
   title = 'Niños(as)';
+  defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
   now = moment();
   dataSource = new MatTableDataSource<Child>([]);
   @ViewChild(MatSort, {static: true}) sort: MatSort;
@@ -64,9 +66,14 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     });
   }
 
-  show(data) {
-    sessionStorage.setItem('child', JSON.stringify(data));
-    this.router.navigate([this.childrenService.route + '/show']);
+  show(id) {
+    sessionStorage.setItem('child', JSON.stringify(this.dataSource.data[id]));
+    this.dialogService.openDialog(ChildrenShowComponent, {
+      width: '700px',
+    }).subscribe(res => {
+      console.log(res);
+    });
+    // this.router.navigate([this.childrenService.route + '/show']);
   }
 
   update(value: any) {

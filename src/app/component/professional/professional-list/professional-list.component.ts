@@ -1,16 +1,23 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CrudComponent} from '../../../interfaces/crudComponent.interface';
 import {MatSort, MatTableDataSource} from '@angular/material';
-import {Tutor} from '../../../interfaces/models/tutor.model';
 import {DialogService} from '../../alerts/dialog.service';
 import {Router} from '@angular/router';
 import {ProfessionalService} from '../services/professional.service';
 import {Professional} from '../../../interfaces/models/professional.model';
+import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
   selector: 'app-professional-list',
   templateUrl: './professional-list.component.html',
-  styleUrls: ['./professional-list.component.scss']
+  styleUrls: ['./professional-list.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class ProfessionalListComponent implements OnInit, CrudComponent {
   displayedColumns: string[] = [

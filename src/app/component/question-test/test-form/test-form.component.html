@@ -1,36 +1,26 @@
-<app-table-toolbar
-  [title]="title"
-  [onBank]="true"
-  [onNew]="false"
->
-</app-table-toolbar>
-<div class="table-container">
-  <form [formGroup]="testForm" autocomplete="off">
-    <mat-card>
-      <mat-card-title>{{titleForm}}</mat-card-title>
-      <mat-card-content>
-        <mat-form-field>
-          <input formControlName="code" required matInput placeholder="Codigo">
-          <mat-error *ngIf="testForm.get('code').hasError('required')">
-            Ingrese un codigo Valido
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select formControlName="childId" required placeholder="Niño(a)">
-            <mat-option *ngFor="let child of children" [value]="child.id">{{child.name}} {{child.lastName}}</mat-option>
-          </mat-select>
-          <mat-error *ngIf="testForm.get('childId').hasError('required')">
-            Debe Seleccionar un Niño(a)
-          </mat-error>
-        </mat-form-field>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
-        <span class="spacer-row"></span>
-        <button color="primary" (click)="accept()" mat-raised-button>Guardar</button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
-</div>
+<form [formGroup]="testForm" autocomplete="off" (ngSubmit)="accept()">
+  <div mat-dialog-content>
+    <h1 mat-dialog-title>{{titleForm}}</h1>
+    <mat-form-field>
+      <input formControlName="code" matInput placeholder="Codigo">
+      <mat-error *ngIf="testForm.get('code').hasError('required')">
+        Ingrese un codigo Valido
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="childId" required placeholder="Niño(a)">
+        <mat-option *ngFor="let child of children" [value]="child.id">{{child.name}} {{child.lastName}}</mat-option>
+      </mat-select>
+      <mat-error *ngIf="testForm.get('childId').hasError('required')">
+        Debe Seleccionar un Niño(a)
+      </mat-error>
+    </mat-form-field>
+    <div mat-dialog-actions>
+      <button type="button" mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+      <span class="spacer-row"></span>
+      <button type="submit" color="primary" [disabled]="!testForm.valid" mat-raised-button>Guardar</button>
+    </div>
+  </div>
+</form>
 
 

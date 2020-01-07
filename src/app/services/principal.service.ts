@@ -31,4 +31,8 @@ export class PrincipalService {
   getCustom(param) {
     return this.http.get(`${this.server}/${this.route}/${param}`);
   }
+
+  postCustom(param, data) {
+    return this.http.post(`${this.server}/${this.route}/${param}`, data);
+  }
 }

@@ -1,9 +1,11 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DashboardComponent} from './dashboard.component';
-import {MatSidenavModule} from '@angular/material';
+import {MatSidenavModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
 import {HomeComponent} from './home/home.component';
+import {RouterModule} from '@angular/router';
+import {MatIconModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,11 @@ import {HomeComponent} from './home/home.component';
   imports: [
     CommonModule,
     MatSidenavModule,
-    ToolsModule
+    ToolsModule,
+    MatTabsModule,
+    RouterModule,
+    MatToolbarModule,
+    MatIconModule
   ]
 })
 export class DashboardModule {

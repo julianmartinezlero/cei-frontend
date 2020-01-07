@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {Test} from '../../../interfaces/models/test.model';
 import {ViewTest} from '../../../interfaces/models/ViewTest';
 import {QuestionTestService} from '../question-test.service';
+import {TestFormComponent} from '../test-form/test-form.component';
 
 @Component({
   selector: 'app-test-list',
@@ -45,7 +46,11 @@ export class TestListComponent implements OnInit {
   }
 
   create() {
-    this.router.navigate([this.questionTestService.route + '/create']);
+    this.dialogService.openDialog(TestFormComponent, {
+      width: '400px',
+    }).subscribe(res => {
+      this.all();
+    });
   }
 
   delete(ele: Test) {
@@ -63,12 +68,13 @@ export class TestListComponent implements OnInit {
 
   show(data) {
     sessionStorage.setItem('child', JSON.stringify(data));
-    this.router.navigate([this.questionTestService.route + '/show']);
+    this.router.navigate([`admin${this.questionTestService.route}/show`]);
   }
 
   solved(data) {
-    sessionStorage.setItem('test', JSON.stringify(data));
-    this.router.navigate([`${this.questionTestService.route}/${data.id}/solved`]);
+    const d = this.dataSource.data[data];
+    sessionStorage.setItem('test', JSON.stringify(d));
+    this.router.navigate([`admin/${this.questionTestService.route}/${d.childId}/solved`]);
   }
 
   update(value: any) {

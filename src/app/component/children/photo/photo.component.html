@@ -1,0 +1,23 @@
+<div mat-dialog-content>
+  <h1 mat-dialog-title>Tomar Foto</h1>
+  <webcam [height]="350" [width]="350" [trigger]="triggerObservable" (imageCapture)="handleImage($event)"
+          *ngIf="showWebcam&&!webcamImage"
+          [allowCameraSwitch]="allowCameraSwitch" [switchCamera]="nextWebcamObservable"
+          [videoOptions]="videoOptions"
+          [imageQuality]="1"
+          (cameraSwitched)="cameraWasSwitched($event)"
+          (initError)="handleInitError($event)"
+  ></webcam>
+  <div class="snapshot" *ngIf="webcamImage">
+    <img [src]="webcamImage.imageAsDataUrl"/>
+  </div>
+  <div mat-dialog-actions>
+    <button (click)="cancel()" type="button" mat-button color="warn">Cancelar</button>
+    <span class="spacer-row"></span>
+    <button *ngIf="webcamImage" color="primary" mat-button (click)="webcamImage=null">Tomar Otra</button>
+    <button *ngIf="!webcamImage" color="primary" mat-button (click)="triggerSnapshot();">Tomar Foto
+      <mat-icon>photo_camera</mat-icon>
+    </button>
+    <button *ngIf="webcamImage" type="button" (click)="accept()" mat-button>Aceptar</button>
+  </div>
+</div>

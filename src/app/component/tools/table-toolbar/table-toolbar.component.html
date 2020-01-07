@@ -1,12 +1,12 @@
-<mat-toolbar color="primary" class="mat-elevation-z3">
+<mat-toolbar color="primary" class="mat-elevation-z0">
   <mat-toolbar-row>
-    <button tabindex="-1" mat-icon-button type="button" *ngIf="!sideService.sideMenu" (click)="sideService.openMenu()">
-      <mat-icon mat-list-icon>menu</mat-icon>
-    </button>
+    <!--    <button tabindex="-1" mat-icon-button type="button" *ngIf="!sideService.sideMenu" (click)="sideService.openMenu()">-->
+    <!--      <mat-icon mat-list-icon>menu</mat-icon>-->
+    <!--    </button>-->
     <button tabindex="-1" mat-icon-button type="button" *ngIf="onBank" (click)="back()">
       <mat-icon mat-list-icon>arrow_back</mat-icon>
     </button>
-    <span>{{title}}</span>
+    <!--    <span>{{title}}</span>-->
     <span class="spacer-row"></span>
     <button tabindex="-1" mat-icon-button *ngIf="onPrint" (click)="print_p()">
       <mat-icon aria-hidden="false" aria-label="Example heart icon">print</mat-icon>

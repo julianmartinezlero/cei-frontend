@@ -5,9 +5,12 @@ import {ChildrenService} from './services/children.service';
 import {ToolsModule} from '../tools/tools.module';
 import {
   MatButtonModule,
-  MatCardModule, MatDatepickerModule,
-  MatFormFieldModule,
-  MatIconModule, MatInputModule, MatRippleModule,
+  MatCardModule,
+  MatDatepickerModule, MatDialogModule,
+  MatFormFieldModule, MatGridListModule,
+  MatIconModule,
+  MatInputModule, MatListModule, MatMenuModule,
+  MatRippleModule,
   MatSelectModule,
   MatSortModule,
   MatTableModule
@@ -16,9 +19,12 @@ import {ChildrenRoutingModule} from './children-routing.module';
 import {ChildrenFormComponent} from './children-form/children-form.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {ChildrenShowComponent} from './childer-show/children-show.component';
+import {WebcamModule} from 'ngx-webcam';
+import {PhotoComponent} from './photo/photo.component';
+import {TutorService} from '../tutor/services/tutor.service';
 
 @NgModule({
-  declarations: [ChildrenListComponent, ChildrenFormComponent, ChildrenShowComponent],
+  declarations: [ChildrenListComponent, ChildrenFormComponent, ChildrenShowComponent, PhotoComponent],
   imports: [
     CommonModule,
     ToolsModule,
@@ -34,9 +40,19 @@ import {ChildrenShowComponent} from './childer-show/children-show.component';
     MatDatepickerModule,
     MatInputModule,
     MatRippleModule,
+    MatListModule,
+    MatMenuModule,
+    MatDialogModule,
+    WebcamModule,
+    MatGridListModule,
   ],
   providers: [
-    ChildrenService
+    ChildrenService,
+    TutorService,
+  ],
+  entryComponents: [
+    ChildrenShowComponent,
+    PhotoComponent,
   ]
 })
 export class ChildrenModule {

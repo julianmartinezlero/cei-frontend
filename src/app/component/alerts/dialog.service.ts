@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {MatDialog, MatSnackBar} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSnackBar} from '@angular/material';
 import {DeleteDialogComponent} from './delete-dialog/delete-dialog.component';
 import {SnackDeleteComponent} from './snack-delete/snack-delete.component';
 import {SnackErrorComponent} from './snack-error/snack-error.component';
@@ -50,6 +50,17 @@ export class DialogService {
         this.snack.openFromComponent(SnackAlertComponent, this.snackConfig);
         break;
       }
+      case 'noAuth': {
+        this.snackConfig.data = 'Error de Sesion';
+        this.snack.openFromComponent(SnackErrorComponent, this.snackConfig);
+        break;
+      }
     }
+  }
+
+  openDialog(s: any, config?: MatDialogConfig) {
+    return this.dialog.open(s, config ? config : {
+      width: this.width,
+    }).afterClosed();
   }
 }

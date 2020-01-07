@@ -1,67 +1,77 @@
-<app-table-toolbar
-  [title]="title"
-  [onBank]="true"
-  [onNew]="false">
-</app-table-toolbar>
-<div class="table-container">
-  <form [formGroup]="childForm" autocomplete="off">
-    <mat-card>
-      <mat-card-title>{{titleForm}}</mat-card-title>
-      <mat-card-content>
-        <mat-form-field>
-          <input formControlName="name" required matInput placeholder="Nombres">
-          <mat-error *ngIf="childForm.get('name').hasError('required')">
-            Ingrese un Nombre(s) v&aacute;lido
-          </mat-error>
-          <mat-error *ngIf="childForm.get('name').hasError('minlength')">
-            Longitud minima de 3 letras
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input formControlName="lastName" required matInput placeholder="Apellidos">
-          <mat-error *ngIf="childForm.get('lastName').hasError('required')">
-            Ingrese un Apellido(s) v&aacute;lido
-          </mat-error>
-          <mat-error *ngIf="childForm.get('lastName').hasError('minlength')">
-            Longitud minima de 3 letras
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input formControlName="ci" matInput placeholder="CI">
-          <mat-error
-            *ngIf="(childForm.get('ci').hasError('minlength')||childForm.get('ci').hasError('maxlength'))&&!childForm.get('ci').hasError('pattern')">
-            Longitud minima de 7 numeros y m&aacute;ximo de 10
-          </mat-error>
-          <mat-error *ngIf="childForm.get('ci').hasError('pattern')">
-            Solo debe contener Numeros
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <mat-select formControlName="sex" required placeholder="Genero">
-            <mat-option value="Masculino">Masculino</mat-option>
-            <mat-option value="Femenino">Femenino</mat-option>
-          </mat-select>
-          <mat-error *ngIf="childForm.get('sex').hasError('required')">
-            Debe Seleccionar un Genero
-          </mat-error>
-        </mat-form-field>
-        <mat-form-field>
-          <input formControlName="birthDate" readonly (click)="picker.open()" matInput [matDatepicker]="picker"
-                 placeholder="Fecha de Nacimiento">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
-          <mat-error *ngIf="childForm.get('birthDate').hasError('required')">
-            Debe Seleccionar o ingresar la Fecha de Nacimiento
-          </mat-error>
-        </mat-form-field>
-      </mat-card-content>
-      <mat-card-actions>
-        <button mat-raised-button color="warn" (click)="cancel()">Cancelar</button>
+<form [formGroup]="childForm" (ngSubmit)="accept()" autocomplete="off">
+  <div mat-dialog-content>
+    <h1 mat-dialog-title>{{titleForm}}</h1>
+    <mat-form-field>
+      <input formControlName="name" required matInput placeholder="Nombres">
+      <mat-error *ngIf="childForm.get('name').hasError('required')">
+        Ingrese un Nombre(s) v&aacute;lido
+      </mat-error>
+      <mat-error *ngIf="childForm.get('name').hasError('minlength')">
+        Longitud minima de 3 letras
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input formControlName="lastName" required matInput placeholder="Apellidos">
+      <mat-error *ngIf="childForm.get('lastName').hasError('required')">
+        Ingrese un Apellido(s) v&aacute;lido
+      </mat-error>
+      <mat-error *ngIf="childForm.get('lastName').hasError('minlength')">
+        Longitud minima de 3 letras
+      </mat-error>
+    </mat-form-field>
+    <mat-grid-list cols="2" rowHeight="1:1">
+      <mat-grid-tile>
+        <div id="tile" style="width: 90%;
+  position: absolute;
+  padding-right: 10%;
+  padding-top: 20px;">
+          <mat-form-field>
+            <input formControlName="ci" matInput placeholder="CI">
+            <mat-error
+              *ngIf="(childForm.get('ci').hasError('minlength')||childForm.get('ci').hasError('maxlength'))&&!childForm.get('ci').hasError('pattern')">
+              Longitud minima de 7 numeros y m&aacute;ximo de 10
+            </mat-error>
+            <mat-error *ngIf="childForm.get('ci').hasError('pattern')">
+              Solo debe contener Numeros
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <mat-select formControlName="sex" required placeholder="Genero">
+              <mat-option value="Masculino">Masculino</mat-option>
+              <mat-option value="Femenino">Femenino</mat-option>
+            </mat-select>
+            <mat-error *ngIf="childForm.get('sex').hasError('required')">
+              Debe Seleccionar un Genero
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field>
+            <input formControlName="birthDate" readonly (click)="picker.open()" matInput [matDatepicker]="picker"
+                   placeholder="Fecha de Nacimiento">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error *ngIf="childForm.get('birthDate').hasError('required')">
+              Debe Seleccionar o ingresar la Fecha de Nacimiento
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <div>
+          <img *ngIf="childSelect.photo" [src]="childSelect.photo">
+          <button type="button" mat-button (click)="takePhoto()">Tomar Foto
+            <mat-icon>photo_camera</mat-icon>
+          </button>
+        </div>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <div mat-dialog-actions>
+      <button type="button" mat-button color="warn" (click)="cancel()">Cancelar</button>
         <span class="spacer-row"></span>
-        <button color="primary" (click)="accept()" mat-raised-button>Guardar</button>
-      </mat-card-actions>
-    </mat-card>
-  </form>
-</div>
+      <button type="submit" [disabled]="!childForm.valid" color="primary" mat-button>Guardar</button>
+    </div>
+  </div>
+</form>
 
 

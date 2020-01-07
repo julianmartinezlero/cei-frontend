@@ -1,0 +1,45 @@
+<div>
+  <mat-toolbar class="header-app">
+    <mat-toolbar-row>
+      <h1 class="mat-primary">Mis Hijos</h1>
+      <span class="spacer-row"></span>
+      <button mat-icon-button color="primary" (click)="addChild()">
+        <mat-icon>person_add</mat-icon>
+      </button>
+      <!--      <mat-divider></mat-divider>-->
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div style="text-align: center;" *ngIf="children.length > 0">
+    <mat-card class="child mat-elevation-z3" *ngFor="let child of children">
+      <mat-card-title>
+        Datos del ni&ntilde;(a)
+      </mat-card-title>
+      <div class="details-child" style="text-align: center;">
+        <img [src]="child.photo ? child.photo : defaultPhoto" alt="" srcset="">
+      </div>
+      <mat-card-content>
+        <div class="details-child">
+          <div>
+            <div class="details-data-child">Nombre</div>
+            <div class="details-data-child">{{child.name}}</div>
+            <div class="details-data-child">Apellido</div>
+            <div class="details-data-child">{{child.lastName}}</div>
+            <span class="details-data-child">Ci</span>
+            <span class="details-data-child">{{child.ci ? child.ci : 'No definido'}}</span>
+            <span class="details-data-child">Genero</span>
+            <span class="details-data-child">{{child.sex}}</span>
+            <span class="details-data-child">Fecha de Nacimiento</span>
+            <span class="details-data-child">{{child.birthDate}}</span>
+          </div>
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary" (click)="solved(child)">Resolver Test</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div style="text-align: center" *ngIf="children.length === 0">
+    No se registraron hijos
+  </div>
+</div>
+

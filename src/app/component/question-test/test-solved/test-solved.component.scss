@@ -1,4 +1,37 @@
 mat-card {
   margin: 21px auto;
-  width: 500px !important;
+  width: 460px !important;
 }
+
+.custom-header {
+  height: 20px;
+  padding: 20px;
+  font-size: 51px !important;
+}
+
+.mat-toolbar-row, .mat-toolbar-single-row {
+  background: white;
+}
+
+.custom-card {
+  border: solid 1px #b4b4b4;
+}
+
+.details-child {
+  img {
+    width: 100px;
+    border-radius: 50%;
+  }
+
+  .details-data-child {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    padding: 5px 20px;
+  }
+
+  .details-data-child:nth-child(2n+1) {
+    font-weight: bold;
+  }
+}
+

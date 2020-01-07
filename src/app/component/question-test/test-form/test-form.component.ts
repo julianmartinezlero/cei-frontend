@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Injectable, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {DialogService} from '../../alerts/dialog.service';
@@ -6,6 +6,8 @@ import {Test} from '../../../interfaces/models/test.model';
 import {QuestionTestService} from '../question-test.service';
 import {ChildrenService} from '../../children/services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
+import {MatDialogRef} from '@angular/material';
+import * as uuid from 'uuid';
 
 @Component({
   selector: 'app-test-form',
@@ -20,7 +22,7 @@ export class TestFormComponent implements OnInit {
   stringTest = sessionStorage.getItem('test');
   titleForm = this.stringTest ?
     'Actualizar Datos de Prueba' :
-    'Resistro de Prueba';
+    'Registro de Prueba';
   children: Child[];
   testSelect: Test = this.stringTest ? JSON.parse(this.stringTest) : {
     id: null,
@@ -35,10 +37,11 @@ export class TestFormComponent implements OnInit {
               private router: Router,
               private questionTestService: QuestionTestService,
               private childrenService: ChildrenService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              public dialogRef: MatDialogRef<TestFormComponent>) {
     this.testForm = this.fb.group({
       id: this.testSelect.id,
-      code: [this.testSelect.code, [Validators.required, Validators.minLength(3)]],
+      code: [{value: uuid.v4(), disabled: true}, [Validators.required, Validators.minLength(3)]],
       questionState: [this.testSelect.questionState],
       childId: [this.testSelect.childId, Validators.required],
       professionalId: [this.testSelect.professionalId],
@@ -55,7 +58,7 @@ export class TestFormComponent implements OnInit {
       this.questionTestService.put(this.testSelect.id, this.testForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
         sessionStorage.removeItem('test');
-        this.router.navigate([this.questionTestService.route]);
+        this.dialogRef.close();
       }, error1 => {
         this.dialogService.toastDialog('error');
       });
@@ -63,7 +66,7 @@ export class TestFormComponent implements OnInit {
       this.questionTestService.post(this.testForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
         sessionStorage.removeItem('test');
-        this.router.navigate([this.questionTestService.route]);
+        this.dialogRef.close();
       }, error1 => {
         this.dialogService.toastDialog('error');
       });
@@ -79,6 +82,7 @@ export class TestFormComponent implements OnInit {
   cancel() {
     sessionStorage.removeItem('test');
     this.dialogService.toastDialog('cancel');
-    this.router.navigate([this.questionTestService.route]);
+    this.dialogRef.close();
+    // this.router.navigate([this.questionTestService.route]);
   }
 }

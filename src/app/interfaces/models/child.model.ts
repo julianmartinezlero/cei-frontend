@@ -1,4 +1,5 @@
 import {Tutor} from './tutor.model';
+import {Professional} from './professional.model';
 
 export interface Child {
   id?: number;
@@ -9,6 +10,7 @@ export interface Child {
   ci?: string;
   createdAt?: Date;
   updatedAt?: Date;
-  tutor?: Tutor;
+  tutor?: Professional;
+  professional?: Professional;
   photo?: string;
 }

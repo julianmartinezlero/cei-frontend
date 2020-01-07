@@ -1,0 +1,33 @@
+.details-child {
+  img {
+    width: 100px;
+    border-radius: 50%;
+  }
+
+  .details-data-child {
+    position: relative;
+    display: inline-block;
+    width: 40%;
+    padding: 5px 15px;
+  }
+
+  .details-data-child:nth-child(2n+1) {
+    font-weight: bold;
+  }
+}
+
+.child {
+  //background: red;
+  display: inline-block;
+  margin: 20px;
+  text-align: start;
+}
+
+.header-app {
+  background: white;
+
+  mat-toolbar-row {
+    width: 80%;
+    margin: auto;
+  }
+}

@@ -1,9 +1,25 @@
 <div class="router-primary-content" [ngStyle]="hidden()">
-  <mat-sidenav-container [ngStyle]="hidden()" (backdropClick)="closedNav()">
-    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'over'"
-                 [fixedInViewport]="mobileQuery.matches" [opened]="sidenav.sideMenu">
-      <app-panel-navigation></app-panel-navigation>
-    </mat-sidenav>
-    <ng-content></ng-content>
-  </mat-sidenav-container>
+  <!--  <mat-sidenav-container [ngStyle]="hidden()" (backdropClick)="closedNav()">-->
+  <!--    <mat-sidenav #snav [mode]="mobileQuery.matches ? 'over' : 'side'"-->
+  <!--                 [fixedInViewport]="mobileQuery.matches" [opened]="sidenav.sideMenu">-->
+  <!--      <app-panel-navigation></app-panel-navigation>-->
+  <!--    </mat-sidenav>-->
+  <!--    <ng-content></ng-content>-->
+  <!--  </mat-sidenav-container>-->
+  <mat-toolbar>
+    <mat-toolbar-row>
+      Sistema de Informacion CEI
+      <nav mat-tab-nav-bar [backgroundColor]="background">
+        <a mat-tab-link *ngFor="let link of routes"
+           [routerLink]="link.route"
+           (click)="activeLink = link.route"
+           routerLinkActive="active" [active]="link.route == activeLink">
+          <mat-icon>{{link.icon}}</mat-icon>
+          {{link.name}}</a>
+      </nav>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <ng-content></ng-content>
+
 </div>

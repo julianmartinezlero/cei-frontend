@@ -3,7 +3,6 @@ import {CommonModule} from '@angular/common';
 import {ProfessionalListComponent} from './professional-list/professional-list.component';
 import {ProfessionalFormComponent} from './professional-form/professional-form.component';
 import {ProfessionalService} from './services/professional.service';
-import {HttpClientModule} from '@angular/common/http';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatButtonModule,
@@ -11,7 +10,7 @@ import {
   MatDatepickerModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule,
+  MatInputModule, MatListModule,
   MatSelectModule,
   MatSortModule,
   MatTableModule
@@ -27,7 +26,6 @@ import {ProfessionalRoutingModule} from './professional-routing.module';
   ],
   imports: [
     CommonModule,
-    HttpClientModule,
     FormsModule,
     MatTableModule,
     ToolsModule,
@@ -42,6 +40,7 @@ import {ProfessionalRoutingModule} from './professional-routing.module';
     MatInputModule,
     ReactiveFormsModule,
     MatDatepickerModule,
+    MatListModule,
   ],
   providers: [
     ProfessionalService

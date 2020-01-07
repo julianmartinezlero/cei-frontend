@@ -1,12 +1,24 @@
-
 .router-primary-content {
   position: relative;
   background: white;
   border-radius: 0px;
-  box-shadow: 0px 0px 10px 0px #232323;
+  //box-shadow: 0px 0px 10px 0px #232323;
   overflow: hidden;
   width: 100%;
   height: 100%;
+}
+
+mat-toolbar {
+  background: white;
+  border-bottom: 1px #bdbdbd solid;
+}
+
+nav {
+  height: inherit;
+}
+
+.mat-tab-header, .mat-tab-nav-bar {
+  border-bottom: none;
 }
 
 .mat-drawer-container {

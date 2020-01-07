@@ -1,11 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {Professional} from '../../../interfaces/models/professional.model';
 import {Router} from '@angular/router';
-import {ProfessionalService} from '../../professional/services/professional.service';
 import {DialogService} from '../../alerts/dialog.service';
 import {Child} from '../../../interfaces/models/child.model';
 import {ChildrenService} from '../services/children.service';
+import {MatDialogRef} from '@angular/material';
+import {PhotoComponent} from '../photo/photo.component';
+import {LoginService} from '../../login/login.service';
+import {Professional} from '../../../interfaces/models/professional.model';
 
 @Component({
   selector: 'app-children-form',
@@ -20,16 +22,16 @@ export class ChildrenFormComponent implements OnInit {
   stringChild = sessionStorage.getItem('child');
   titleForm = this.stringChild ?
     'Actualizar Datos del Niño(a)' :
-    'Resistro de Niño(a)';
-  childSelect: Child = this.stringChild ? JSON.parse(this.stringChild) : {
+    'Registro de Niño(a)';
+  professional: Professional;
+  childSelect: Child = {
     id: null,
-    password: null,
     name: null,
     lastName: null,
     sex: null,
-    tutor: null,
     birthDate: null,
     ci: null,
+    photo: null,
     createdAt: null,
     updatedAt: null,
   };
@@ -37,19 +39,22 @@ export class ChildrenFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private childrenService: ChildrenService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private authService: LoginService,
+              private dialogRef: MatDialogRef<ChildrenFormComponent>) {
     this.childForm = this.fb.group({
       id: this.childSelect.id,
       name: [this.childSelect.name, [Validators.required, Validators.minLength(3)]],
       lastName: [this.childSelect.lastName, [Validators.required, Validators.minLength(3)]],
       ci: [this.childSelect.ci, [Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
-      sex: [{value: this.childSelect.sex, disabled: true}, Validators.required],
-      birthDate: [{value: this.childSelect.birthDate, disabled: true}, Validators.required]
+      sex: [{value: this.childSelect.sex, disabled: false}, Validators.required],
+      birthDate: [{value: this.childSelect.birthDate, disabled: false}, Validators.required],
+      photo: null,
     });
   }
 
   ngOnInit() {
-
+    this.loadProfile();
   }
 
   accept() {
@@ -57,24 +62,42 @@ export class ChildrenFormComponent implements OnInit {
       this.childrenService.put(this.childSelect.id, this.childForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
         sessionStorage.removeItem('child');
-        this.router.navigate(['/child']);
+        this.dialogRef.close(true);
       }, error1 => {
         this.dialogService.toastDialog('error');
       });
     } else {
+      const c: Child = this.childForm.value;
+      c.professional = this.professional.position ? c.professional : this.professional;
       this.childrenService.post(this.childForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
         sessionStorage.removeItem('child');
-        this.router.navigate(['/child']);
+        this.dialogRef.close(true);
       }, error1 => {
         this.dialogService.toastDialog('error');
       });
     }
   }
 
+  takePhoto() {
+    this.dialogService.openDialog(PhotoComponent, {
+      width: '400px'
+    }).subscribe(res => {
+      if (res) {
+        this.childSelect.photo = res;
+        this.childForm.get('photo').setValue(res);
+      }
+    });
+  }
   cancel() {
     sessionStorage.removeItem('child');
+    this.dialogRef.close();
     this.dialogService.toastDialog('cancel');
-    this.router.navigate(['/child']);
+  }
+
+  loadProfile() {
+    this.authService.getCustom('profile').subscribe((p: any) => {
+      this.professional = p[0];
+    });
   }
 }

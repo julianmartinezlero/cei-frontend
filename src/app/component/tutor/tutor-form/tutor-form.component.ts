@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {TutorService} from '../services/tutor.service';
 import {Tutor} from '../../../interfaces/models/tutor.model';
 import {DialogService} from '../../alerts/dialog.service';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-tutor-form',
@@ -20,7 +21,8 @@ export class TutorFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private tutorService: TutorService,
-              private dialogService: DialogService) {
+              private dialogService: DialogService,
+              private dialogRef: MatDialogRef<TutorFormComponent>) {
     this.tutorForm = this.fb.group({
       id: [null],
       name: [null, [Validators.required, Validators.minLength(3)]],
@@ -96,8 +98,8 @@ export class TutorFormComponent implements OnInit {
 
   cancel() {
     localStorage.removeItem('tutor');
+    this.dialogRef.close();
     this.dialogService.toastDialog('cancel');
-    this.router.navigate(['/tutor']);
   }
 
 

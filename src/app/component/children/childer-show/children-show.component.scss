@@ -1,0 +1,20 @@
+.details {
+  //background: red;
+}
+
+.details-child {
+  display: inline-block;
+  position: relative;
+  width: 277px;
+  padding: 20px;
+  top: 0;
+  height: 100%;
+  vertical-align: middle;
+
+  img {
+    width: 278px;
+    height: 278px;
+    //image-rendering: pixelated;
+    border-radius: 50%;
+  }
+}

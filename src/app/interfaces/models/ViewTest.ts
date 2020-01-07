@@ -9,4 +9,7 @@ export interface ViewTest extends Test {
   tutorId?: number;
   createdAt?: any;
   updatedAt?: any;
+
+  name?: any;
+  tutor?: any;
 }
