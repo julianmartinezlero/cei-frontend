@@ -1,115 +1,114 @@
-<!--<app-table-toolbar-->
-<!--  [title]="title"-->
-<!--  [onBank]="true"-->
-<!--  [onNew]="false">-->
-<!--</app-table-toolbar>-->
-<!--<div class="table-container">-->
-  <mat-horizontal-stepper [linear]="true" #stepper>
+<mat-horizontal-stepper [linear]="true" #stepper>
     <mat-step [stepControl]="tutorForm">
       <ng-template matStepLabel>Datos del Apoderado</ng-template>
       <form [formGroup]="tutorForm" autocomplete="off">
-        <!--        <mat-card>-->
-        <!--          <mat-card-content>-->
+        <div class="mat-dialog-content">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombres</mat-label>
+            <input formControlName="name" required matInput placeholder="Nombres">
+            <mat-error *ngIf="tutorForm.get('name').hasError('required')">
+              Ingrese un Nombre(s) v&aacute;lido
+            </mat-error>
+            <mat-error *ngIf="tutorForm.get('name').hasError('minlength')">
+              Longitud minima de 3 letras
+            </mat-error>
+          </mat-form-field>
 
-            <mat-form-field>
-              <input formControlName="name" required matInput placeholder="Nombres">
-              <mat-error *ngIf="tutorForm.get('name').hasError('required')">
-                Ingrese un Nombre(s) v&aacute;lido
-              </mat-error>
-              <mat-error *ngIf="tutorForm.get('name').hasError('minlength')">
-                Longitud minima de 3 letras
-              </mat-error>
-            </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Apellidos</mat-label>
+            <input formControlName="lastName" required matInput placeholder="Apellidos">
+            <mat-error *ngIf="tutorForm.get('lastName').hasError('required')">
+              Ingrese un Apellido(s) v&aacute;lido
+            </mat-error>
+            <mat-error *ngIf="tutorForm.get('lastName').hasError('minlength')">
+              Longitud minima de 3 letras
+            </mat-error>
+          </mat-form-field>
 
-            <mat-form-field>
-              <input formControlName="lastName" required matInput placeholder="Apellidos">
-              <mat-error *ngIf="tutorForm.get('lastName').hasError('required')">
-                Ingrese un Apellido(s) v&aacute;lido
-              </mat-error>
-              <mat-error *ngIf="tutorForm.get('lastName').hasError('minlength')">
-                Longitud minima de 3 letras
-              </mat-error>
-            </mat-form-field>
+          <mat-form-field appearance="outline">
+            <input formControlName="ci" required matInput placeholder="CI">
+            <mat-error *ngIf="tutorForm.get('ci').hasError('required')">
+              Ingrese un n&uacute;mero v&aacute;lido
+            </mat-error>
+            <mat-error
+              *ngIf="(tutorForm.get('ci').hasError('minlength')||tutorForm.get('ci').hasError('maxlength'))&&!tutorForm.get('ci').hasError('pattern')">
+              Longitud minima de 7 numeros y m&aacute;ximo de 10
+            </mat-error>
+            <mat-error *ngIf="tutorForm.get('ci').hasError('pattern')">
+              Solo debe contener Numeros
+            </mat-error>
+          </mat-form-field>
 
-            <mat-form-field>
-              <input formControlName="ci" required matInput placeholder="CI">
-              <mat-error *ngIf="tutorForm.get('ci').hasError('required')">
-                Ingrese un n&uacute;mero v&aacute;lido
-              </mat-error>
-              <mat-error
-                *ngIf="(tutorForm.get('ci').hasError('minlength')||tutorForm.get('ci').hasError('maxlength'))&&!tutorForm.get('ci').hasError('pattern')">
-                Longitud minima de 7 numeros y m&aacute;ximo de 10
-              </mat-error>
-              <mat-error *ngIf="tutorForm.get('ci').hasError('pattern')">
-                Solo debe contener Numeros
-              </mat-error>
-            </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Telf./Cel.</mat-label>
+            <input formControlName="cell" required matInput placeholder="Telf./Cel.">
+            <mat-error *ngIf="tutorForm.get('cell').hasError('required')">
+              Ingrese un n&uacute;mero v&aacute;lido
+            </mat-error>
+            <mat-error
+              *ngIf="(tutorForm.get('cell').hasError('minlength')||tutorForm.get('cell').hasError('maxlength'))&&!tutorForm.get('cell').hasError('pattern')">
+              Longitud minima de 7 numeros y m&aacute;ximo de 10
+            </mat-error>
+            <mat-error *ngIf="tutorForm.get('cell').hasError('pattern')">
+              Solo debe contener Numeros
+            </mat-error>
+          </mat-form-field>
 
-            <mat-form-field>
-              <input formControlName="cell" required matInput placeholder="Telf./Cel.">
-              <mat-error *ngIf="tutorForm.get('cell').hasError('required')">
-                Ingrese un n&uacute;mero v&aacute;lido
-              </mat-error>
-              <mat-error
-                *ngIf="(tutorForm.get('cell').hasError('minlength')||tutorForm.get('cell').hasError('maxlength'))&&!tutorForm.get('cell').hasError('pattern')">
-                Longitud minima de 7 numeros y m&aacute;ximo de 10
-              </mat-error>
-              <mat-error *ngIf="tutorForm.get('cell').hasError('pattern')">
-                Solo debe contener Numeros
-              </mat-error>
-            </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Correo Electronico</mat-label>
+            <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">
+            <mat-error
+              *ngIf="tutorForm.get('email').hasError('required') || tutorForm.get('email').hasError('email')">
+              Ingrese un correo v&aacute;lido
+            </mat-error>
+          </mat-form-field>
 
-            <mat-form-field>
-              <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">
-              <mat-error
-                *ngIf="tutorForm.get('email').hasError('required') || tutorForm.get('email').hasError('email')">
-                Ingrese un correo v&aacute;lido
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-              <input formControlName="password" required matInput placeholder="Contraseña"
-                     [type]="hide ? 'password' : 'text'">
-              <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                      [attr.aria-pressed]="hide">
-                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-              </button>
-              <mat-error *ngIf="tutorForm.get('password').hasError('required')">
-                Debe Ingresar contrase&ntilde;a
-              </mat-error>
-              <mat-error *ngIf="tutorForm.get('password').hasError('minlength')">
-                La longitud m&iacute;nima es de 8 caracteres
-              </mat-error>
-            </mat-form-field>
-
-            <mat-form-field>
-              <input formControlName="children" required matInput placeholder="Nro de Hijos a registrar" type="number">
-              <mat-error *ngIf="tutorForm.get('children').hasError('required')">
-                Debe Ingresar un Numero de hijos
-              </mat-error>
-              <mat-error *ngIf="tutorForm.get('children').hasError('min')||tutorForm.get('children').hasError('max')">
-                Ingrese un n&uacute;mero entre 1 y 12
-              </mat-error>
-            </mat-form-field>
-
-        <!--          </mat-card-content>-->
-          <mat-card-actions>
-            <button color="warn" (click)="cancel()" mat-raised-button>Cancelar</button>
-            <span class="spacer-row"></span>
-            <button color="primary" (click)="accept()" [disabled]="tutorForm.invalid" mat-raised-button matStepperNext>
-              Siguiente
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input formControlName="password" required matInput placeholder="Contraseña"
+                   [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide">
+              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
             </button>
-          </mat-card-actions>
-        <!--        </mat-card>-->
+            <mat-error *ngIf="tutorForm.get('password').hasError('required')">
+              Debe Ingresar contrase&ntilde;a
+            </mat-error>
+            <mat-error *ngIf="tutorForm.get('password').hasError('minlength')">
+              La longitud m&iacute;nima es de 8 caracteres
+            </mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Nro de Hijos a registrar</mat-label>
+            <input formControlName="children" required matInput placeholder="Nro de Hijos a registrar" type="number">
+            <mat-error *ngIf="tutorForm.get('children').hasError('required')">
+              Debe Ingresar un Numero de hijos
+            </mat-error>
+            <mat-error *ngIf="tutorForm.get('children').hasError('min')||tutorForm.get('children').hasError('max')">
+              Ingrese un n&uacute;mero entre 1 y 12
+            </mat-error>
+          </mat-form-field>
+        </div>
+
+        <div class="mat-dialog-actions">
+          <button color="warn" (click)="cancel()" mat-stroked-button>Cancelar</button>
+          <span class="spacer-row"></span>
+          <button color="primary" (click)="accept()" [disabled]="tutorForm.invalid" mat-stroked-button matStepperNext>
+            Siguiente
+          </button>
+        </div>
       </form>
     </mat-step>
     <mat-step [stepControl]="childFormGroup">
       <ng-template matStepLabel>Datos de los hijos</ng-template>
-      <div *ngFor="let childForm of children; let i= index">
-        <mat-divider></mat-divider>
-        <h3 mat-subheader>Hijo N&deg; {{i + 1}}</h3>
-        <form [formGroup]="childForm" autocomplete="off">
-            <mat-form-field>
+      <div class="mat-dialog-content">
+        <div class="child" *ngFor="let childForm of children; let i= index">
+          <mat-divider></mat-divider>
+          <h3 mat-subheader>Hijo N&deg; {{i + 1}}</h3>
+          <form [formGroup]="childForm" autocomplete="off">
+            <mat-form-field appearance="outline">
+              <mat-label>Nombres</mat-label>
               <input formControlName="name" required matInput placeholder="Nombres">
               <mat-error *ngIf="childForm.get('name').hasError('required')">
                 Ingrese un Nombre(s) v&aacute;lido
@@ -118,7 +117,8 @@
                 Longitud minima de 3 letras
               </mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Apellidos</mat-label>
               <input formControlName="lastName" required matInput placeholder="Apellidos">
               <mat-error *ngIf="childForm.get('lastName').hasError('required')">
                 Ingrese un Apellido(s) v&aacute;lido
@@ -127,7 +127,8 @@
                 Longitud minima de 3 letras
               </mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>CI</mat-label>
               <input formControlName="ci" matInput placeholder="CI">
               <mat-error
                 *ngIf="(childForm.get('ci').hasError('minlength')||childForm.get('ci').hasError('maxlength'))&&!childForm.get('ci').hasError('pattern')">
@@ -137,7 +138,8 @@
                 Solo debe contener Numeros
               </mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Genero</mat-label>
               <mat-select formControlName="sex" required placeholder="Genero">
                 <mat-option value="Masculino">Masculino</mat-option>
                 <mat-option value="Femenino">Femenino</mat-option>
@@ -146,7 +148,8 @@
                 Debe Seleccionar un Genero
               </mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
+              <mat-label>Fecha de Nacimiento</mat-label>
               <input formControlName="birthDate" readonly (click)="picker.open()" matInput [matDatepicker]="picker"
                      placeholder="Fecha de Nacimiento">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -158,27 +161,25 @@
             <div>
               <input type="file" accept="image/*" (change)="onFileChange($event, i)">
             </div>
-        </form>
+          </form>
+        </div>
       </div>
-        <mat-card-actions>
-          <button mat-raised-button matStepperPrevious>Atras</button>
-          <span class="spacer-row"></span>
-          <button color="primary" mat-raised-button matStepperNext [disabled]="childrenInvalid()">Seguiente</button>
-        </mat-card-actions>
-      <!--      </mat-card>-->
+      <div class="mat-dialog-actions">
+        <button mat-stroked-button matStepperPrevious>Atras</button>
+        <span class="spacer-row"></span>
+        <button color="primary" mat-stroked-button matStepperNext [disabled]="childrenInvalid()">Seguiente</button>
+      </div>
     </mat-step>
     <mat-step>
       <ng-template matStepLabel>Terminar Registro</ng-template>
-      <mat-card>
-        <mat-card-content>
+      <div class="mat-dialog-content">
           Usted a terminado su registro.
-        </mat-card-content>
-        <mat-card-actions>
-          <button mat-raised-button matStepperPrevious>Atras</button>
-          <span class="spacer-row"></span>
-          <button color="primary" mat-raised-button (click)="endRegister()">Terminar Registro</button>
-        </mat-card-actions>
-      </mat-card>
+      </div>
+      <div class="mat-dialog-actions">
+        <button mat-stroked-button matStepperPrevious>Atras</button>
+        <span class="spacer-row"></span>
+        <button color="primary" mat-stroked-button (click)="endRegister()">Terminar Registro</button>
+      </div>
     </mat-step>
   </mat-horizontal-stepper>
 <!--</div>-->

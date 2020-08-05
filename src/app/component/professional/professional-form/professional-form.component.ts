@@ -17,7 +17,7 @@ export class ProfessionalFormComponent implements OnInit {
   stringProfessional = sessionStorage.getItem('professional');
   titleForm = this.stringProfessional ?
     'Actualizar Datos del Profesional' :
-    'Resistro de Profesional';
+    'Registro de Profesional';
   professionalSelect: Professional = this.stringProfessional ? JSON.parse(this.stringProfessional) : {
     id: null,
     password: null,
@@ -61,7 +61,7 @@ export class ProfessionalFormComponent implements OnInit {
       this.professionalService.put(this.professionalSelect.id, this.professionalForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
         sessionStorage.removeItem('professional');
-        this.router.navigate(['/professional']);
+        // this.router.navigate(['/professional']);
       }, error1 => {
         this.dialogService.toastDialog('error');
       });
@@ -69,7 +69,7 @@ export class ProfessionalFormComponent implements OnInit {
       this.professionalService.post(this.professionalForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
         sessionStorage.removeItem('professional');
-        this.router.navigate(['/professional']);
+        // this.router.navigate(['/professional']);
       }, error1 => {
         this.dialogService.toastDialog('error');
       });
@@ -79,6 +79,6 @@ export class ProfessionalFormComponent implements OnInit {
   cancel() {
     sessionStorage.removeItem('professional');
     this.dialogService.toastDialog('cancel');
-    this.router.navigate(['/professional']);
+    // this.router.navigate(['/admin/professional']);
   }
 }

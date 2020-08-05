@@ -6,6 +6,7 @@ import {Router} from '@angular/router';
 import {ProfessionalService} from '../services/professional.service';
 import {Professional} from '../../../interfaces/models/professional.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import {ProfessionalFormComponent} from '../professional-form/professional-form.component';
 
 @Component({
   selector: 'app-professional-list',
@@ -56,7 +57,11 @@ export class ProfessionalListComponent implements OnInit, CrudComponent {
   }
 
   create() {
-    this.router.navigate([this.professionalService.route + '/create']);
+    this.dialogService.openDialog(ProfessionalFormComponent, {
+      width: '400px'
+    }).subscribe(res => {
+      console.log(res);
+    });
   }
 
   delete(ele: Professional) {

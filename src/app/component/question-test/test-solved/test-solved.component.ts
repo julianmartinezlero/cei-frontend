@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionTestService} from '../question-test.service';
 import {DialogService} from '../../alerts/dialog.service';
 import {Question} from '../../../interfaces/models/question';
 import {ChildrenService} from '../../children/services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
-import {MatDialogRef} from '@angular/material';
 import {TestSolvedResourceComponent} from '../test-solved-resource/test-solved-resource.component';
 import * as uuid from 'uuid';
 import {TestAcceptComponent} from '../test-accept/test-accept.component';
+import {validate} from 'codelyzer/walkerFactory/walkerFn';
 
 @Component({
   selector: 'app-test-solved',
@@ -19,7 +19,7 @@ import {TestAcceptComponent} from '../test-accept/test-accept.component';
 export class TestSolvedComponent implements OnInit {
 
   title = 'Atras';
-  testForm = [];
+  testForm: TestSolved[] = [];
   hide = true;
   test = JSON.parse(sessionStorage.getItem('test'));
   titleForm = 'Resolver Prubea';
@@ -33,7 +33,7 @@ export class TestSolvedComponent implements OnInit {
               private questionTestService: QuestionTestService,
               private dialogService: DialogService,
               private childService: ChildrenService,
-              private dialogRef: MatDialogRef<TestSolvedComponent>) {
+  ) {
   }
 
   ngOnInit() {
@@ -59,27 +59,28 @@ export class TestSolvedComponent implements OnInit {
       width: '300px',
     }).subscribe(accept => {
       if (accept === true) {
-        // let total =  0;
-        // this.testForm.forEach(q => {
-        //   total += q.questionOption.value;
-        // });
-        // total = total / 12;
+        let total = 0;
+        this.testForm.forEach(q => {
+          total += q.questionOption.value;
+        });
+        total = total / 12;
         this.questionTestService.post({
           id: null,
           code: uuid.v4(),
-          questionState: 0,
+          questionState: 1,
           childId: this.childSelect.id,
           professional: null,
-          // totalValue: total,
+          totalValue: total,
         }).subscribe(res => {
           this.testForm.forEach(q => {
             q.test = res;
           });
+          sessionStorage.setItem('test', JSON.stringify(res));
           this.questionTestService.postCustom('solved/save', {
             solution: this.testForm,
           }).subscribe(r => {
             this.dialogService.toastDialog('success');
-            this.dialogRef.close(true);
+            this.router.navigate(['/app/children/test/result']);
           });
         });
       }
@@ -110,7 +111,20 @@ export class TestSolvedComponent implements OnInit {
   cancel() {
     sessionStorage.removeItem('test');
     this.dialogService.toastDialog('cancel');
-    this.dialogRef.close();
-    // this.router.navigate([this.questionTestService.route]);
   }
+
+  testValid() {
+    return this.testForm.filter(r => {
+      return r.questionOption;
+    }).length === 12;
+  }
+}
+
+export interface TestSolved {
+  id: number;
+  questionId: any;
+  test: any;
+  questionOption: any;
+  createdAt: Date;
+  updatedAt: Date;
 }

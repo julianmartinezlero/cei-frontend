@@ -13,4 +13,5 @@ export interface Child {
   tutor?: Professional;
   professional?: Professional;
   photo?: string;
+  tests?: any;
 }

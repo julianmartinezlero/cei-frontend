@@ -9,7 +9,8 @@
       <mat-card-title>Actualizar Datos del Apoderado</mat-card-title>
       <mat-card-content>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Nombres</mat-label>
           <input formControlName="name" matInput placeholder="Nombres">
           <mat-error *ngIf="tutorForm.get('name').hasError('required')">
             Ingrese un Nombre(s) v&aacute;lido
@@ -19,7 +20,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Apellidos</mat-label>
           <input formControlName="lastName" matInput placeholder="Apellidos">
           <mat-error *ngIf="tutorForm.get('lastName').hasError('required')">
             Ingrese un Apellido(s) v&aacute;lido
@@ -29,7 +31,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>CI</mat-label>
           <input formControlName="ci" matInput placeholder="CI">
           <mat-error *ngIf="tutorForm.get('ci').hasError('required')">
             Ingrese un n&uacute;mero v&aacute;lido
@@ -43,7 +46,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Telf./Cel.</mat-label>
           <input formControlName="cell" required matInput placeholder="Telf./Cel.">
           <mat-error *ngIf="tutorForm.get('cell').hasError('required')">
             Ingrese un n&uacute;mero v&aacute;lido
@@ -57,14 +61,16 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Correo Electronico</mat-label>
           <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">
           <mat-error *ngIf="tutorForm.get('email').hasError('required') || tutorForm.get('email').hasError('email')">
             Ingrese un correo v&aacute;lido
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Contraseña</mat-label>
           <input formControlName="password" required matInput placeholder="Contraseña"
                  [type]="hide ? 'password' : 'text'">
           <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
@@ -79,7 +85,8 @@
           </mat-error>
         </mat-form-field>
 
-        <mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Nro de Hijos a registrar</mat-label>
           <input formControlName="children" required matInput placeholder="Nro de Hijos a registrar" type="number">
           <mat-error *ngIf="tutorForm.get('children').hasError('required')">
             Debe Ingresar un Numero de hijos
@@ -91,9 +98,9 @@
 
       </mat-card-content>
       <mat-card-actions>
-        <button color="warn" (click)="cancel()" mat-raised-button>Cancelar</button>
+        <button color="warn" (click)="cancel()" mat-stroked-button>Cancelar</button>
         <span class="spacer-row"></span>
-        <button color="primary" (click)="accept()" mat-raised-button>Guardar</button>
+        <button color="primary" (click)="accept()" mat-stroked-button>Guardar</button>
       </mat-card-actions>
     </mat-card>
   </form>

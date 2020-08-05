@@ -13,7 +13,7 @@ import {
   MatSelectModule,
   MatSortModule,
   MatStepperModule,
-  MatTableModule
+  MatTableModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
 import {TutorRoutingModule} from './tutor-routing.module';
@@ -47,6 +47,8 @@ import {TutorIndexComponent} from './tutor-index/tutor-index.component';
     MatDatepickerModule,
     MatStepperModule,
     MatListModule,
+    MatToolbarModule,
+    MatTooltipModule,
   ],
   providers: [
     TutorService,

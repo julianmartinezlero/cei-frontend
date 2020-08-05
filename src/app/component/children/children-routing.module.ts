@@ -5,7 +5,7 @@ import {ChildrenFormComponent} from './children-form/children-form.component';
 import {ChildrenShowComponent} from './childer-show/children-show.component';
 
 const routes: Routes = [
-  {path: '', component: ChildrenListComponent},
+  {path: 'index', component: ChildrenListComponent},
   {path: 'edit', component: ChildrenFormComponent},
   {path: 'show', component: ChildrenShowComponent}
 ];

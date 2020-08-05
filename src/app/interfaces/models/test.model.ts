@@ -3,6 +3,7 @@ export interface Test {
   code: string;
   questionState: boolean;
   childId: number;
+  totalValue?: number;
   professionalId?: number;
   tutorId?: number;
   createdAt?: any;

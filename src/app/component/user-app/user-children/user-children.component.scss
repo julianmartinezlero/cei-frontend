@@ -16,6 +16,16 @@
   }
 }
 
+.mat-card {
+  padding: 0 16px 16px 16px !important;
+  border-radius: 15px;
+  border: solid 1px #e3e3e3;
+
+  .mat-card-image {
+    margin: 0 -16px 0px -16px !important;
+  }
+}
+
 .child {
   //background: red;
   display: inline-block;

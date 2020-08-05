@@ -1,10 +1,13 @@
-<!--<app-table-toolbar [title]="title" [onNew]="false"></app-table-toolbar>-->
 <div class="table-container">
+  <img class="image-icon" src="/assets/student-boy.svg">
   <mat-list>
-    <!--    <button color="primary" style="border-radius: 20px;margin-bottom: 20px;" tabindex="-1" mat-raised-button (click)="create()">-->
-    <!--      <mat-icon aria-hidden="false" aria-label="Example heart icon">add</mat-icon>-->
-    <!--      Nuevo-->
-    <!--    </button>-->
+    <mat-toolbar class="white">
+      <span class="text-primary">
+        Ni&ntilde;os (as)
+      </span>
+      <span class="spacer-row"></span>
+    </mat-toolbar>
+    <mat-divider class="primary"></mat-divider>
     <mat-list-item *ngFor="let child of dataSource.data; let i = index">
       <img mat-list-icon [src]="child.photo ? child.photo : defaultPhoto" alt="">
       <h4 mat-line>{{child.name}} {{child.lastName}}</h4>
@@ -13,56 +16,6 @@
       </button>
     </mat-list-item>
   </mat-list>
-  <!--  <mat-card class="mat-elevation-z3">-->
-  <!--    <table mat-table [dataSource]="dataSource" matSort>-->
-  <!--      <ng-container matColumnDef="position">-->
-  <!--        <th mat-header-cell *matHeaderCellDef class="position">#</th>-->
-  <!--        <td mat-cell *matCellDef="let i = index"> {{i + 1}} </td>-->
-  <!--      </ng-container>-->
-  <!--      <ng-container matColumnDef="name">-->
-  <!--        <th mat-header-cell mat-sort-header="" *matHeaderCellDef>Nombres</th>-->
-  <!--        <td mat-cell *matCellDef="let element"> {{element.name}} </td>-->
-  <!--      </ng-container>-->
-  <!--      <ng-container matColumnDef="lastName">-->
-  <!--        <th mat-header-cell mat-sort-header *matHeaderCellDef>Apellidos</th>-->
-  <!--        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>-->
-  <!--      </ng-container>-->
-  <!--      <ng-container matColumnDef="birthDate">-->
-  <!--        <th mat-header-cell mat-sort-header *matHeaderCellDef>F. Nacimiento</th>-->
-  <!--        <td mat-cell *matCellDef="let element"> {{element.birthDate}} </td>-->
-  <!--      </ng-container>-->
-  <!--      <ng-container matColumnDef="ci">-->
-  <!--        <th mat-header-cell mat-sort-header class="number" *matHeaderCellDef>CI</th>-->
-  <!--        <td mat-cell *matCellDef="let element" class="number"> {{element.ci}} </td>-->
-  <!--      </ng-container>-->
-  <!--      <ng-container matColumnDef="age">-->
-  <!--        <th mat-header-cell mat-sort-header *matHeaderCellDef>A&ntilde;os</th>-->
-  <!--        <td mat-cell *matCellDef="let element" class="number"> {{getAge(element.birthDate)}} </td>-->
-  <!--      </ng-container>-->
-  <!--      <ng-container matColumnDef="sex">-->
-  <!--        <th mat-header-cell mat-sort-header *matHeaderCellDef>Genero</th>-->
-  <!--        <td mat-cell *matCellDef="let element" class="number"> {{element.sex}} </td>-->
-  <!--      </ng-container>-->
-  <!--      <ng-container matColumnDef="options">-->
-  <!--        <th mat-header-cell *matHeaderCellDef>Opciones</th>-->
-  <!--        <td mat-cell *matCellDef="let element">-->
-  <!--          <div class="options">-->
-  <!--            <button mat-icon-button (click)="show(element)">-->
-  <!--              <mat-icon>remove_red_eye</mat-icon>-->
-  <!--            </button>-->
-  <!--            <button mat-icon-button (click)="update(element)">-->
-  <!--              <mat-icon>edit</mat-icon>-->
-  <!--            </button>-->
-  <!--            <button mat-icon-button (click)="delete(element)">-->
-  <!--              <mat-icon>delete</mat-icon>-->
-  <!--            </button>-->
-  <!--          </div>-->
-  <!--        </td>-->
-  <!--      </ng-container>-->
-  <!--      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>-->
-  <!--      <tr mat-row *matRowDef="let dataRow; columns: displayedColumns;"></tr>-->
-  <!--    </table>-->
-  <!--  </mat-card>-->
 </div>
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-id="id">

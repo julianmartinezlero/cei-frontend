@@ -3,8 +3,19 @@
 //*:not(.mat-icon){
 //  font-size: 12px !important;
 //}
+//
+//@font-face {
+//  font-family: 'fredoka-one';
+//  src: url('/assets/FredokaOne-Regular.ttf');
+//}
+
+@font-face {
+  font-family: 'comic-neue';
+  src: url('/assets/ComicNeue-Bold.ttf');
+}
 *:not(.mat-icon) {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  //font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: comic-neue !important;
 }
 body {
   margin: 0;
@@ -81,12 +92,21 @@ mat-sidenav-content {
 }
 
 .mat-dialog-container {
-  padding: 0 !important;
+  //padding: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
   border-radius: 15px !important;
 }
 
+
 mat-card-actions {
   display: flex !important;
+
+}
+
+.mat-dialog-title, .mat-dialog-actions {
+  padding-left: 24px !important;
+  padding-right: 24px !important;
 }
 
 .mat-form-field {
@@ -166,9 +186,9 @@ table th.mat-header-cell {
   padding: 0 15px !important;
 }
 
-input[type="number"] {
-  text-align: right;
-}
+//input[type="number"] {
+//  text-align: right;
+//}
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -240,4 +260,49 @@ app-test-solved {
 
 .cdk-overlay-dark-backdrop {
   background: rgba(37, 37, 37, 0.81) !important;
+}
+
+.mat-menu-panel {
+  border-radius: 0 30px 20px !important;
+}
+
+.mat-select-panel {
+  border-radius: 20px 20px !important;
+}
+
+button {
+  border-radius: 50px !important;
+}
+
+.mat-horizontal-content-container {
+  //overflow: hidden;
+  padding: 0 0px 12px 0px !important;
+}
+
+.white {
+  background: white;
+}
+
+.text-primary {
+  color: #3f51b5;
+}
+
+mat-divider.primary {
+  border-top-width: 2px;
+  border-top-color: rgb(63 81 181 / 60%);
+}
+
+img.image-icon {
+  width: 100px;
+  position: absolute;
+  left: 30px;
+  top: 100px;
+}
+
+.mat-dialog-content {
+  border-bottom: solid 1px #4e4e4e40;
+}
+
+.back .mat-dialog-container {
+  padding-bottom: 12px !important;
 }

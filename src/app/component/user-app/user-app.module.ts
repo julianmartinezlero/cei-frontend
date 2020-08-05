@@ -5,12 +5,13 @@ import {UserAppRoutingModule} from './user-app-routing.module';
 import {ToolsModule} from '../tools/tools.module';
 import {UserChildrenComponent} from './user-children/user-children.component';
 import {FlexModule} from '@angular/flex-layout';
-import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatCardModule, MatDividerModule, MatIconModule, MatMenuModule, MatToolbarModule} from '@angular/material';
 import {ChildrenService} from '../children/services/children.service';
 import {ChildrenFormComponent} from '../children/children-form/children-form.component';
 import {ChildrenModule} from '../children/children.module';
 import {TestSolvedComponent} from '../question-test/test-solved/test-solved.component';
 import {QuestionTestModule} from '../question-test/question-test.module';
+import {TestSolvedResultComponent} from '../question-test/test-solved-result/test-solved-result.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {QuestionTestModule} from '../question-test/question-test.module';
     MatToolbarModule,
     MatIconModule,
     MatDividerModule,
+    MatMenuModule,
   ],
   providers: [
     ChildrenService,

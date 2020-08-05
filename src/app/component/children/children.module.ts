@@ -9,11 +9,11 @@ import {
   MatDatepickerModule, MatDialogModule,
   MatFormFieldModule, MatGridListModule,
   MatIconModule,
-  MatInputModule, MatListModule, MatMenuModule,
+  MatInputModule, MatListModule, MatMenuModule, MatProgressSpinnerModule,
   MatRippleModule,
   MatSelectModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {ChildrenRoutingModule} from './children-routing.module';
 import {ChildrenFormComponent} from './children-form/children-form.component';
@@ -36,6 +36,7 @@ import {TutorService} from '../tutor/services/tutor.service';
     MatCardModule,
     ReactiveFormsModule,
     MatFormFieldModule,
+    MatFormFieldModule,
     MatSelectModule,
     MatDatepickerModule,
     MatInputModule,
@@ -45,6 +46,9 @@ import {TutorService} from '../tutor/services/tutor.service';
     MatDialogModule,
     WebcamModule,
     MatGridListModule,
+    MatProgressSpinnerModule,
+    MatToolbarModule,
+    MatTooltipModule,
   ],
   providers: [
     ChildrenService,

@@ -4,10 +4,12 @@
       <form [formGroup]="user" (ngSubmit)="send()">
         <mat-card-title>Iniciar Sesion</mat-card-title>
         <mat-card-content>
-          <mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Correo</mat-label>
             <input formControlName="email" matInput placeholder="Correo">
           </mat-form-field>
-          <mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
             <input formControlName="password" matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
             <button tabindex="-1" type="button" mat-icon-button matSuffix (click)="hide = !hide"
                     [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
@@ -16,10 +18,10 @@
           </mat-form-field>
         </mat-card-content>
         <mat-card-actions>
-          <button (click)="register()" type="button" mat-raised-button color="accent" class="mat-ripple custom-button">
+          <button (click)="register()" type="button" mat-stroked-button color="accent" class="mat-ripple custom-button">
             Registrate
           </button>
-          <button type="submit" mat-raised-button color="primary" class="mat-ripple custom-button">Inicias Sesion
+          <button type="submit" mat-stroked-button color="primary" class="mat-ripple custom-button">Inicias Sesion
           </button>
         </mat-card-actions>
       </form>

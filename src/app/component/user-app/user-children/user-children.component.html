@@ -6,38 +6,65 @@
       <button mat-icon-button color="primary" (click)="addChild()">
         <mat-icon>person_add</mat-icon>
       </button>
-      <!--      <mat-divider></mat-divider>-->
     </mat-toolbar-row>
   </mat-toolbar>
-  <div style="text-align: center;" *ngIf="children.length > 0">
-    <mat-card class="child mat-elevation-z3" *ngFor="let child of children">
-      <mat-card-title>
-        Datos del ni&ntilde;(a)
-      </mat-card-title>
-      <div class="details-child" style="text-align: center;">
-        <img [src]="child.photo ? child.photo : defaultPhoto" alt="" srcset="">
-      </div>
-      <mat-card-content>
-        <div class="details-child">
-          <div>
-            <div class="details-data-child">Nombre</div>
-            <div class="details-data-child">{{child.name}}</div>
-            <div class="details-data-child">Apellido</div>
-            <div class="details-data-child">{{child.lastName}}</div>
-            <span class="details-data-child">Ci</span>
-            <span class="details-data-child">{{child.ci ? child.ci : 'No definido'}}</span>
-            <span class="details-data-child">Genero</span>
-            <span class="details-data-child">{{child.sex}}</span>
-            <span class="details-data-child">Fecha de Nacimiento</span>
-            <span class="details-data-child">{{child.birthDate}}</span>
-          </div>
-        </div>
-      </mat-card-content>
+  <mat-divider></mat-divider>
+  <div *ngIf="children.length > 0">
+    <!--    <mat-card class="child mat-elevation-z3" *ngFor="let child of children">-->
+    <!--      <mat-card-title>-->
+    <!--        Datos del ni&ntilde;(a)-->
+    <!--      </mat-card-title>-->
+    <!--      <div class="details-child" style="text-align: center;">-->
+    <!--        <img [src]="child.photo ? child.photo : defaultPhoto" alt="" srcset="">-->
+    <!--      </div>-->
+    <!--      <mat-card-content>-->
+    <!--        <div class="details-child">-->
+    <!--          <div>-->
+    <!--            <div class="details-data-child">Nombre</div>-->
+    <!--            <div class="details-data-child">{{child.name}}</div>-->
+    <!--            <div class="details-data-child">Apellido</div>-->
+    <!--            <div class="details-data-child">{{child.lastName}}</div>-->
+    <!--            <span class="details-data-child">Ci</span>-->
+    <!--            <span class="details-data-child">{{child.ci ? child.ci : 'No definido'}}</span>-->
+    <!--            <span class="details-data-child">Genero</span>-->
+    <!--            <span class="details-data-child">{{child.sex}}</span>-->
+    <!--            <span class="details-data-child">Fecha de Nacimiento</span>-->
+    <!--            <span class="details-data-child">{{child.birthDate}}</span>-->
+    <!--          </div>-->
+    <!--        </div>-->
+    <!--      </mat-card-content>-->
+    <!--      <mat-card-actions>-->
+    <!--        <button *ngIf="child.tests.length == 0" mat-button color="primary" routerLink="/app/children/test" (click)="solved(child)">Resolver Test</button>-->
+    <!--      </mat-card-actions>-->
+    <!--    </mat-card>-->
+    <mat-card class="child mat-elevation-z0" *ngFor="let child of children">
+      <img mat-card-image [src]="child.photo ? child.photo : defaultPhoto" alt="Photo of a Shiba Inu">
+      <!--      <mat-card-header>-->
+      <!--        {{child.name}} {{child.lastName}}-->
+      <!--      </mat-card-header>-->
       <mat-card-actions>
-        <button mat-button color="primary" (click)="solved(child)">Resolver Test</button>
+        <button mat-flat-button disableRipple>{{child.name}} {{child.lastName}}</button>
+        <span class="spacer-row"></span>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>more_vert</mat-icon>
+        </button>
       </mat-card-actions>
     </mat-card>
   </div>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>dialpad</mat-icon>
+      <span>Redial</span>
+    </button>
+    <button mat-menu-item disabled>
+      <mat-icon>voicemail</mat-icon>
+      <span>Check voice mail</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>notifications_off</mat-icon>
+      <span>Disable alerts</span>
+    </button>
+  </mat-menu>
   <div style="text-align: center" *ngIf="children.length === 0">
     No se registraron hijos
   </div>

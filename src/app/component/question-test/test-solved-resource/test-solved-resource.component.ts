@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 
 @Component({
@@ -7,7 +7,7 @@ import {MatDialogRef} from '@angular/material';
   styleUrls: ['./test-solved-resource.component.scss']
 })
 export class TestSolvedResourceComponent implements OnInit {
-
+  @Input() images: string[] = [];
   constructor(private dialogRef: MatDialogRef<TestSolvedResourceComponent>) {
   }
 

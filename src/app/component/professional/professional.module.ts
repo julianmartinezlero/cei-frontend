@@ -7,13 +7,13 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule, MatListModule,
   MatSelectModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule, MatToolbarModule, MatTooltipModule
 } from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
 import {AlertsModule} from '../alerts/alerts.module';
@@ -41,6 +41,9 @@ import {ProfessionalRoutingModule} from './professional-routing.module';
     ReactiveFormsModule,
     MatDatepickerModule,
     MatListModule,
+    MatDialogModule,
+    MatToolbarModule,
+    MatTooltipModule,
   ],
   providers: [
     ProfessionalService

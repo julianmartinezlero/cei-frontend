@@ -88,9 +88,9 @@ export class TutorFormComponent implements OnInit {
     t.children = this.children.map(c => {
       return c.value;
     });
-    this.tutorService.post(t).subscribe(res => {
+    this.tutorService.postCustom('create', t).subscribe(res => {
       this.dialogService.toastDialog('success');
-      this.router.navigate(['/tutor']);
+      // this.router.navigate(['/tutor']);
     }, error1 => {
       this.dialogService.toastDialog('error');
     });

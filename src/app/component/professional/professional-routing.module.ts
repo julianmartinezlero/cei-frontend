@@ -5,7 +5,7 @@ import {ProfessionalFormComponent} from './professional-form/professional-form.c
 
 const routes: Routes = [
   // {path: '', redirectTo: '/', pathMatch: 'full'},
-  {path: '', component: ProfessionalListComponent},
+  {path: 'index', component: ProfessionalListComponent},
   {path: 'create', component: ProfessionalFormComponent},
   {path: 'edit', component: ProfessionalFormComponent},
 ];

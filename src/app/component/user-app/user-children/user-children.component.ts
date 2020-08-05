@@ -27,7 +27,7 @@ export class UserChildrenComponent implements OnInit {
 
   addChild() {
     this.dialogService.openDialog(ChildrenFormComponent, {
-      width: '400px',
+      width: '500px',
     }).subscribe(res => {
       if (res === true) {
         this.ngOnInit();
@@ -37,11 +37,11 @@ export class UserChildrenComponent implements OnInit {
 
   solved(c) {
     sessionStorage.setItem('child', JSON.stringify(c));
-    this.dialogService.openDialog(TestSolvedComponent, {
-      width: '800px',
-      height: '100%',
-    }).subscribe(res => {
-      console.log(res);
-    });
+    // this.dialogService.openDialog(TestSolvedComponent, {
+    //   width: '800px',
+    //   height: '100%',
+    // }).subscribe(res => {
+    //   console.log(res);
+    // });
   }
 }

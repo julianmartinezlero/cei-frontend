@@ -1,0 +1,20 @@
+.row {
+  display: inline-flex;
+  width: 100%;
+
+  .col:first-child {
+    display: inline-block;
+    width: calc(50% - 10px);
+    margin-right: 10px;
+  }
+
+  .col:last-child {
+    display: inline-block;
+    width: calc(50% - 10px);
+    margin-left: 10px;
+  }
+
+  .col:last-child button, .col:last-child img {
+    width: 100%;
+  }
+}

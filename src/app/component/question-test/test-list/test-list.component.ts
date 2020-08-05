@@ -68,17 +68,17 @@ export class TestListComponent implements OnInit {
 
   show(data) {
     sessionStorage.setItem('child', JSON.stringify(data));
-    this.router.navigate([`admin${this.questionTestService.route}/show`]);
+    this.router.navigate([`/admin${this.questionTestService.route}/show`]);
   }
 
   solved(data) {
     const d = this.dataSource.data[data];
     sessionStorage.setItem('test', JSON.stringify(d));
-    this.router.navigate([`admin/${this.questionTestService.route}/${d.childId}/solved`]);
+    this.router.navigate([`/admin/${this.questionTestService.route}/${d.childId}/solved`]);
   }
 
   update(value: any) {
     sessionStorage.setItem('child', JSON.stringify(value));
-    this.router.navigate([this.questionTestService.route + '/edit']);
+    this.router.navigate(['/' + this.questionTestService.route + '/edit']);
   }
 }

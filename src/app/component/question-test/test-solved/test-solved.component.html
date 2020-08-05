@@ -1,69 +1,62 @@
-<div matDialogContent>
-  <div style="display: flex;">
-    <h1 matDialogTitle>Resolviendo Test</h1>
-    <span class="spacer-row"></span>
-    <button mat-icon-button (click)="cancel()">
-      <mat-icon>close</mat-icon>
-    </button>
-  </div>
-  <div style="position: fixed;left: 0;width: 250px !important;margin: 20px;top: 0;">
-    <mat-card style="width: inherit !important;">
-      <mat-card-title>
-        Importante
-      </mat-card-title>
-      <mat-card-content>
-        Lea y seleccione la opcion que mas se adecue sengun su criterio.
-      </mat-card-content>
-    </mat-card>
-    <mat-card style="width: inherit !important;" *ngIf="childSelect">
-      <mat-card-title>
-        Datos del ni&ntilde;(a)
-      </mat-card-title>
-      <div class="details-child" style="text-align: center;">
-        <img [src]="childSelect.photo ? childSelect.photo : defaultPhoto" alt="" srcset="">
-      </div>
-      <div class="details-child">
-        <div>
-          <div class="details-data-child">Nombre</div>
-          <div class="details-data-child">{{childSelect.name}}</div>
-          <div class="details-data-child">Apellido</div>
-          <div class="details-data-child">{{childSelect.lastName}}</div>
-          <span class="details-data-child">Ci</span>
-          <span class="details-data-child">{{childSelect.ci ? childSelect.ci : 'No definido'}}</span>
-          <span class="details-data-child">Genero</span>
-          <span class="details-data-child">{{childSelect.sex}}</span>
-          <span class="details-data-child">Fecha de Nacimiento</span>
-          <span class="details-data-child">{{childSelect.birthDate}}</span>
-        </div>
-      </div>
-    </mat-card>
-  </div>
-
-  <form autocomplete="off">
-    <div>
-      <div fxFlex.gt-lg="50%" fxFlex.gt-sm="100%">
-        <div>
-          <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
-            <mat-card-title>{{question.question}}</mat-card-title>
-            <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
-            <mat-card-content>
-              <mat-radio-group aria-label="Select an option" [(ngModel)]="testForm[i].questionOption"
-                               [name]="'questionId' + i">
-                <mat-radio-button *ngFor="let option of question.questionOptions"
-                                  [value]="option">{{option.description}}</mat-radio-button>
-              </mat-radio-group>
-              <button mat-button color="primary" (click)="openResource()">Abrir Recursos</button>
-            </mat-card-content>
-          </mat-card>
-        </div>
+<div>
+  <mat-card>
+    <mat-card-title>
+      Importante
+    </mat-card-title>
+    <mat-card-content>
+      Lea y seleccione la opcion que mas se adecue sengun su criterio.
+    </mat-card-content>
+  </mat-card>
+  <mat-card *ngIf="childSelect">
+    <mat-card-title>
+      Datos del ni&ntilde;(a)
+    </mat-card-title>
+    <div class="details-child" style="text-align: center;">
+      <img [src]="childSelect.photo ? childSelect.photo : defaultPhoto" alt="" srcset="">
+    </div>
+    <div class="details-child">
+      <div>
+        <div class="details-data-child">Nombre</div>
+        <div class="details-data-child">{{childSelect.name}}</div>
+        <div class="details-data-child">Apellido</div>
+        <div class="details-data-child">{{childSelect.lastName}}</div>
+        <span class="details-data-child">Ci</span>
+        <span class="details-data-child">{{childSelect.ci ? childSelect.ci : 'No definido'}}</span>
+        <span class="details-data-child">Genero</span>
+        <span class="details-data-child">{{childSelect.sex}}</span>
+        <span class="details-data-child">Fecha de Nacimiento</span>
+        <span class="details-data-child">{{childSelect.birthDate}}</span>
       </div>
     </div>
-  </form>
-  <div mat-dialog-actions>
-    <button type="button" mat-button color="warn" (click)="cancel()">Cancelar</button>
-    <button type="button" mat-button color="primary" (click)="accept()">Aceptar</button>
-  </div>
+  </mat-card>
 </div>
 
-
-
+<form autocomplete="off">
+  <div style="width: 700px;margin: auto;">
+    <h1 matDialogTitle>Resolviendo Test</h1>
+    <span class="spacer-row"></span>
+    <!--            <button mat-icon-button (click)="cancel()">-->
+    <!--              <mat-icon>close</mat-icon>-->
+    <!--            </button>-->
+  </div>
+  <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
+    <mat-card-title>{{question.question}}</mat-card-title>
+    <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
+    <mat-card-content>
+      <mat-radio-group aria-label="Select an option" [(ngModel)]="testForm[i].questionOption"
+                       [name]="'questionId' + i">
+        <mat-radio-button *ngFor="let option of question.questionOptions"
+                          [value]="option">{{option.description}}</mat-radio-button>
+      </mat-radio-group>
+      <button mat-button color="primary" (click)="openResource()">Abrir Recursos</button>
+    </mat-card-content>
+  </mat-card>
+</form>
+<div style="width: 700px;
+    margin: auto;
+    display: flex;
+    margin-bottom: 20px !important;">
+  <span class="spacer-row"></span>
+  <button type="button" mat-button color="warn" (click)="cancel()">Cancelar</button>
+  <button [disabled]="!testValid()" type="button" mat-button color="primary" (click)="accept()">Aceptar</button>
+</div>

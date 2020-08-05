@@ -6,7 +6,7 @@ import {TutorEditComponent} from './tutor-edit/tutor-edit.component';
 
 const routes: Routes = [
   // {path: '', redirectTo: 'all', pathMatch: 'full'},
-  {path: '', component: TutorListComponent},
+  {path: 'index', component: TutorListComponent},
   {path: 'create', component: TutorFormComponent},
   {path: 'edit', component: TutorEditComponent},
 ];
