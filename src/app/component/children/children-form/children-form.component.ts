@@ -58,6 +58,7 @@ export class ChildrenFormComponent implements OnInit {
   }
 
   accept() {
+    console.log(this.childForm.value);
     if (this.stringChild) {
       this.childrenService.put(this.childSelect.id, this.childForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
@@ -97,7 +98,7 @@ export class ChildrenFormComponent implements OnInit {
 
   loadProfile() {
     this.authService.getCustom('profile').subscribe((p: any) => {
-      this.professional = p[0];
+      this.professional = p.professional;
     });
   }
 }

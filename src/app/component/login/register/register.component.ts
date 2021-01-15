@@ -41,14 +41,14 @@ export class RegisterComponent implements OnInit {
       sessionStorage.setItem('token', r.access_token);
       this.authService.getCustom('profile').subscribe((p: any) => {
         sessionStorage.setItem('profile', btoa(JSON.stringify(p[0])));
-        this.tutorService.post(this.tutorForm.value).subscribe(res => {
-          this.dialogService.toastDialog('success');
-          // if (p[0].position !== null) {
-          //   this.router.navigate(['/admin/tutor']);
-          // } else {
+        // this.tutorService.post(this.tutorForm.value).subscribe(res => {
+        this.dialogService.toastDialog('success');
+        if (p.professional.position !== null) {
+          this.router.navigate(['/admin/tutor']);
+        } else {
           this.router.navigate(['/app']);
-          // }
-        });
+        }
+        // });
       });
 
     });

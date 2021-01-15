@@ -1,12 +1,12 @@
+<h1 mat-dialog-title>{{question.question}}</h1>
 <div mat-dialog-content>
-  <h1 mat-dialog-title>Recursos</h1>
   <div>
-    <mat-carousel>
-      <mat-carousel-slide *ngFor="let img of images" [image]="img">
+    <mat-carousel [useKeyboard]="true" [hideIndicators]="false" [autoplay]="false" [hideArrows]="false" color="primary" [loop]="false">
+      <mat-carousel-slide *ngFor="let img of question.questionAssets" [image]="img.asset" [overlayColor]="color">
       </mat-carousel-slide>
     </mat-carousel>
   </div>
-  <div mat-dialog-actions>
-    <button mat-button color="primary" (click)="close()">Cerrar</button>
-  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="close()">Cerrar</button>
 </div>

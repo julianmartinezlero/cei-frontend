@@ -6,6 +6,7 @@ import {Test} from '../../../interfaces/models/test.model';
 import {ViewTest} from '../../../interfaces/models/ViewTest';
 import {QuestionTestService} from '../question-test.service';
 import {TestFormComponent} from '../test-form/test-form.component';
+import {TestSolvedResultComponent} from '../test-solved-result/test-solved-result.component';
 
 @Component({
   selector: 'app-test-list',
@@ -24,8 +25,8 @@ export class TestListComponent implements OnInit {
     'options'
   ];
   title = 'Pruebas';
-  dataSource = new MatTableDataSource<ViewTest>([]);
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  dataSource: Test[] = [];
+  // @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private questionTestService: QuestionTestService,
               private dialogService: DialogService,
@@ -37,9 +38,9 @@ export class TestListComponent implements OnInit {
   }
 
   all() {
-    this.questionTestService.get().subscribe((t: ViewTest[]) => {
-      this.dataSource = new MatTableDataSource<ViewTest>(t);
-      this.dataSource.sort = this.sort;
+    this.questionTestService.get().subscribe((t: Test[]) => {
+      this.dataSource = t;
+      // this.dataSource.sort = this.sort;
     }, error1 => {
       this.dialogService.toastDialog('error');
     });
@@ -72,9 +73,27 @@ export class TestListComponent implements OnInit {
   }
 
   solved(data) {
-    const d = this.dataSource.data[data];
+    const d = data;
     sessionStorage.setItem('test', JSON.stringify(d));
-    this.router.navigate([`/admin/${this.questionTestService.route}/${d.childId}/solved`]);
+    // this.dialogService.openDialog(TestSolvedComponent, {
+    //   width: '100%',
+    //   height: '100%',
+    //   data: {
+    //     id: data.id
+    //   }
+    // }).subscribe(r => {
+    //   console.log(r);
+    // });
+    this.router.navigate([`/admin/${this.questionTestService.route}/${d.id}/solved`]);
+  }
+  showResult(te: Test) {
+    this.dialogService.openDialog(TestSolvedResultComponent, {
+      width: '700px',
+      height: '505px',
+      data: {
+        test: te
+      }
+    });
   }
 
   update(value: any) {

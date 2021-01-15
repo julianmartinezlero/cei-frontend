@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Child} from '../../../interfaces/models/child.model';
 import {TreatmentService} from '../treatment.service';
 import {Test} from '../../../interfaces/models/test.model';
+import {MAT_DIALOG_DATA} from '@angular/material';
+import {QuestionTestService} from '../question-test.service';
 
 @Component({
   selector: 'app-test-solved-result',
@@ -13,13 +15,19 @@ export class TestSolvedResultComponent implements OnInit {
   test: Test = null;
   treatment: any;
 
-  constructor(private treatmentService: TreatmentService) {
+  constructor(private treatmentService: TreatmentService,
+              private testService: QuestionTestService,
+              @Inject(MAT_DIALOG_DATA) private data: any) {
+    this.test = this.data.test;
   }
 
   ngOnInit() {
-    this.test = JSON.parse(sessionStorage.getItem('test'));
-    this.childSelect = JSON.parse(sessionStorage.getItem('child'));
-    this.loadTreatment(this.getRange(this.test.totalValue));
+    this.testService.get(this.test.id).subscribe((r: any) => {
+      this.test = r;
+      this.childSelect = this.test.child;
+      this.loadTreatment(this.getRange(this.test.totalValue));
+    });
+
   }
 
   loadTreatment(range) {

@@ -1,62 +1,76 @@
-<div>
-  <mat-card>
-    <mat-card-title>
-      Importante
-    </mat-card-title>
-    <mat-card-content>
-      Lea y seleccione la opcion que mas se adecue sengun su criterio.
-    </mat-card-content>
-  </mat-card>
-  <mat-card *ngIf="childSelect">
-    <mat-card-title>
-      Datos del ni&ntilde;(a)
-    </mat-card-title>
-    <div class="details-child" style="text-align: center;">
-      <img [src]="childSelect.photo ? childSelect.photo : defaultPhoto" alt="" srcset="">
-    </div>
-    <div class="details-child">
-      <div>
-        <div class="details-data-child">Nombre</div>
-        <div class="details-data-child">{{childSelect.name}}</div>
-        <div class="details-data-child">Apellido</div>
-        <div class="details-data-child">{{childSelect.lastName}}</div>
-        <span class="details-data-child">Ci</span>
-        <span class="details-data-child">{{childSelect.ci ? childSelect.ci : 'No definido'}}</span>
-        <span class="details-data-child">Genero</span>
-        <span class="details-data-child">{{childSelect.sex}}</span>
-        <span class="details-data-child">Fecha de Nacimiento</span>
-        <span class="details-data-child">{{childSelect.birthDate}}</span>
+<div class="solved-content">
+<!--  <h1 mat-dialog-title class="mat-elevation-z3"></h1>-->
+  <mat-toolbar class="mat-elevation-z3">
+    <mat-toolbar-row>
+      <span>Resolviendo Test</span>
+      <span class="spacer-row"></span>
+      <button mat-icon-button matTooltip="Cancelar" (click)="closeTest()"><mat-icon>close</mat-icon></button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <mat-card>
+      <mat-card-title>
+        Importante
+      </mat-card-title>
+      <mat-card-content>
+        Lea y seleccione la opcion que mas se adecue sengun su criterio.
+      </mat-card-content>
+    </mat-card>
+    <mat-card *ngIf="childSelect">
+      <mat-card-title>
+        Datos del ni&ntilde;(a)
+      </mat-card-title>
+      <div class="details-child" style="text-align: center;">
+        <img [src]="childSelect.photo ? childSelect.photo : defaultPhoto" alt="" srcset="">
       </div>
-    </div>
-  </mat-card>
-</div>
+      <div class="details-child">
+        <div>
+          <div class="details-data-child">Nombre</div>
+          <div class="details-data-child">{{childSelect.name}}</div>
+          <div class="details-data-child">Apellido</div>
+          <div class="details-data-child">{{childSelect.lastName}}</div>
+          <span class="details-data-child">Ci</span>
+          <span class="details-data-child">{{childSelect.ci ? childSelect.ci : 'No definido'}}</span>
+          <span class="details-data-child">Genero</span>
+          <span class="details-data-child">{{childSelect.sex}}</span>
+          <span class="details-data-child">Fecha de Nacimiento</span>
+          <span class="details-data-child">{{childSelect.birthDate}}</span>
+        </div>
+      </div>
+    </mat-card>
 
-<form autocomplete="off">
-  <div style="width: 700px;margin: auto;">
-    <h1 matDialogTitle>Resolviendo Test</h1>
-    <span class="spacer-row"></span>
-    <!--            <button mat-icon-button (click)="cancel()">-->
-    <!--              <mat-icon>close</mat-icon>-->
-    <!--            </button>-->
+
+    <form autocomplete="off">
+      <div style="width: 700px;margin: auto;">
+
+        <span class="spacer-row"></span>
+        <!--            <button mat-icon-button (click)="cancel()">-->
+        <!--              <mat-icon>close</mat-icon>-->
+        <!--            </button>-->
+      </div>
+      <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
+        <mat-card-title>{{question.question}}</mat-card-title>
+        <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
+        <mat-card-content>
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="testForm[i].questionOption"
+                           [name]="'questionId' + i">
+            <mat-radio-button *ngFor="let option of question.questionOptions"
+                              [value]="option">{{option.description}}</mat-radio-button>
+          </mat-radio-group>
+          <button mat-button color="primary" *ngIf="question.questionAssets.length > 0" (click)="openResource(question)">Abrir Recursos</button>
+        </mat-card-content>
+      </mat-card>
+    </form>
+
   </div>
-  <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
-    <mat-card-title>{{question.question}}</mat-card-title>
-    <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
-    <mat-card-content>
-      <mat-radio-group aria-label="Select an option" [(ngModel)]="testForm[i].questionOption"
-                       [name]="'questionId' + i">
-        <mat-radio-button *ngFor="let option of question.questionOptions"
-                          [value]="option">{{option.description}}</mat-radio-button>
-      </mat-radio-group>
-      <button mat-button color="primary" (click)="openResource()">Abrir Recursos</button>
-    </mat-card-content>
-  </mat-card>
-</form>
-<div style="width: 700px;
-    margin: auto;
-    display: flex;
-    margin-bottom: 20px !important;">
-  <span class="spacer-row"></span>
-  <button type="button" mat-button color="warn" (click)="cancel()">Cancelar</button>
-  <button [disabled]="!testValid()" type="button" mat-button color="primary" (click)="accept()">Aceptar</button>
+  <!--<div style="width: 700px;-->
+  <!--      margin: auto;-->
+  <!--      display: flex;-->
+  <!--      margin-bottom: 20px !important;">-->
+  <mat-card-actions>
+    <span class="spacer-row"></span>
+    <button type="button" mat-button color="warn" (click)="closeTest()">Cancelar</button>
+    <button [disabled]="!testValid()" type="button" mat-button color="primary" (click)="accept()">Aceptar</button>
+  </mat-card-actions>
+
 </div>

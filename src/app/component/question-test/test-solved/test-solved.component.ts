@@ -4,12 +4,12 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionTestService} from '../question-test.service';
 import {DialogService} from '../../alerts/dialog.service';
 import {Question} from '../../../interfaces/models/question';
-import {ChildrenService} from '../../children/services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
 import {TestSolvedResourceComponent} from '../test-solved-resource/test-solved-resource.component';
-import * as uuid from 'uuid';
 import {TestAcceptComponent} from '../test-accept/test-accept.component';
-import {validate} from 'codelyzer/walkerFactory/walkerFn';
+import {Test} from '../../../interfaces/models/test.model';
+import {Location} from '@angular/common';
+import {TestSolvedResultComponent} from '../test-solved-result/test-solved-result.component';
 
 @Component({
   selector: 'app-test-solved',
@@ -21,9 +21,10 @@ export class TestSolvedComponent implements OnInit {
   title = 'Atras';
   testForm: TestSolved[] = [];
   hide = true;
-  test = JSON.parse(sessionStorage.getItem('test'));
+  test: Test;
   titleForm = 'Resolver Prubea';
   questions: Question[];
+  testId: number;
   childSelect: Child;
   defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
 
@@ -32,12 +33,19 @@ export class TestSolvedComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private questionTestService: QuestionTestService,
               private dialogService: DialogService,
-              private childService: ChildrenService,
+              private location: Location
+              // @Inject(MAT_DIALOG_DATA) private data: any
   ) {
+    this.activatedRoute.params.subscribe(data => {
+      this.testId = data.id;
+    });
   }
 
   ngOnInit() {
-    this.childSelect = JSON.parse(sessionStorage.getItem('child'));
+    this.questionTestService.get(this.testId).subscribe((r: any) => {
+      this.test = r;
+      this.childSelect = this.test.child;
+    });
     this.loadQuestion(null);
   }
 
@@ -64,23 +72,22 @@ export class TestSolvedComponent implements OnInit {
           total += q.questionOption.value;
         });
         total = total / 12;
-        this.questionTestService.post({
-          id: null,
-          code: uuid.v4(),
-          questionState: 1,
-          childId: this.childSelect.id,
-          professional: null,
+        this.testForm.forEach(q => {
+          q.test = this.test;
+        });
+        this.questionTestService.postCustom('solved/save', {
+          solution: this.testForm,
           totalValue: total,
-        }).subscribe(res => {
-          this.testForm.forEach(q => {
-            q.test = res;
-          });
-          sessionStorage.setItem('test', JSON.stringify(res));
-          this.questionTestService.postCustom('solved/save', {
-            solution: this.testForm,
-          }).subscribe(r => {
-            this.dialogService.toastDialog('success');
-            this.router.navigate(['/app/children/test/result']);
+          test: this.test
+        }).subscribe(r => {
+          this.dialogService.toastDialog('success');
+          this.location.back();
+          this.dialogService.openDialog(TestSolvedResultComponent, {
+            width: '700px',
+            height: '505px',
+            data: {
+              test: this.test
+            }
           });
         });
       }
@@ -94,23 +101,21 @@ export class TestSolvedComponent implements OnInit {
     });
   }
 
-  loadChild(id) {
-    this.childService.get(id).subscribe((res: Child) => {
-      this.childSelect = res;
-    });
+  closeTest() {
+    this.dialogService.toastDialog('cancel');
+    this.location.back();
   }
 
-  openResource() {
+  openResource(option: Question) {
     this.dialogService.openDialog(TestSolvedResourceComponent, {
-      width: '400px',
+      width: '1000px',
+      height: '427px',
+      data: {
+        question: option
+      }
     }).subscribe(r => {
       console.log(r);
     });
-  }
-
-  cancel() {
-    sessionStorage.removeItem('test');
-    this.dialogService.toastDialog('cancel');
   }
 
   testValid() {

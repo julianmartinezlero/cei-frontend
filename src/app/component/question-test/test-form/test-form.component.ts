@@ -41,7 +41,7 @@ export class TestFormComponent implements OnInit {
               public dialogRef: MatDialogRef<TestFormComponent>) {
     this.testForm = this.fb.group({
       id: this.testSelect.id,
-      code: [{value: uuid.v4(), disabled: true}, [Validators.required, Validators.minLength(3)]],
+      // code: [{value: uuid.v4(), disabled: true}, [Validators.required, Validators.minLength(3)]],
       questionState: [this.testSelect.questionState],
       childId: [this.testSelect.childId, Validators.required],
       professionalId: [this.testSelect.professionalId],
@@ -54,15 +54,15 @@ export class TestFormComponent implements OnInit {
   }
 
   accept() {
-    if (this.stringTest) {
-      this.questionTestService.put(this.testSelect.id, this.testForm.value).subscribe(res => {
-        this.dialogService.toastDialog('success');
-        sessionStorage.removeItem('test');
-        this.dialogRef.close();
-      }, error1 => {
-        this.dialogService.toastDialog('error');
-      });
-    } else {
+    // if (this.stringTest) {
+    //   this.questionTestService.put(this.testSelect.id, this.testForm.value).subscribe(res => {
+    //     this.dialogService.toastDialog('success');
+    //     sessionStorage.removeItem('test');
+    //     this.dialogRef.close();
+    //   }, error1 => {
+    //     this.dialogService.toastDialog('error');
+    //   });
+    // } else {
       this.questionTestService.post(this.testForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
         sessionStorage.removeItem('test');
@@ -70,7 +70,7 @@ export class TestFormComponent implements OnInit {
       }, error1 => {
         this.dialogService.toastDialog('error');
       });
-    }
+    // }
   }
 
   loadChild() {

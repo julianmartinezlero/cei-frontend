@@ -26,9 +26,9 @@ export class LoginComponent implements OnInit {
     this.loginService.postCustom('login', this.user.value).subscribe((res: any) => {
       sessionStorage.setItem('token', res.access_token);
       this.loginService.getCustom('profile').subscribe((p: any) => {
-        sessionStorage.setItem('profile', btoa(JSON.stringify(p[0])));
-        if (p[0].position !== null) {
-          this.router.navigate(['/admin/tutor']);
+        sessionStorage.setItem('profile', btoa(JSON.stringify(p)));
+        if ((p.professional && (p.professional.position === 'Auxiliar' || p.professional.position === 'Encargado'))) {
+          this.router.navigate(['/admin/home']);
         } else {
           this.router.navigate(['/app']);
         }

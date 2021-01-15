@@ -1,10 +1,11 @@
+<h1 mat-dialog-title>Alerta</h1>
 <div mat-dialog-content>
-  <h1 mat-dialog-title>Alerta</h1>
   <div>
     Esta Seguro de enviar los resultados seleccionados?, recuerde que una ves enviado las respuestas no se podran
     cambiar.
   </div>
-  <div mat-dialog-actions>
-    <button type="button" mat-button color="primary" (click)="accept()">Aceptar</button>
-  </div>
+</div>
+<div mat-dialog-actions>
+  <button type="button" mat-button color="warn" (click)="cancel()">Cancelar</button>
+  <button type="button" mat-button color="primary" (click)="accept()">Aceptar</button>
 </div>

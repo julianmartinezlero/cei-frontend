@@ -10,7 +10,7 @@ const routes: Routes = [
   // {path: '', redirectTo: 'all', pathMatch: 'full'},
   {path: 'index', component: TestListComponent},
   {path: 'create', component: TestFormComponent},
-  {path: 'solved', component: TestSolvedComponent},
+  {path: ':id/solved', component: TestSolvedComponent},
   {path: 'treatment', component: TestSolvedResultComponent},
 ];
 

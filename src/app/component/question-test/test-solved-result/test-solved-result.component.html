@@ -1,12 +1,14 @@
-<div>
-  <mat-card style="width: 700px !important;">
-    <mat-card-title>
-      Resultados del Test
-    </mat-card-title>
-    <mat-card-content>
-      <mat-list *ngIf="treatment">
-        <mat-list-item *ngFor="let tr of treatment">{{tr.text}}</mat-list-item>
-      </mat-list>
-    </mat-card-content>
-  </mat-card>
+<h1 mat-dialog-title>
+  Resultados del Test
+</h1>
+<div mat-dialog-content>
+  <mat-card-content>
+    <mat-list *ngIf="treatment">
+      <mat-list-item *ngFor="let tr of treatment">{{tr.text}}</mat-list-item>
+    </mat-list>
+  </mat-card-content>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" mat-dialog-close>Aceptar</button>
+  <span class="spacer-row"></span>
 </div>
