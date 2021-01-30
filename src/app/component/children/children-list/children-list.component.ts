@@ -15,16 +15,6 @@ import {ChildrenShowComponent} from '../childer-show/children-show.component';
 })
 export class ChildrenListComponent implements OnInit, CrudComponent {
 
-  displayedColumns: string[] = [
-    'position',
-    'name',
-    'lastName',
-    'birthDate',
-    'ci',
-    'age',
-    'sex',
-    'options'
-  ];
   title = 'Niños(as)';
   defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
   now = moment();

@@ -313,3 +313,12 @@ img.image-icon {
   //z-index: auto;
   background-size: contain !important;
 }
+
+.mat-snack-bar-container {
+  border-radius: 50px !important;
+}
+.notify-empty {
+  text-align: center;
+  margin: 100px;
+  color: #9e9e9e;
+}

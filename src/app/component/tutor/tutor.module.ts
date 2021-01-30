@@ -6,10 +6,10 @@ import {TutorService} from './services/tutor.service';
 import {
   MatButtonModule,
   MatCardModule,
-  MatDatepickerModule,
+  MatDatepickerModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatListModule,
+  MatInputModule, MatListModule, MatMenuModule,
   MatSelectModule,
   MatSortModule,
   MatStepperModule,
@@ -21,6 +21,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AlertsModule} from '../alerts/alerts.module';
 import {TutorEditComponent} from './tutor-edit/tutor-edit.component';
 import {TutorIndexComponent} from './tutor-index/tutor-index.component';
+import {ChildrenService} from '../children/services/children.service';
+import {TutorChildComponent} from './tutor-child/tutor-child.component';
+import {NgxUsefulSwiperModule} from 'ngx-useful-swiper';
 
 @NgModule({
   declarations: [
@@ -28,6 +31,7 @@ import {TutorIndexComponent} from './tutor-index/tutor-index.component';
     TutorListComponent,
     TutorEditComponent,
     TutorIndexComponent,
+    TutorChildComponent,
   ],
   imports: [
     CommonModule,
@@ -49,12 +53,17 @@ import {TutorIndexComponent} from './tutor-index/tutor-index.component';
     MatListModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatDialogModule,
+    MatMenuModule,
+    NgxUsefulSwiperModule
   ],
   providers: [
     TutorService,
+    ChildrenService
   ],
   entryComponents: [
     TutorFormComponent,
+    TutorChildComponent
   ]
 })
 export class TutorModule {

@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {DialogService} from '../../alerts/dialog.service';
 import {ProfessionalService} from '../services/professional.service';
 import {Professional} from '../../../interfaces/models/professional.model';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-professional-form',
@@ -11,14 +12,10 @@ import {Professional} from '../../../interfaces/models/professional.model';
   styleUrls: ['./professional-form.component.scss']
 })
 export class ProfessionalFormComponent implements OnInit {
-  title = 'Atras';
   professionalForm: FormGroup;
   hide = true;
-  stringProfessional = sessionStorage.getItem('professional');
-  titleForm = this.stringProfessional ?
-    'Actualizar Datos del Profesional' :
-    'Registro de Profesional';
-  professionalSelect: Professional = this.stringProfessional ? JSON.parse(this.stringProfessional) : {
+  titleForm = '';
+  professionalSelect: Professional =  {
     id: null,
     password: null,
     name: null,
@@ -35,7 +32,15 @@ export class ProfessionalFormComponent implements OnInit {
   constructor(private fb: FormBuilder,
               private router: Router,
               private professionalService: ProfessionalService,
-              private dialogService: DialogService) {
+              private dialogRef: MatDialogRef<ProfessionalFormComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: any) {
+
+    if (this.data.professional) {
+      this.professionalSelect = this.data.professional;
+    }
+
+    this.titleForm = this.data.title;
+
     this.professionalForm = this.fb.group({
       id: [this.professionalSelect.id],
       name: [this.professionalSelect.name, [Validators.required, Validators.minLength(3)]],
@@ -54,31 +59,27 @@ export class ProfessionalFormComponent implements OnInit {
   }
 
   ngOnInit() {
-  }
-
-  accept() {
-    if (this.stringProfessional) {
-      this.professionalService.put(this.professionalSelect.id, this.professionalForm.value).subscribe(res => {
-        this.dialogService.toastDialog('success');
-        sessionStorage.removeItem('professional');
-        // this.router.navigate(['/professional']);
-      }, error1 => {
-        this.dialogService.toastDialog('error');
-      });
-    } else {
-      this.professionalService.post(this.professionalForm.value).subscribe(res => {
-        this.dialogService.toastDialog('success');
-        sessionStorage.removeItem('professional');
-        // this.router.navigate(['/professional']);
-      }, error1 => {
-        this.dialogService.toastDialog('error');
-      });
+    if (this.data.disabled === true) {
+      this.professionalForm.disable();
+    }
+    if (this.professionalSelect.id) {
+      this.professionalForm.get('ci').disable();
+      this.professionalForm.removeControl('email');
+      this.professionalForm.removeControl('password');
     }
   }
 
-  cancel() {
-    sessionStorage.removeItem('professional');
-    this.dialogService.toastDialog('cancel');
-    // this.router.navigate(['/admin/professional']);
+  accept() {
+    if (this.professionalForm.valid) {
+      if (this.professionalSelect.id) {
+        this.professionalService.put(this.professionalSelect.id, this.professionalForm.value).subscribe(res => {
+          this.dialogRef.close(true);
+        });
+      } else {
+        this.professionalService.post(this.professionalForm.value).subscribe(res => {
+          this.dialogRef.close(true);
+        });
+      }
+    }
   }
 }

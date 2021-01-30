@@ -1,14 +1,6 @@
-<!--<app-table-toolbar-->
-<!--  [title]="title"-->
-<!--  [onBank]="true"-->
-<!--  [onNew]="false">-->
-<!--</app-table-toolbar>-->
-<!--<div class="table-container">-->
-
-<form [formGroup]="professionalForm" autocomplete="off">
+<form [formGroup]="professionalForm" autocomplete="off" (ngSubmit)="accept()">
   <div mat-dialog-title>{{titleForm}}</div>
   <div mat-dialog-content>
-    <!--    <div>-->
     <mat-form-field appearance="outline">
       <mat-label>Nombres</mat-label>
       <input formControlName="name" matInput placeholder="Nombres">
@@ -61,7 +53,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="!data.disabled && !professionalSelect.id">
       <mat-label>Correo Electronico</mat-label>
       <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">
       <mat-error
@@ -91,7 +83,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="!data.disabled && !professionalSelect.id">
       <mat-label>Contraseña</mat-label>
       <input formControlName="password" required matInput placeholder="Contraseña"
              [type]="hide ? 'password' : 'text'">
@@ -106,17 +98,14 @@
         La longitud m&iacute;nima es de 8 caracteres
       </mat-error>
     </mat-form-field>
-    <!--    </div>-->
-
   </div>
   <div mat-dialog-actions>
-    <button color="warn" (click)="cancel()" mat-dialog-close mat-stroked-button>Cancelar</button>
+    <button *ngIf="!data.disabled" color="warn" mat-dialog-close mat-stroked-button>Cancelar</button>
     <span class="spacer-row"></span>
-    <button color="primary" (click)="accept()" [disabled]="professionalForm.invalid" mat-stroked-button>Guardar
-    </button>
+    <button *ngIf="!data.disabled" color="primary" type="submit" [disabled]="professionalForm.invalid" mat-stroked-button>Guardar</button>
+    <button *ngIf="data.disabled" color="primary" type="button" [disabled]="professionalForm.invalid" mat-stroked-button mat-dialog-close>Cerrar</button>
   </div>
 
 </form>
-<!--</div>-->
 
 

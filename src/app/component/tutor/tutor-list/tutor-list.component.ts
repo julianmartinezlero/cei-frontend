@@ -1,11 +1,15 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {TutorService} from '../services/tutor.service';
 import {Tutor} from '../../../interfaces/models/tutor.model';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatSnackBar} from '@angular/material';
 import {CrudComponent} from '../../../interfaces/crudComponent.interface';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../alerts/dialog.service';
 import {TutorFormComponent} from '../tutor-form/tutor-form.component';
+import {ChildrenFormComponent} from '../../children/children-form/children-form.component';
+import {ChildrenService} from '../../children/services/children.service';
+import {TutorChildComponent} from '../tutor-child/tutor-child.component';
+import {TutorEditComponent} from '../tutor-edit/tutor-edit.component';
 
 @Component({
   selector: 'app-tutor-list',
@@ -13,24 +17,15 @@ import {TutorFormComponent} from '../tutor-form/tutor-form.component';
   styleUrls: ['./tutor-list.component.scss']
 })
 export class TutorListComponent implements OnInit, CrudComponent {
-  // displayedColumns: string[] = [
-  //   'position',
-  //   'name',
-  //   'lastName',
-  //   'ci',
-  //   'cell',
-  //   'email',
-  //   'options'
-  // ];
   title = 'Tutores';
   state = true;
-  tutors: Tutor[];
-  // dataSource = new MatTableDataSource<>([]);
-  // @ViewChild(MatSort, {static: true}) sort: MatSort;
+  tutors: Tutor[] = [];
 
   constructor(private tutorService: TutorService,
+              private childService: ChildrenService,
               private dialogService: DialogService,
               private router: Router,
+              private snack: MatSnackBar,
               private routerActive: ActivatedRoute) {
     this.routerActive.queryParams.subscribe(r => {
       this.state = r.sort;
@@ -44,62 +39,73 @@ export class TutorListComponent implements OnInit, CrudComponent {
   all() {
     this.tutorService.get().subscribe((t: Tutor[]) => {
       this.tutors = t;
-      // this.dataSource.sort = this.sort;
     }, error1 => {
       this.dialogService.toastDialog('error');
     });
   }
 
   create() {
-    // this.router.navigate([this.tutorService.route + '/create']);
     this.dialogService.openDialog(TutorFormComponent, {
-      width: '700px',
-      panelClass: 'back'
-      // height: '100%'
+      width: '500px',
     }).subscribe(res => {
-      console.log(res);
+      if (res) {
+        this.ngOnInit();
+      }
     });
   }
 
   delete(ele: Tutor) {
-    this.dialogService.deleteDialog(ele.name + ' ' + ele.lastName).subscribe(re => {
-      if (re === 1) {
-        this.tutorService.delete(ele.id).subscribe(del => {
-          this.dialogService.toastDialog('delete');
-          this.all();
-        }, error1 => {
-          this.dialogService.toastDialog('error');
-        });
+    this.snack.open('Seguro de Eliminar?', 'Aceptar', {
+      duration: 5000,
+    }).onAction().subscribe(() => {
+      this.tutorService.delete(ele.id).subscribe(s => {
+        this.all();
+      });
+    });
+  }
+
+  show(tutor: Tutor) {
+    this.dialogService.openDialog(TutorEditComponent, {
+      width: '500px',
+      data: {
+        tutor,
+        disabled: true,
+        title: 'Datos del Tutor'
       }
     });
   }
 
-  show(id: any) {
+  createChild(tutor: Tutor) {
+    this.dialogService.openDialog(ChildrenFormComponent, {
+      width: '600px',
+      data: {
+        tutor,
+        professionalId: tutor.id,
+      },
+    }).subscribe(r => {});
   }
 
-  sortBy() {
-    if (this.state != null) {
-      this.state = true;
-    } else {
-      this.state = !this.state;
-    }
-    this.tutors.sort((a, b) => {
-      if (this.state === true) {
-        if (a.name > b.name) {
-          return 1;
-        }
-      } else if (this.state === false) {
-        if (a.name < b.name) {
-          return -1;
-        }
+  update(tutor: Tutor) {
+    this.dialogService.openDialog(TutorEditComponent, {
+      width: '500px',
+      data: {
+        tutor,
+        disabled: false,
+        title: 'Actualizar Tutor'
       }
-      return 0;
+    }).subscribe(r => {
+      if (r) {
+        this.ngOnInit();
+      }
     });
-    this.router.navigate([], {queryParams: {sort: this.state}});
   }
 
-  update(value: any) {
-    sessionStorage.setItem('tutor', JSON.stringify(value));
-    this.router.navigate([this.tutorService.route + '/edit']);
+  tutorChildren(tutor: Tutor) {
+    this.dialogService.openDialog(TutorChildComponent, {
+      width: '500px',
+      data: {
+        tutor,
+      },
+    });
   }
 }

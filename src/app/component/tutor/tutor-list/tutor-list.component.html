@@ -11,14 +11,29 @@
       </button>
     </mat-toolbar>
     <mat-divider class="primary"></mat-divider>
-    <mat-list-item *ngFor="let tutor of tutors">
-      <img mat-list-icon
-           src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
-           alt="">
-      <h4 mat-line>{{tutor.name}} {{tutor.lastName}}</h4>
-      <button mat-icon-button>
-        <mat-icon>more_vert</mat-icon>
-      </button>
-    </mat-list-item>
+    <div *ngIf="tutors.length === 0" class="notify-empty">
+      A&uacute;n no se registraron Tutores
+    </div>
+    <ng-container *ngIf="tutors.length > 0">
+      <mat-list-item *ngFor="let tutor of tutors">
+        <img mat-list-icon
+             src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
+             alt="">
+        <h4 mat-line>{{tutor.name}} {{tutor.lastName}}</h4>
+        <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{tutor: tutor}">
+          <mat-icon>more_vert</mat-icon>
+        </button>
+      </mat-list-item>
+    </ng-container>
   </mat-list>
 </div>
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-tutor="tutor">
+    <button mat-menu-item (click)="show(tutor)">Ver</button>
+    <button mat-menu-item (click)="tutorChildren(tutor)">Ver Ni&ntilde;os(as)</button>
+    <button mat-menu-item (click)="createChild(tutor)">Asignar Ni&ntilde;o(a)</button>
+    <button mat-menu-item (click)="update(tutor)">Actualizar Tutor</button>
+    <button mat-menu-item (click)="delete(tutor)">Eliminar</button>
+  </ng-template>
+</mat-menu>
+

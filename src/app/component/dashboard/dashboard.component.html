@@ -8,7 +8,7 @@
   <!--  </mat-sidenav-container>-->
   <mat-toolbar>
     <mat-toolbar-row>
-      Sistema de Informacion CEI
+      <div>C.E.I.</div>
       <nav mat-tab-nav-bar [backgroundColor]="background">
         <a mat-tab-link *ngFor="let link of routes"
            [routerLink]="link.route"
@@ -17,6 +17,8 @@
           <mat-icon>{{link.icon}}</mat-icon>
           {{link.name}}</a>
       </nav>
+      <span class="spacer-row"></span>
+      <button mat-icon-button (click)="logout()"><mat-icon>account_circle</mat-icon></button>
     </mat-toolbar-row>
   </mat-toolbar>
 

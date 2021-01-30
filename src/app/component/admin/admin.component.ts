@@ -11,8 +11,8 @@ export class AdminComponent implements OnInit {
     {name: 'Tutores', icon: 'account_box', route: '/admin/tutor/index'},
     {name: 'Niños(as)', icon: 'child_care', route: '/admin/child/index'},
     {name: 'Profesionales', icon: 'assignment_ind', route: '/admin/professional/index'},
-    {name: 'Pruebas', icon: 'assignment', route: '/admin/question-test/index'},
-    {name: 'Usuarios', icon: 'verified_user', route: '/admin/user/index'}
+    // {name: 'Pruebas', icon: 'assignment', route: '/admin/question-test/index'},
+    // {name: 'Usuarios', icon: 'verified_user', route: '/admin/user/index'}
   ];
 
   constructor() {

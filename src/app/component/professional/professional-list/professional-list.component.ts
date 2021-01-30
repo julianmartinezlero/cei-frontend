@@ -1,12 +1,13 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {CrudComponent} from '../../../interfaces/crudComponent.interface';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogService} from '../../alerts/dialog.service';
 import {Router} from '@angular/router';
 import {ProfessionalService} from '../services/professional.service';
 import {Professional} from '../../../interfaces/models/professional.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ProfessionalFormComponent} from '../professional-form/professional-form.component';
+import {TutorEditComponent} from '../../tutor/tutor-edit/tutor-edit.component';
 
 @Component({
   selector: 'app-professional-list',
@@ -21,25 +22,13 @@ import {ProfessionalFormComponent} from '../professional-form/professional-form.
   ],
 })
 export class ProfessionalListComponent implements OnInit, CrudComponent {
-  displayedColumns: string[] = [
-    'pos',
-    'name',
-    'lastName',
-    'ci',
-    'cell',
-    'email',
-    'position',
-    'profession',
-    'options'
-  ];
-
   title = 'Profesionales';
   dataSource = new MatTableDataSource<Professional>([]);
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(
     private professionalService: ProfessionalService,
     private dialogService: DialogService,
+    private snack: MatSnackBar,
     private router: Router) {
   }
 
@@ -50,38 +39,61 @@ export class ProfessionalListComponent implements OnInit, CrudComponent {
   all() {
     this.professionalService.get().subscribe((t: Professional[]) => {
       this.dataSource = new MatTableDataSource<Professional>(t);
-      this.dataSource.sort = this.sort;
-    }, error1 => {
-      this.dialogService.toastDialog('error');
     });
   }
 
   create() {
     this.dialogService.openDialog(ProfessionalFormComponent, {
-      width: '400px'
+      width: '400px',
+      data: {
+        disabled: false,
+        title: 'Registrar Profesional'
+      }
     }).subscribe(res => {
-      console.log(res);
-    });
-  }
-
-  delete(ele: Professional) {
-    this.dialogService.deleteDialog(ele.name + ' ' + ele.lastName).subscribe(re => {
-      if (re === 1) {
-        this.professionalService.delete(ele.id).subscribe(del => {
-          this.dialogService.toastDialog('delete');
-          this.all();
-        }, error1 => {
-          this.dialogService.toastDialog('error');
-        });
+      if (res) {
+        this.ngOnInit();
       }
     });
   }
 
-  show(id: any) {
+  delete(ele: Professional) {
+    this.snack.open('Seguro de Eliminar?', 'Aceptar', {
+      duration: 5000,
+    }).onAction().subscribe(() => {
+      this.professionalService.delete(ele.id).subscribe(del => {
+        this.all();
+      });
+    });
+  }
+
+  show(professional: any) {
+    this.dialogService.openDialog(ProfessionalFormComponent, {
+      width: '400px',
+      data: {
+        professional,
+        disabled: true,
+        title: 'Datos del Profesional'
+      }
+    }).subscribe(r => {
+      if (r) {
+        this.ngOnInit();
+      }
+    });
   }
 
   update(value: any) {
-    sessionStorage.setItem('professional', JSON.stringify(value));
-    this.router.navigate([this.professionalService.route + '/edit']);
+    this.dialogService.openDialog(ProfessionalFormComponent, {
+      width: '400px',
+      data: {
+        professional: value,
+        disabled: false,
+        title: 'Actualizar Profesional'
+      }
+    }).subscribe(r => {
+      if (r) {
+        this.ngOnInit();
+      }
+    });
   }
+
 }

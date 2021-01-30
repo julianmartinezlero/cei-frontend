@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {TutorService} from '../services/tutor.service';
-import {DialogService} from '../../alerts/dialog.service';
 import {Tutor} from '../../../interfaces/models/tutor.model';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-tutor-edit',
@@ -12,15 +12,18 @@ import {Tutor} from '../../../interfaces/models/tutor.model';
 })
 export class TutorEditComponent implements OnInit {
 
-  title = 'Atras';
   tutorForm: FormGroup;
   hide = true;
+  title = '';
   tutorSelect: Tutor = JSON.parse(sessionStorage.getItem('tutor'));
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private tutorService: TutorService,
-              private dialogService: DialogService) {
+              private dialogRef: MatDialogRef<TutorEditComponent>,
+              @Inject(MAT_DIALOG_DATA) private date: any ) {
+    this.tutorSelect = this.date.tutor;
+    this.title = this.date.title;
   }
 
   ngOnInit() {
@@ -37,21 +40,26 @@ export class TutorEditComponent implements OnInit {
       password: [this.tutorSelect.password, [Validators.required, Validators.minLength(8)]],
       children: [this.tutorSelect.children.length, [Validators.required, Validators.max(12), Validators.min(1)]]
     });
+    this.disabledInputs();
+  }
+
+  disabledInputs() {
+    if (this.date.disabled && this.date.disabled === true) {
+      this.tutorForm.disable();
+    }
+    if (this.tutorSelect.id) {
+      this.tutorForm.get('ci').disable();
+      this.tutorForm.removeControl('email');
+      this.tutorForm.removeControl('password');
+      this.tutorForm.removeControl('children');
+    }
   }
 
   accept() {
-    this.tutorService.put(this.tutorSelect.id, this.tutorForm.value).subscribe(res => {
-      this.dialogService.toastDialog('success');
-      sessionStorage.removeItem('tutor');
-      this.router.navigate(['/tutor']);
-    }, error1 => {
-      this.dialogService.toastDialog('error');
-    });
-  }
-
-  cancel() {
-    sessionStorage.removeItem('tutor');
-    this.dialogService.toastDialog('cancel');
-    this.router.navigate(['/tutor']);
+    if (this.tutorForm.valid) {
+      this.tutorService.put(this.tutorSelect.id, this.tutorForm.value).subscribe(res => {
+        this.dialogRef.close(res);
+      });
+    }
   }
 }

@@ -1,8 +1,8 @@
 import {Observable, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse} from '@angular/common/http';
 import {Router} from '@angular/router';
-import {catchError} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {DialogService} from '../component/alerts/dialog.service';
 
 @Injectable({
@@ -27,14 +27,27 @@ export class AuthInterceptorService implements HttpInterceptor {
       });
     }
 
-    return next.handle(request).pipe(catchError((err: HttpErrorResponse) => {
-
+    return next.handle(request).pipe(
+      map((event: HttpEvent<any>) => {
+      if (event instanceof HttpResponse) {
+        try {
+          if (event.body.message && event.status >= 200 ) {
+            this.dialogService.toastDialog(event.body.message, 'success');
+          }
+        } catch (e) {
+          //
+        }
+      }
+      return event;
+    }), catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           sessionStorage.clear();
           this.dialogService.toastDialog('noAuth');
           this.router.navigate(['/login']);
-        } else if (err.status === 500) {
-          this.dialogService.toastDialog('error');
+        } else if (err.status >= 400 && err.status <= 500) {
+          this.dialogService.toastDialog(err.error.message, 'error');
+        } else if (err.status === 0) {
+          this.dialogService.toastDialog('connection');
         }
         return throwError(err);
       })

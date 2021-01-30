@@ -21,7 +21,6 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {AdminComponent} from './component/admin/admin.component';
 import {UserAppModule} from './component/user-app/user-app.module';
 import {AppUserComponent} from './component/app-user/app-user.component';
-import {LoaderService} from './services/loader.service';
 
 @NgModule({
   declarations: [

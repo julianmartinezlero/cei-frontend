@@ -47,8 +47,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ngOnInit() {
   }
 
-  closedNav() {
-    // this.sidenav.openMenu();
+  logout() {
+    
   }
+
 
 }

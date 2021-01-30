@@ -10,7 +10,7 @@ import {
   MatDatepickerModule, MatDialogModule,
   MatFormFieldModule,
   MatIconModule,
-  MatInputModule, MatListModule,
+  MatInputModule, MatListModule, MatMenuModule,
   MatSelectModule,
   MatSortModule,
   MatTableModule, MatToolbarModule, MatTooltipModule
@@ -44,6 +44,7 @@ import {ProfessionalRoutingModule} from './professional-routing.module';
     MatDialogModule,
     MatToolbarModule,
     MatTooltipModule,
+    MatMenuModule,
   ],
   providers: [
     ProfessionalService

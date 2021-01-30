@@ -1,0 +1,51 @@
+<div mat-dialog-title>Ni&ntilde;os(as)</div>
+<div mat-dialog-content>
+  <swiper [config]="config">
+    <div class="swiper-wrapper" *ngIf="children.length > 0">
+      <div class="swiper-slide" *ngFor="let child of children">
+        <div class="title-name">{{child.name}} {{child.lastName}}</div>
+        <div class="details">
+          <div class="details-child">
+            <img [src]="child.photo ? child.photo : child" mat-card-image alt="" srcset="">
+          </div>
+          <div class="details-child">
+            <table>
+              <tr>
+                <td><b>Nombre y Apellido</b></td>
+                <td>{{child.name}} {{child.lastName}}</td>
+              </tr>
+              <tr>
+                <td><b>Ci</b></td>
+                <td>{{child.ci ? child.ci : 'No definido'}}</td>
+              </tr>
+              <tr>
+                <td>Genero</td>
+                <td>{{child.sex}}</td>
+              </tr>
+              <tr>
+                <td><b>Fecha de Nacimiento</b></td>
+                <td>{{child.birthDate}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="title-center" *ngIf="children.length === 0">No Existen Ni&ntilde;os(as)</div>
+
+    <!-- Add Pagination -->
+    <ng-container *ngIf="children.length > 0">
+<!--      <div class="swiper-pagination"></div>-->
+      <!-- Add Arrows -->
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+    </ng-container>
+
+  </swiper>
+</div>
+<div mat-dialog-actions>
+  <span class="spacer-row"></span>
+  <button color="primary" type="submit" mat-dialog-close mat-stroked-button>
+    Cerrar
+  </button>
+</div>

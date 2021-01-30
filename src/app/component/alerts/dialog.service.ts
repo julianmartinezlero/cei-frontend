@@ -27,26 +27,30 @@ export class DialogService {
     }).afterClosed();
   }
 
-  toastDialog(type: string) {
-    switch (type) {
+  toastDialog(message: string, option?: string) {
+    switch (option) {
       case 'delete': {
+        this.snackConfig.data = message;
         this.snack.openFromComponent(SnackDeleteComponent, this.snackConfig);
         break;
       }
       case 'error': {
+        this.snackConfig.data = message;
         this.snack.openFromComponent(SnackErrorComponent, this.snackConfig);
         break;
       }
       case 'success': {
+        this.snackConfig.data = message;
         this.snack.openFromComponent(SnackSuccessComponent, this.snackConfig);
         break;
       }
       case 'alert': {
+        this.snackConfig.data = message;
         this.snack.openFromComponent(SnackAlertComponent, this.snackConfig);
         break;
       }
       case 'cancel': {
-        this.snackConfig.data = 'Cancelado';
+        this.snackConfig.data = message;
         this.snack.openFromComponent(SnackAlertComponent, this.snackConfig);
         break;
       }
@@ -54,6 +58,15 @@ export class DialogService {
         this.snackConfig.data = 'Error de Sesion';
         this.snack.openFromComponent(SnackErrorComponent, this.snackConfig);
         break;
+      }
+      case 'connection': {
+        this.snackConfig.data = 'Error de Conexión';
+        this.snack.openFromComponent(SnackErrorComponent, this.snackConfig);
+        break;
+      }
+      default : {
+        this.snackConfig.data = message;
+        this.snack.open(message, null, this.snackConfig);
       }
     }
   }

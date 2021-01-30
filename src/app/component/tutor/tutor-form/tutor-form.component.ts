@@ -85,21 +85,14 @@ export class TutorFormComponent implements OnInit {
 
   endRegister() {
     const t: Tutor = this.tutorForm.value;
-    t.children = this.children.map(c => {
-      return c.value;
-    });
     this.tutorService.postCustom('create', t).subscribe(res => {
-      this.dialogService.toastDialog('success');
-      // this.router.navigate(['/tutor']);
-    }, error1 => {
-      this.dialogService.toastDialog('error');
+      this.dialogRef.close(true);
     });
   }
 
   cancel() {
     localStorage.removeItem('tutor');
     this.dialogRef.close();
-    this.dialogService.toastDialog('cancel');
   }
 
 

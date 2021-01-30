@@ -28,6 +28,9 @@ export class UserChildrenComponent implements OnInit {
   addChild() {
     this.dialogService.openDialog(ChildrenFormComponent, {
       width: '500px',
+      data: {
+        tutor: {},
+      }
     }).subscribe(res => {
       if (res === true) {
         this.ngOnInit();

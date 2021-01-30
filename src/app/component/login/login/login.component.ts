@@ -27,7 +27,9 @@ export class LoginComponent implements OnInit {
       sessionStorage.setItem('token', res.access_token);
       this.loginService.getCustom('profile').subscribe((p: any) => {
         sessionStorage.setItem('profile', btoa(JSON.stringify(p)));
-        if ((p.professional && (p.professional.position === 'Auxiliar' || p.professional.position === 'Encargado'))) {
+        if ((p.professional && (p.professional.position === 'Auxiliar'
+          || p.professional.position === 'Encargado'
+          || p.professional.position === 'Administrador'))) {
           this.router.navigate(['/admin/home']);
         } else {
           this.router.navigate(['/app']);
