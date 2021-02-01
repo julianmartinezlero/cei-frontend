@@ -1,5 +1,6 @@
 import {Child} from './child.model';
 import {Professional} from './professional.model';
+import {TreatmentChild} from './treatmentChild.model';
 
 export interface Test {
   id: number;
@@ -8,6 +9,7 @@ export interface Test {
   childId: number;
   totalValue?: number;
   child?: Child;
+  treatmentChildren?: TreatmentChild[];
   professional?: Professional;
   professionalId?: number;
   tutorId?: number;

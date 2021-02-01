@@ -15,7 +15,7 @@
       <mat-list-item *ngFor="let child of dataSource.data; let i = index">
         <img mat-list-icon [src]="child.photo ? child.photo : defaultPhoto" alt="">
         <h4 mat-line>{{child.name}} {{child.lastName}}</h4>
-        <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{id: i}">
+        <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{child: child}">
           <mat-icon>more_vert</mat-icon>
         </button>
       </mat-list-item>
@@ -23,10 +23,10 @@
   </mat-list>
 </div>
 <mat-menu #menu="matMenu">
-  <ng-template matMenuContent let-id="id">
-    <button mat-menu-item (click)="show(id)">Ver</button>
-    <button mat-menu-item>Diagnosticos</button>
-    <button mat-menu-item>Tratamientos</button>
+  <ng-template matMenuContent let-child="child">
+    <button mat-menu-item (click)="show(child)">Ver</button>
+    <button mat-menu-item (click)="createTest(child)">Nuevo Diagnostico</button>
+    <button mat-menu-item (click)="openTreatments(child)">Diagnosticos y Tratamientos</button>
     <button mat-menu-item>Archivar</button>
   </ng-template>
 </mat-menu>

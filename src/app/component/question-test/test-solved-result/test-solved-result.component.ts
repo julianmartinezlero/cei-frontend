@@ -11,43 +11,38 @@ import {QuestionTestService} from '../question-test.service';
   styleUrls: ['./test-solved-result.component.scss']
 })
 export class TestSolvedResultComponent implements OnInit {
-  childSelect: Child = null;
   test: Test = null;
   treatment: any;
 
   constructor(private treatmentService: TreatmentService,
               private testService: QuestionTestService,
               @Inject(MAT_DIALOG_DATA) private data: any) {
-    this.test = this.data.test;
+    this.test = this.data.testResult;
   }
 
   ngOnInit() {
-    this.testService.get(this.test.id).subscribe((r: any) => {
-      this.test = r;
-      this.childSelect = this.test.child;
-      this.loadTreatment(this.getRange(this.test.totalValue));
-    });
 
   }
 
-  loadTreatment(range) {
-    this.treatmentService.get(range).subscribe(res => {
-      this.treatment = res;
-    });
+  getClass() {
+    if (this.test) {
+      return this.getRange(this.test.totalValue);
+    } else {
+      return 'white';
+    }
   }
-
   getRange(total) {
     if (total >= 0 && total <= 0.69) {
-      return 0;
+      return 'green';
     }
     if (total >= 0.70 && total <= 1.19) {
-      return 1;
+      return 'yellow';
     }
     if (total >= 1.20 && total <= 1.70) {
-      return 2;
+      return 'orange';
     }
     if (total >= 1.71 && total <= 3) {
-      return 3;
+      return 'red';
     }
   }
 

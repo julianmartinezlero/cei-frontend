@@ -1,0 +1,30 @@
+<div mat-dialog-title>Tratamientos</div>
+<div mat-dialog-content>
+  <mat-drawer-container class="treatment-container">
+    <mat-drawer mode="side" opened >
+      <div class="menu-side">
+        <mat-list *ngIf="tests.length > 0">
+          <mat-list-item *ngFor="let tr of tests" (click)="setTest(tr)" matRipple [ngClass]="isActive(tr)">
+            <mat-icon mat-list-icon>assignment</mat-icon>
+            <h4 mat-line>{{tr.code}}</h4>
+            <p mat-line> {{tr.createdAt | date: 'mediumDate'}} </p>
+          </mat-list-item>
+
+        </mat-list>
+      </div>
+
+    </mat-drawer>
+    <mat-drawer-content>
+      <div class="content-side" [ngClass]="getClass()">
+        <mat-list *ngIf="testSelect">
+          <mat-list-item *ngFor="let tr of testSelect.treatmentChildren">{{tr.treatment.text}}</mat-list-item>
+        </mat-list>
+      </div>
+
+    </mat-drawer-content>
+  </mat-drawer-container>
+</div>
+<div mat-dialog-actions>
+  <span class="spacer-row"></span>
+  <button type="button" mat-stroked-button mat-dialog-close>Cerrar</button>
+</div>

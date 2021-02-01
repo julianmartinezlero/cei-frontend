@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSort, MatTableDataSource} from '@angular/material';
+import {MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
 import {DialogService} from '../../alerts/dialog.service';
 import {Router} from '@angular/router';
 import {CrudComponent} from '../../../interfaces/crudComponent.interface';
@@ -7,6 +7,9 @@ import {ChildrenService} from '../services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
 import * as moment from 'moment';
 import {ChildrenShowComponent} from '../childer-show/children-show.component';
+import {QuestionTestService} from '../../question-test/question-test.service';
+import {Validators} from '@angular/forms';
+import {ChildTreatmentsComponent} from '../child-treatments/child-treatments.component';
 
 @Component({
   selector: 'app-children-list',
@@ -23,6 +26,8 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
 
   constructor(private childrenService: ChildrenService,
               private dialogService: DialogService,
+              private snack: MatSnackBar,
+              private testService: QuestionTestService,
               private router: Router) {
   }
 
@@ -56,14 +61,26 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     });
   }
 
-  show(id) {
-    sessionStorage.setItem('child', JSON.stringify(this.dataSource.data[id]));
+  show(child: Child) {
+    sessionStorage.setItem('child', JSON.stringify(child));
     this.dialogService.openDialog(ChildrenShowComponent, {
       width: '700px',
     }).subscribe(res => {
       console.log(res);
     });
     // this.router.navigate([this.childrenService.route + '/show']);
+  }
+
+  createTest(child: Child) {
+    this.snack.open('Seguro de Proceder?, es irreversible!', 'Aceptar', {
+      duration: 5000,
+    }).onAction().subscribe(() => {
+      this.router.navigate(['/admin/child/test'], {
+        queryParams: {
+          c: btoa(JSON.stringify(child.id))
+        }
+      });
+    });
   }
 
   update(value: any) {
@@ -73,5 +90,15 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
 
   getAge(date) {
     return this.now.diff(date, 'year');
+  }
+
+  openTreatments(child: Child) {
+    this.dialogService.openDialog(ChildTreatmentsComponent, {
+      width: '700px',
+      // height: '',
+      data: {
+        child
+      }
+    });
   }
 }

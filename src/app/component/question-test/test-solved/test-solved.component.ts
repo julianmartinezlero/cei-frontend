@@ -10,6 +10,7 @@ import {TestAcceptComponent} from '../test-accept/test-accept.component';
 import {Test} from '../../../interfaces/models/test.model';
 import {Location} from '@angular/common';
 import {TestSolvedResultComponent} from '../test-solved-result/test-solved-result.component';
+import {ChildrenService} from '../../children/services/children.service';
 
 @Component({
   selector: 'app-test-solved',
@@ -26,6 +27,7 @@ export class TestSolvedComponent implements OnInit {
   questions: Question[];
   testId: number;
   childSelect: Child;
+  childId: number;
   defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
 
   constructor(private fb: FormBuilder,
@@ -33,18 +35,18 @@ export class TestSolvedComponent implements OnInit {
               private activatedRoute: ActivatedRoute,
               private questionTestService: QuestionTestService,
               private dialogService: DialogService,
+              private childService: ChildrenService,
               private location: Location
               // @Inject(MAT_DIALOG_DATA) private data: any
   ) {
-    this.activatedRoute.params.subscribe(data => {
-      this.testId = data.id;
+    this.activatedRoute.queryParams.subscribe(data => {
+      this.childId = JSON.parse(atob(data.c));
     });
   }
 
   ngOnInit() {
-    this.questionTestService.get(this.testId).subscribe((r: any) => {
-      this.test = r;
-      this.childSelect = this.test.child;
+    this.childService.get(this.childId).subscribe(r => {
+      this.childSelect = r as Child;
     });
     this.loadQuestion(null);
   }
@@ -72,21 +74,18 @@ export class TestSolvedComponent implements OnInit {
           total += q.questionOption.value;
         });
         total = total / 12;
-        this.testForm.forEach(q => {
-          q.test = this.test;
-        });
         this.questionTestService.postCustom('solved/save', {
           solution: this.testForm,
-          totalValue: total,
-          test: this.test
-        }).subscribe(r => {
-          this.dialogService.toastDialog('success');
+          child: this.childSelect,
+          totalValue: total
+        }).subscribe((r: any) => {
           this.location.back();
+          this.test = r.test;
           this.dialogService.openDialog(TestSolvedResultComponent, {
             width: '700px',
             height: '505px',
             data: {
-              test: this.test
+              testResult: r.testResult,
             }
           });
         });
@@ -102,7 +101,7 @@ export class TestSolvedComponent implements OnInit {
   }
 
   closeTest() {
-    this.dialogService.toastDialog('cancel');
+    this.dialogService.toastDialog('Cancelado');
     this.location.back();
   }
 

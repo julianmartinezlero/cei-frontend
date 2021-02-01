@@ -77,6 +77,11 @@ import {TreatmentService} from './treatment.service';
   entryComponents: [
     TestSolvedResourceComponent,
     TestAcceptComponent,
+  ],
+  exports: [
+    TestSolvedComponent,
+    TestSolvedResultComponent,
+    TestSolvedResourceComponent
   ]
 })
 export class QuestionTestModule {

@@ -1,0 +1,33 @@
+.treatment-container{
+  width: 100%;
+  height: 100%;
+}
+.mat-dialog-content{
+  height: 500px;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  padding-left: 0 !important;
+  .menu-side {
+    width: 150px;
+
+    mat-list-item{
+      cursor: pointer;
+    }
+  }
+  .content-side{
+    width: 100%;
+    height: 100%;
+
+    mat-list-item{
+      height: auto;
+      margin-bottom: 15px;
+    }
+    mat-list-item:not(:first-child){
+      font-size: 14px;
+      margin-left: 32px;
+      width: auto;
+      display: list-item;
+    }
+
+  }
+}

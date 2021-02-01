@@ -322,3 +322,44 @@ img.image-icon {
   margin: 100px;
   color: #9e9e9e;
 }
+.redContent{
+  background: #3f51b5;
+}
+
+.red{
+  background: #ff00001f;
+}
+.green{
+  background: #0080001f;
+}
+.yellow{
+  background: #ffff001f;
+}
+.orange{
+  background: #ffa5001f;
+}
+.white {
+  background: #ffffff;
+}
+/* width */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #8888886b;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #8888882f;
+}
+mat-list-item .mat-list-icon{
+  color: #9e9e9e;
+}
