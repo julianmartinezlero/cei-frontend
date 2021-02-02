@@ -8,8 +8,8 @@ import {Component, OnInit} from '@angular/core';
 export class AppUserComponent implements OnInit {
   routes = [
     {name: 'Inicio', icon: 'home', route: '/app'},
-    {name: 'Perfil', icon: 'accessibility', route: '/app'},
     {name: 'Mis hijos', icon: 'child_care', route: '/app/children'},
+    {name: 'Perfil', icon: 'accessibility', route: '/app'},
   ];
 
   constructor() {

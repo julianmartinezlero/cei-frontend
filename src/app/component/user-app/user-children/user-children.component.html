@@ -10,24 +10,23 @@
   </mat-toolbar>
   <mat-divider></mat-divider>
   <div *ngIf="children.length > 0">
-    <mat-card class="child mat-elevation-z0" *ngFor="let child of children">
+    <mat-card class="child mat-elevation-z1" *ngFor="let child of children">
       <img mat-card-image [src]="child.photo ? child.photo : defaultPhoto" alt="Photo of a Shiba Inu">
       <mat-card-actions>
         <button mat-flat-button disableRipple>{{child.name}} {{child.lastName}}</button>
         <span class="spacer-row"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
+        <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{child: child}">
           <mat-icon>more_vert</mat-icon>
         </button>
       </mat-card-actions>
     </mat-card>
   </div>
   <mat-menu #menu="matMenu">
-    <ng-template matMenuContent>
-      <button mat-menu-item>Ver</button>
-      <button mat-menu-item>Diagnosticos</button>
-      <button mat-menu-item>Tratamientos</button>
+    <ng-template matMenuContent let-child="child">
+      <button mat-menu-item (click)="show(child)">Ver</button>
+      <button mat-menu-item (click)="createTest(child)">Nuevo Diagnostico</button>
+      <button mat-menu-item (click)="openTreatments(child)">Diagnosticos y Tratamientos</button>
     </ng-template>
-
   </mat-menu>
   <div style="text-align: center" *ngIf="children.length === 0">
     No se registraron hijos

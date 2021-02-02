@@ -1,10 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {Child} from '../../../interfaces/models/child.model';
 import {ChildrenService} from '../../children/services/children.service';
-import {Professional} from '../../../interfaces/models/professional.model';
 import {DialogService} from '../../alerts/dialog.service';
 import {ChildrenFormComponent} from '../../children/children-form/children-form.component';
-import {TestSolvedComponent} from '../../question-test/test-solved/test-solved.component';
+import {ChildrenShowComponent} from '../../children/childer-show/children-show.component';
+import {ChildTreatmentsComponent} from '../../children/child-treatments/child-treatments.component';
+import {MatSnackBar} from '@angular/material';
+import {Router} from '@angular/router';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-user-children',
@@ -16,6 +19,9 @@ export class UserChildrenComponent implements OnInit {
   defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
 
   constructor(private childService: ChildrenService,
+              private snack: MatSnackBar,
+              private router: Router,
+              private location: Location,
               private dialogService: DialogService) {
   }
 
@@ -27,7 +33,7 @@ export class UserChildrenComponent implements OnInit {
 
   addChild() {
     this.dialogService.openDialog(ChildrenFormComponent, {
-      width: '500px',
+      width: '600px',
       data: {
         tutor: {},
       }
@@ -38,13 +44,35 @@ export class UserChildrenComponent implements OnInit {
     });
   }
 
-  solved(c) {
-    sessionStorage.setItem('child', JSON.stringify(c));
-    // this.dialogService.openDialog(TestSolvedComponent, {
-    //   width: '800px',
-    //   height: '100%',
-    // }).subscribe(res => {
-    //   console.log(res);
-    // });
+  show(child: Child) {
+    sessionStorage.setItem('child', JSON.stringify(child));
+    this.dialogService.openDialog(ChildrenShowComponent, {
+      width: '700px',
+    }).subscribe(res => {
+      console.log(res);
+    });
+    // this.router.navigate([this.childrenService.route + '/show']);
+  }
+
+  createTest(child: Child) {
+    this.snack.open('Seguro de Proceder?, es irreversible!', 'Aceptar', {
+      duration: 5000,
+    }).onAction().subscribe(() => {
+      this.router.navigate(['/app/children/test'], {
+        queryParams: {
+          c: btoa(JSON.stringify(child.id))
+        }
+      });
+    });
+  }
+
+  openTreatments(child: Child) {
+    this.dialogService.openDialog(ChildTreatmentsComponent, {
+      width: '700px',
+      // height: '',
+      data: {
+        child
+      }
+    });
   }
 }
