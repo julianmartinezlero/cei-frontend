@@ -1,21 +1,15 @@
-<h1 mat-dialog-title>Seguimiento</h1>
-<div mat-dialog-content>
-  <div>
-<!--    <table>-->
-<!--      <ng-container *ngFor="let a of treatments">-->
-<!--        <tr>-->
-<!--          <th>{{a.text}}</th>-->
-<!--          <ng-container *ngFor="let t of a.treatmentChildSessions">-->
-<!--            <td>desde {{t.dateIni}} al {{t.dateEnd}}</td>-->
-<!--          </ng-container>-->
-<!--        </tr>-->
-<!--      </ng-container>-->
-
-<!--    </table>-->
-    <full-calendar [options]="calendarOptions"></full-calendar>
-
+<div class="tracing">
+  <mat-toolbar>
+    Seguimiento
+  </mat-toolbar>
+  <div mat-dialog-content>
+<!--    <mat-card>-->
+      <full-calendar #calendar [options]="calendarOptions" [deepChangeDetection]="true"></full-calendar>
+<!--    </mat-card>-->
   </div>
+  <mat-card-actions>
+    <button type="button" mat-button color="primary" mat-dialog-close>Aceptar</button>
+    <button type="button" mat-button color="primary"(click)="calendarApi.render()">Reder</button>
+  </mat-card-actions>
 </div>
-<div mat-dialog-actions>
-  <button type="button" mat-button color="primary" mat-dialog-close>Aceptar</button>
-</div>
+

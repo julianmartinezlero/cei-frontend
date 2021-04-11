@@ -363,3 +363,63 @@ img.image-icon {
 mat-list-item .mat-list-icon{
   color: #9e9e9e;
 }
+// calendar
+.fc {
+  text-transform: capitalize;
+
+  .fc-button-group>.fc-button {
+    flex: 1 1 auto;
+    position: relative;
+    width: 40px;
+    margin-right: 10px;
+  }
+
+  .fc-button .fc-icon {
+    font-size: 1.5em;
+    margin-left: -4px;
+    vertical-align: middle;
+  }
+
+  .fc-button-primary {
+    background-color: #3f51bc !important;
+    border-color: #3f51bc !important;
+    color: #fff !important;
+  }
+
+  .fc-button-primary:hover {
+    background-color: #4b5ab1bd !important;
+    border-color: #4b5ab1bd !important;
+  }
+
+  .fc-button-primary:focus {
+    box-shadow: #3f51b5 !important;
+  }
+
+  .fc-button-primary:focus {
+    box-shadow: none !important;
+  }
+   .fc-button:focus {
+    box-shadow: none !important;
+    outline: 0;
+  }
+  .fc-daygrid-day-bg .fc-bg-event {
+    overflow: hidden;
+  }
+  .fc-daygrid-day-number {
+    padding: 4px;
+    position: relative;
+    z-index: 4;
+    background: #3f51bc;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+    text-align: center;
+    color: white;
+  }
+}
+.red-event{
+  background: #2d9eff26 !important;
+  padding-top: 20px !important;
+  color: black;
+  opacity: 1 !important;
+}
