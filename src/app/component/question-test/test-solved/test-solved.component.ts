@@ -7,7 +7,7 @@ import {Question} from '../../../interfaces/models/question';
 import {Child} from '../../../interfaces/models/child.model';
 import {TestSolvedResourceComponent} from '../test-solved-resource/test-solved-resource.component';
 import {TestAcceptComponent} from '../test-accept/test-accept.component';
-import {Test} from '../../../interfaces/models/test.model';
+import {TestChild} from '../../../interfaces/models/testChild.model';
 import {Location} from '@angular/common';
 import {TestSolvedResultComponent} from '../test-solved-result/test-solved-result.component';
 import {ChildrenService} from '../../children/services/children.service';
@@ -22,7 +22,7 @@ export class TestSolvedComponent implements OnInit {
   title = 'Atras';
   testForm: TestSolved[] = [];
   hide = true;
-  test: Test;
+  test: TestChild;
   titleForm = 'Resolver Prubea';
   questions: Question[];
   testId: number;

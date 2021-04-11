@@ -49,7 +49,7 @@
         <!--            </button>-->
       </div>
       <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
-        <mat-card-title>{{question.question}}</mat-card-title>
+        <mat-card-title>{{question.question}}<span style="color: red"> *</span></mat-card-title>
         <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
         <mat-card-content>
           <mat-radio-group aria-label="Select an option" [(ngModel)]="testForm[i].questionOption"
@@ -69,8 +69,8 @@
   <!--      margin-bottom: 20px !important;">-->
   <mat-card-actions>
     <span class="spacer-row"></span>
-    <button type="button" mat-button color="warn" (click)="closeTest()">Cancelar</button>
-    <button [disabled]="!testValid()" type="button" mat-button color="primary" (click)="accept()">Aceptar</button>
+    <button type="button" mat-flat-button color="warn" (click)="closeTest()" style="margin-right: 10px">Cancelar</button>
+    <button [disabled]="!testValid()" type="button" mat-flat-button color="primary" (click)="accept()">Aceptar</button>
   </mat-card-actions>
 
 </div>

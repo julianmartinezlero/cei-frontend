@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSort, MatTableDataSource} from '@angular/material';
 import {DialogService} from '../../alerts/dialog.service';
 import {Router} from '@angular/router';
-import {Test} from '../../../interfaces/models/test.model';
+import {TestChild} from '../../../interfaces/models/testChild.model';
 import {ViewTest} from '../../../interfaces/models/ViewTest';
 import {QuestionTestService} from '../question-test.service';
 import {TestFormComponent} from '../test-form/test-form.component';
@@ -25,7 +25,7 @@ export class TestListComponent implements OnInit {
     'options'
   ];
   title = 'Pruebas';
-  dataSource: Test[] = [];
+  dataSource: TestChild[] = [];
   // @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private questionTestService: QuestionTestService,
@@ -38,7 +38,7 @@ export class TestListComponent implements OnInit {
   }
 
   all() {
-    this.questionTestService.get().subscribe((t: Test[]) => {
+    this.questionTestService.get().subscribe((t: TestChild[]) => {
       this.dataSource = t;
       // this.dataSource.sort = this.sort;
     }, error1 => {
@@ -54,7 +54,7 @@ export class TestListComponent implements OnInit {
     });
   }
 
-  delete(ele: Test) {
+  delete(ele: TestChild) {
     this.dialogService.deleteDialog(ele.code + ' ' + ele.questionState).subscribe(re => {
       if (re === 1) {
         this.questionTestService.delete(ele.id).subscribe(del => {
@@ -86,7 +86,7 @@ export class TestListComponent implements OnInit {
     // });
     this.router.navigate([`/admin/${this.questionTestService.route}/${d.id}/solved`]);
   }
-  showResult(te: Test) {
+  showResult(te: TestChild) {
     this.dialogService.openDialog(TestSolvedResultComponent, {
       width: '700px',
       height: '505px',

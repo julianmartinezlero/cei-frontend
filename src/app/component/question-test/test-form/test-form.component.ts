@@ -2,7 +2,7 @@ import {Component, Injectable, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {DialogService} from '../../alerts/dialog.service';
-import {Test} from '../../../interfaces/models/test.model';
+import {TestChild} from '../../../interfaces/models/testChild.model';
 import {QuestionTestService} from '../question-test.service';
 import {ChildrenService} from '../../children/services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
@@ -24,7 +24,7 @@ export class TestFormComponent implements OnInit {
     'Actualizar Datos de Prueba' :
     'Registro de Prueba';
   children: Child[];
-  testSelect: Test = this.stringTest ? JSON.parse(this.stringTest) : {
+  testSelect: TestChild = this.stringTest ? JSON.parse(this.stringTest) : {
     id: null,
     code: null,
     questionState: false,

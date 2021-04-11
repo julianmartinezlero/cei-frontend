@@ -1,6 +1,6 @@
-import {Test} from './test.model';
+import {TestChild} from './testChild.model';
 
-export interface ViewTest extends Test {
+export interface ViewTest extends TestChild {
   id: number;
   code: string;
   questionState: boolean;

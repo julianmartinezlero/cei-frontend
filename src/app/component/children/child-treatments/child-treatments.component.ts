@@ -2,8 +2,7 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Child} from '../../../interfaces/models/child.model';
 import {QuestionTestService} from '../../question-test/question-test.service';
-import {Test} from '../../../interfaces/models/test.model';
-import {Treatment} from '../../../interfaces/models/treatment.model';
+import {TestChild} from '../../../interfaces/models/testChild.model';
 
 @Component({
   selector: 'app-child-treatments',
@@ -12,8 +11,8 @@ import {Treatment} from '../../../interfaces/models/treatment.model';
 })
 export class ChildTreatmentsComponent implements OnInit {
   child: Child;
-  tests: Test[] = [];
-  testSelect: Test;
+  tests: TestChild[] = [];
+  testSelect: TestChild;
   constructor(
     private testService: QuestionTestService,
     private dialogRef: MatDialogRef<ChildTreatmentsComponent>,
@@ -24,6 +23,7 @@ export class ChildTreatmentsComponent implements OnInit {
   ngOnInit() {
     this.testService.getCustom(`testChild/${this.child.id}`).subscribe((r: any) => {
       this.tests = r;
+      this.testSelect = this.tests.length > 0 ? this.tests[this.tests.length - 1] : null;
     });
   }
 
@@ -51,7 +51,7 @@ export class ChildTreatmentsComponent implements OnInit {
       return 'red';
     }
   }
-  isActive(test: Test) {
+  isActive(test: TestChild) {
     if (this.testSelect) {
       return test.id === this.testSelect.id ? this.getClass() : '';
     } else {
@@ -59,4 +59,7 @@ export class ChildTreatmentsComponent implements OnInit {
     }
   }
 
+  showTreatment() {
+    this.dialogRef.close(this.testSelect);
+  }
 }

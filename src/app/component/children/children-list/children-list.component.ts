@@ -8,8 +8,9 @@ import {Child} from '../../../interfaces/models/child.model';
 import * as moment from 'moment';
 import {ChildrenShowComponent} from '../childer-show/children-show.component';
 import {QuestionTestService} from '../../question-test/question-test.service';
-import {Validators} from '@angular/forms';
 import {ChildTreatmentsComponent} from '../child-treatments/child-treatments.component';
+import {TestChild} from '../../../interfaces/models/testChild.model';
+import {ChildTreatmentTracingComponent} from '../child-treartment-tracing/child-treatment-tracing.component';
 
 @Component({
   selector: 'app-children-list',
@@ -99,6 +100,20 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
       data: {
         child
       }
+    }).subscribe(a => {
+      if (a) {
+        this.openTestTracing(a.id);
+      }
+    });
+  }
+
+  openTestTracing(testId) {
+    this.dialogService.openDialog(ChildTreatmentTracingComponent, {
+      width: '100%',
+      height: '100%',
+      data: {
+        id: testId
+      },
     });
   }
 }

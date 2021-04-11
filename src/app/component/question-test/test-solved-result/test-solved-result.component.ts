@@ -1,7 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Child} from '../../../interfaces/models/child.model';
 import {TreatmentService} from '../treatment.service';
-import {Test} from '../../../interfaces/models/test.model';
+import {TestChild} from '../../../interfaces/models/testChild.model';
 import {MAT_DIALOG_DATA} from '@angular/material';
 import {QuestionTestService} from '../question-test.service';
 
@@ -11,7 +10,7 @@ import {QuestionTestService} from '../question-test.service';
   styleUrls: ['./test-solved-result.component.scss']
 })
 export class TestSolvedResultComponent implements OnInit {
-  test: Test = null;
+  test: TestChild = null;
   treatment: any;
 
   constructor(private treatmentService: TreatmentService,

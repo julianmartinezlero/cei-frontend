@@ -1,0 +1,21 @@
+<h1 mat-dialog-title>Seguimiento</h1>
+<div mat-dialog-content>
+  <div>
+<!--    <table>-->
+<!--      <ng-container *ngFor="let a of treatments">-->
+<!--        <tr>-->
+<!--          <th>{{a.text}}</th>-->
+<!--          <ng-container *ngFor="let t of a.treatmentChildSessions">-->
+<!--            <td>desde {{t.dateIni}} al {{t.dateEnd}}</td>-->
+<!--          </ng-container>-->
+<!--        </tr>-->
+<!--      </ng-container>-->
+
+<!--    </table>-->
+    <full-calendar [options]="calendarOptions"></full-calendar>
+
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button type="button" mat-button color="primary" mat-dialog-close>Aceptar</button>
+</div>
