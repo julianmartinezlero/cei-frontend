@@ -102,18 +102,21 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
       }
     }).subscribe(a => {
       if (a) {
-        this.openTestTracing(a.id);
+        this.openTestTracing(a);
       }
     });
   }
 
-  openTestTracing(testId) {
+  openTestTracing(dates) {
     this.dialogService.openDialog(ChildTreatmentTracingComponent, {
       width: '100%',
       height: '100%',
       data: {
-        id: testId
+        id: dates.testSelect.id,
+        child: dates.child
       },
+    }).subscribe(a => {
+      this.openTreatments(a);
     });
   }
 }

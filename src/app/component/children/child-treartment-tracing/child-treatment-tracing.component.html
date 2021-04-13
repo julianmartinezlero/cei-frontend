@@ -1,6 +1,8 @@
 <div class="tracing">
   <mat-toolbar>
     Seguimiento
+    <span class="spacer-row"></span>
+    <button mat-icon-button matTooltip="Cerrar" [mat-dialog-close]="child"><mat-icon>close</mat-icon></button>
   </mat-toolbar>
   <div mat-dialog-content>
 <!--    <mat-card>-->
@@ -8,8 +10,8 @@
 <!--    </mat-card>-->
   </div>
   <mat-card-actions>
-    <button type="button" mat-button color="primary" mat-dialog-close>Aceptar</button>
-    <button type="button" mat-button color="primary"(click)="calendarApi.render()">Reder</button>
+    <span class="spacer-row"></span>
+    <button type="button" mat-flat-button color="primary" [mat-dialog-close]="child">Cerrar</button>
   </mat-card-actions>
 </div>
 

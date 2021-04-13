@@ -416,10 +416,78 @@ mat-list-item .mat-list-icon{
     text-align: center;
     color: white;
   }
+  .fc-bg-event .fc-event-title {
+    font-size: .85em;
+    font-style: italic;
+    /* margin: .5em; */
+    margin: 0 !important;
+    width: inherit !important;
+    height: inherit !important;
+    overflow: hidden !important;
+  }
+}
+@mixin custom-event-color {
+  opacity: 1 !important;
+  cursor: pointer;
+  height: 100%;
+  padding-left: 5px;
+  padding-bottom: 5px;
+  padding-right: 5px;
+  overflow: hidden !important;
+  padding-top: 20px !important;
+}
+
+.custom-event-color:hover{
+  opacity: 0.5 !important;
+}
+
+.blue-event {
+  @include custom-event-color;
+  background: #2d9eff26 !important;
+  color: black;
 }
 .red-event{
-  background: #2d9eff26 !important;
-  padding-top: 20px !important;
+  background: rgba(255, 13, 0, 0.15) !important;
   color: black;
-  opacity: 1 !important;
 }
+.purple-event{
+  @include custom-event-color;
+  background: rgba(68, 0, 255, 0.15) !important;
+  color: black;
+}
+.green-event{
+  @include custom-event-color;
+  background: rgba(0, 255, 68, 0.15) !important;
+  color: black;
+}
+
+.event-complete{
+  border: solid #008004 !important;
+}
+
+
+//.green-event::before{
+//  content: "";
+//  display: block;
+//  background: url("/assets/correct.ico") no-repeat;
+//  width: 20px;
+//  height: 20px;
+//  float: left;
+//  margin: 0 6px 0 0;
+//}
+.orange-event{
+  @include custom-event-color;
+  background: rgba(255, 140, 0, 0.15) !important;
+  color: black;
+}
+.cyan-event{
+  @include custom-event-color;
+  background: rgba(0, 199, 255, 0.15) !important;
+  color: black;
+}
+.white-snack{
+  background-color: white;
+  color: black;
+}
+
+

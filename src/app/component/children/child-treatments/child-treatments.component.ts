@@ -60,6 +60,9 @@ export class ChildTreatmentsComponent implements OnInit {
   }
 
   showTreatment() {
-    this.dialogRef.close(this.testSelect);
+    this.dialogRef.close({
+      testSelect: this.testSelect,
+      child: this.child
+    });
   }
 }

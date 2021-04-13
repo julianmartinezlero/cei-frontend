@@ -1,12 +1,14 @@
 import {AfterViewInit, Component, Inject, OnInit, ViewChild} from '@angular/core';
 import {TreatmentService} from '../../question-test/treatment.service';
-import {MAT_DIALOG_DATA} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialog, MatSnackBar} from '@angular/material';
 import {CalendarOptions, FullCalendarComponent, FullCalendarModule} from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import {TreatmentChildSession} from '../../../interfaces/models/TreatmentChildSession.model';
-import * as moment from 'moment'; // useful for typechecking
+import * as moment from 'moment';
+import {Child} from '../../../interfaces/models/child.model';
+import {ChildEventDetailsComponent} from '../child-event-details/child-event-details.component'; // useful for typechecking
 FullCalendarModule.registerPlugins([
   dayGridPlugin, interactionPlugin,
   timeGridPlugin,
@@ -36,15 +38,19 @@ export class ChildTreatmentTracingComponent implements OnInit, AfterViewInit {
     allDayText: 'Todos los Dias',
     // themeSystem: 'material',
     height: '100%',
-    dateClick: this.handleDateClick.bind(this), // bind is important!
     events: [],
     eventClassNames: 'active'
   };
+  child: Child;
   calendarApi;
   @ViewChild('calendar', {static: false}) calendarComponent: FullCalendarComponent;
   constructor(
     @Inject(MAT_DIALOG_DATA) private data: any,
-    private treatmentService: TreatmentService) { }
+    private dialog: MatDialog,
+    private snack: MatSnackBar,
+    private treatmentService: TreatmentService) {
+    this.child = this.data.child;
+  }
 
   ngOnInit() {
   }
@@ -67,8 +73,18 @@ export class ChildTreatmentTracingComponent implements OnInit, AfterViewInit {
     });
   }
 
-  handleDateClick(arg) {
-    // alert('date click! ' + arg.dateStr);
+  handleDateClick(evt) {
+    this.dialog.open(ChildEventDetailsComponent, {
+      width: '500px',
+      data: {
+        ...evt.event.extendedProps
+      }
+    }).afterClosed().subscribe(a => {
+      if (a === true) {
+        this.loadCalendar();
+        this.snack.open('Completado', null, {duration: 3000});
+      }
+    });
   }
 
   private async mapDataToEvents(data: TreatmentChildSession[]) {
@@ -79,9 +95,9 @@ export class ChildTreatmentTracingComponent implements OnInit, AfterViewInit {
         end: t.dateIni,
         title: t.treatment.text,
         state: t.state,
-        treatment: t.treatment,
+        session: t,
         display: 'background',
-        classNames: ['red-event'],
+        classNames: ['custom-event-color', t.classColor, (t.state === true ? 'event-complete' : '')],
       };
     });
   }

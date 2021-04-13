@@ -5,6 +5,7 @@ export interface TreatmentChildSession {
   id: number;
   treatment: Treatment;
   test: TestChild;
+  classColor: string,
   state: boolean;
   dateIni: string;
   dateEnd: string;

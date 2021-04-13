@@ -37,6 +37,8 @@ import {TreatmentService} from '../question-test/treatment.service';
 import {FullCalendarModule} from '@fullcalendar/angular';
 
 import * as moment from 'moment';
+import { ChildEventDetailsComponent } from './child-event-details/child-event-details.component';
+import {TreatmentSessionService} from './services/treatment-session.service';
 
 moment().locale('es-Es');
 
@@ -47,7 +49,8 @@ moment().locale('es-Es');
     ChildrenShowComponent,
     PhotoComponent,
     ChildTreatmentsComponent,
-    ChildTreatmentTracingComponent
+    ChildTreatmentTracingComponent,
+    ChildEventDetailsComponent
   ],
   imports: [
     CommonModule,
@@ -80,7 +83,8 @@ moment().locale('es-Es');
   providers: [
     ChildrenService,
     TutorService,
-    TreatmentService
+    TreatmentService,
+    TreatmentSessionService,
     // { provide: LOCALE_ID, useValue: 'es' },
   ],
   entryComponents: [
@@ -88,6 +92,7 @@ moment().locale('es-Es');
     PhotoComponent,
     ChildTreatmentsComponent,
     ChildTreatmentTracingComponent,
+    ChildEventDetailsComponent,
   ]
 })
 export class ChildrenModule {
