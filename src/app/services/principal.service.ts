@@ -35,4 +35,8 @@ export class PrincipalService {
   postCustom(param, data) {
     return this.http.post(`${this.server}/${this.route}/${param}`, data);
   }
+
+  getQuery(route, query) {
+    return this.http.get(`${this.server}/${this.route}/${route}`, {params: query});
+  }
 }

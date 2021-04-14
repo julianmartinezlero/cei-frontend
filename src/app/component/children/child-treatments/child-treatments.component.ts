@@ -23,7 +23,7 @@ export class ChildTreatmentsComponent implements OnInit {
   ngOnInit() {
     this.testService.getCustom(`testChild/${this.child.id}`).subscribe((r: any) => {
       this.tests = r;
-      this.testSelect = this.tests.length > 0 ? this.tests[this.tests.length - 1] : null;
+      this.testSelect = this.tests.length > 0 ? this.tests[0] : null;
     });
   }
 

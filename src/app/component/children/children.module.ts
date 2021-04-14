@@ -21,7 +21,7 @@ import {
   MatSortModule,
   MatTableModule,
   MatToolbarModule,
-  MatTooltipModule
+  MatTooltipModule, MatTreeModule
 } from '@angular/material';
 import {ChildrenRoutingModule} from './children-routing.module';
 import {ChildrenFormComponent} from './children-form/children-form.component';
@@ -79,6 +79,7 @@ moment().locale('es-Es');
     MatTooltipModule,
     QuestionTestModule,
     MatSidenavModule,
+    MatTreeModule,
   ],
   providers: [
     ChildrenService,
