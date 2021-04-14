@@ -17,6 +17,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
   activeLink = '';
   background = '';
 
+  constructor(private location: Location,
+              private router: Router) {
+    this.activeLink = this.location.path();
+  }
 
   toggleBackground() {
     this.background = this.background ? '' : 'primary';
@@ -34,9 +38,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   //   this.mobileQuery.addListener(this._mobileQueryListener);
   // }
   //
-  constructor(private location: Location) {
-    this.activeLink = this.location.path();
-  }
+
   ngOnDestroy(): void {
     // this.mobileQuery.removeListener(this._mobileQueryListener);
   }
@@ -48,8 +50,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   logout() {
-    
+    sessionStorage.clear();
+    this.router.navigate(['/']);
   }
-
-
 }

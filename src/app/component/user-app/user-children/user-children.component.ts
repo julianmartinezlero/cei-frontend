@@ -8,6 +8,7 @@ import {ChildTreatmentsComponent} from '../../children/child-treatments/child-tr
 import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
+import {ChildTreatmentTracingComponent} from '../../children/child-treartment-tracing/child-treatment-tracing.component';
 
 @Component({
   selector: 'app-user-children',
@@ -69,10 +70,26 @@ export class UserChildrenComponent implements OnInit {
   openTreatments(child: Child) {
     this.dialogService.openDialog(ChildTreatmentsComponent, {
       width: '700px',
-      // height: '',
       data: {
         child
       }
+    }).subscribe(a => {
+      if (a) {
+        this.openTestTracing(a);
+      }
+    });
+  }
+
+  openTestTracing(dates) {
+    this.dialogService.openDialog(ChildTreatmentTracingComponent, {
+      width: '100%',
+      height: '100%',
+      data: {
+        id: dates.testSelect.id,
+        child: dates.child
+      },
+    }).subscribe(a => {
+      this.openTreatments(a);
     });
   }
 }

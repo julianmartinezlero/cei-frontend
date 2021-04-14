@@ -19,8 +19,11 @@
         <mat-list *ngIf="testSelect">
           <mat-list-item *ngFor="let tr of testSelect.treatmentChildren">{{tr.treatment.text}}</mat-list-item>
         </mat-list>
-        <div style="text-align: center;">
-          <button type="button" mat-flat-button color="primary"(click)="showTreatment()">Tratamiento</button>
+        <div style="text-align: center;" *ngIf="testSelect">
+          <button type="button" mat-flat-button color="primary" (click)="showTreatment()">Tratamiento</button>
+        </div>
+        <div style="text-align: center;" *ngIf="!testSelect">
+          <div>No Existen Diagnosticos</div>
         </div>
       </div>
 

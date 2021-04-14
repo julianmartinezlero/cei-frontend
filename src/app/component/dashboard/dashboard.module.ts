@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {DashboardComponent} from './dashboard.component';
-import {MatButtonModule, MatSidenavModule, MatTabsModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatMenuModule, MatSidenavModule, MatTabsModule, MatToolbarModule} from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
 import {HomeComponent} from './home/home.component';
 import {RouterModule} from '@angular/router';
@@ -23,7 +23,8 @@ import {MatIconModule} from '@angular/material';
     RouterModule,
     MatToolbarModule,
     MatIconModule,
-    MatButtonModule
+    MatButtonModule,
+    MatMenuModule
   ]
 })
 export class DashboardModule {

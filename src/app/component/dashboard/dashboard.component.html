@@ -18,10 +18,14 @@
           {{link.name}}</a>
       </nav>
       <span class="spacer-row"></span>
-      <button mat-icon-button (click)="logout()"><mat-icon>account_circle</mat-icon></button>
+      <button mat-button [matMenuTriggerFor]="menu">julian martinez lero <mat-icon>account_circle</mat-icon></button>
     </mat-toolbar-row>
   </mat-toolbar>
 
   <ng-content></ng-content>
 
 </div>
+<mat-menu #menu="matMenu">
+  <button mat-menu-item>Mi Datos</button>
+  <button mat-menu-item (click)="logout()">Salir</button>
+</mat-menu>
