@@ -5,15 +5,17 @@ import {SnackDeleteComponent} from './snack-delete/snack-delete.component';
 import {SnackErrorComponent} from './snack-error/snack-error.component';
 import {SnackSuccessComponent} from './snack-success/snack-success.component';
 import {SnackAlertComponent} from './snack-alert/snack-alert.component';
+import {VERTICAL_POSITION} from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DialogService {
   width = '300px';
-  snackConfig = {
+  snackConfig: any = {
     duration: 2000,
-    data: null
+    data: null,
+    verticalPosition: VERTICAL_POSITION,
   };
 
   constructor(private dialog: MatDialog,

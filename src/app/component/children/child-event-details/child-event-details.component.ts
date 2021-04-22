@@ -4,7 +4,7 @@ import {TreatmentChildSession} from '../../../interfaces/models/TreatmentChildSe
 import {TreatmentSessionService} from '../services/treatment-session.service';
 import {TreatmentService} from '../../question-test/treatment.service';
 import {NestedTreeControl} from '@angular/cdk/tree';
-import {environment} from '../../../../environments/environment';
+import {environment, VERTICAL_POSITION} from '../../../../environments/environment';
 import {Router} from '@angular/router';
 
 @Component({
@@ -36,6 +36,7 @@ export class ChildEventDetailsComponent implements OnInit {
   completeSession() {
     this.snack.open('Marcar como Completado?', 'Aceptar', {
       duration: 5000,
+      verticalPosition: VERTICAL_POSITION,
       panelClass: 'white-snack',
     }).onAction().subscribe(() => {
       this.treatmentSessionService.updateSession(this.session.id).subscribe(a => {

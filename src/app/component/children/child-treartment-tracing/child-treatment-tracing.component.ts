@@ -8,7 +8,8 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import {TreatmentChildSession} from '../../../interfaces/models/TreatmentChildSession.model';
 import * as moment from 'moment';
 import {Child} from '../../../interfaces/models/child.model';
-import {ChildEventDetailsComponent} from '../child-event-details/child-event-details.component'; // useful for typechecking
+import {ChildEventDetailsComponent} from '../child-event-details/child-event-details.component';
+import {VERTICAL_POSITION} from '../../../../environments/environment'; // useful for typechecking
 FullCalendarModule.registerPlugins([
   dayGridPlugin, interactionPlugin,
   timeGridPlugin,
@@ -82,7 +83,7 @@ export class ChildTreatmentTracingComponent implements OnInit, AfterViewInit {
     }).afterClosed().subscribe(a => {
       if (a === true) {
         this.loadCalendar();
-        this.snack.open('Completado', null, {duration: 3000});
+        this.snack.open('Completado', null, {duration: 3000, verticalPosition: VERTICAL_POSITION});
       }
     });
   }

@@ -9,6 +9,7 @@ import {MatSnackBar} from '@angular/material';
 import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ChildTreatmentTracingComponent} from '../../children/child-treartment-tracing/child-treatment-tracing.component';
+import {VERTICAL_POSITION} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-user-children',
@@ -52,12 +53,12 @@ export class UserChildrenComponent implements OnInit {
     }).subscribe(res => {
       console.log(res);
     });
-    // this.router.navigate([this.childrenService.route + '/show']);
   }
 
   createTest(child: Child) {
     this.snack.open('Seguro de Proceder?, es irreversible!', 'Aceptar', {
       duration: 5000,
+      verticalPosition: VERTICAL_POSITION,
     }).onAction().subscribe(() => {
       this.router.navigate(['/app/children/test'], {
         queryParams: {

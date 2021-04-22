@@ -8,6 +8,7 @@ import {Professional} from '../../../interfaces/models/professional.model';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ProfessionalFormComponent} from '../professional-form/professional-form.component';
 import {TutorEditComponent} from '../../tutor/tutor-edit/tutor-edit.component';
+import {VERTICAL_POSITION} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-professional-list',
@@ -59,6 +60,7 @@ export class ProfessionalListComponent implements OnInit, CrudComponent {
   delete(ele: Professional) {
     this.snack.open('Seguro de Eliminar?', 'Aceptar', {
       duration: 5000,
+      verticalPosition: VERTICAL_POSITION,
     }).onAction().subscribe(() => {
       this.professionalService.delete(ele.id).subscribe(del => {
         this.all();

@@ -9,8 +9,8 @@ import * as moment from 'moment';
 import {ChildrenShowComponent} from '../childer-show/children-show.component';
 import {QuestionTestService} from '../../question-test/question-test.service';
 import {ChildTreatmentsComponent} from '../child-treatments/child-treatments.component';
-import {TestChild} from '../../../interfaces/models/testChild.model';
 import {ChildTreatmentTracingComponent} from '../child-treartment-tracing/child-treatment-tracing.component';
+import {VERTICAL_POSITION} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-children-list',
@@ -75,6 +75,7 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
   createTest(child: Child) {
     this.snack.open('Seguro de Proceder?, es irreversible!', 'Aceptar', {
       duration: 5000,
+      verticalPosition: VERTICAL_POSITION,
     }).onAction().subscribe(() => {
       this.router.navigate(['/admin/child/test'], {
         queryParams: {

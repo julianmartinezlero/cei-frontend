@@ -10,6 +10,7 @@ import {ChildrenFormComponent} from '../../children/children-form/children-form.
 import {ChildrenService} from '../../children/services/children.service';
 import {TutorChildComponent} from '../tutor-child/tutor-child.component';
 import {TutorEditComponent} from '../tutor-edit/tutor-edit.component';
+import {VERTICAL_POSITION} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-tutor-list',
@@ -57,6 +58,7 @@ export class TutorListComponent implements OnInit, CrudComponent {
   delete(ele: Tutor) {
     this.snack.open('Seguro de Eliminar?', 'Aceptar', {
       duration: 5000,
+      verticalPosition: VERTICAL_POSITION,
     }).onAction().subscribe(() => {
       this.tutorService.delete(ele.id).subscribe(s => {
         this.all();

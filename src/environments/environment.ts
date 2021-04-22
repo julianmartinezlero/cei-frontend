@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  server: 'http://localhost:3000'
+  server: 'http://localhost:3000',
 };
+export const VERTICAL_POSITION = 'top';
 
 /*
  * For easier debugging in development mode, you can import the following file
