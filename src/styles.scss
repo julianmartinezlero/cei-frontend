@@ -9,14 +9,14 @@
 //  src: url('/assets/FredokaOne-Regular.ttf');
 //}
 
-@font-face {
-  font-family: 'comic-neue';
-  src: url('/assets/ComicNeue-Bold.ttf');
-}
-*:not(.mat-icon) {
+//@font-face {
+//  font-family: 'comic-neue';
+//  src: url('/assets/ComicNeue-Bold.ttf');
+//}
+//*:not(.mat-icon) {
   //font-family: Roboto, "Helvetica Neue", sans-serif;
-  font-family: comic-neue !important;
-}
+  //font-family: comic-neue !important;
+//}
 body {
   margin: 0;
   padding: 0;

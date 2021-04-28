@@ -53,4 +53,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     sessionStorage.clear();
     this.router.navigate(['/']);
   }
+
+  getUser() {
+    return sessionStorage.getItem('profile') ? JSON.parse(atob(sessionStorage.getItem('profile'))).professional.name : '';
+  }
 }
