@@ -4,6 +4,7 @@ import {ChildrenListComponent} from './children-list/children-list.component';
 import {TestSolvedComponent} from '../question-test/test-solved/test-solved.component';
 
 const routes: Routes = [
+  {path: '', redirectTo: 'index', pathMatch: 'full'},
   {path: 'index', component: ChildrenListComponent},
   {path: 'test', component: TestSolvedComponent}
 ];

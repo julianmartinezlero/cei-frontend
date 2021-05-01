@@ -1,31 +1,45 @@
 <div class="table-container">
-  <img class="image-icon" src="/assets/teacher.svg">
-  <mat-list>
-    <mat-toolbar class="white">
-      <span class="text-primary">
-        Tutores
-      </span>
-      <span class="spacer-row"></span>
-      <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">
-        <mat-icon>person_add</mat-icon>
-      </button>
-    </mat-toolbar>
+  <mat-card class="card-content mat-elevation-z3">
+      <mat-toolbar class="white">
+        <mat-toolbar-row>
+          <h2>Tutores</h2>
+          <span class="spacer-row"></span>
+          <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">
+            <mat-icon>person_add</mat-icon>
+          </button>
+        </mat-toolbar-row>
+      </mat-toolbar>
     <mat-divider class="primary"></mat-divider>
-    <div *ngIf="tutors.length === 0" class="notify-empty">
-      A&uacute;n no se registraron Tutores
-    </div>
-    <ng-container *ngIf="tutors.length > 0">
-      <mat-list-item *ngFor="let tutor of tutors">
-        <img mat-list-icon
-             src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
-             alt="">
-        <h4 mat-line>{{tutor.name}} {{tutor.lastName}}</h4>
-        <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{tutor: tutor}">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </mat-list-item>
-    </ng-container>
-  </mat-list>
+    <mat-card-content>
+      <mat-list>
+<!--        <mat-toolbar class="white">-->
+<!--          <span class="text-primary">-->
+<!--            Tutores-->
+<!--          </span>-->
+<!--          <span class="spacer-row"></span>-->
+<!--          <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">-->
+<!--            <mat-icon>person_add</mat-icon>-->
+<!--          </button>-->
+<!--        </mat-toolbar>-->
+<!--        <mat-divider class="primary"></mat-divider>-->
+        <div *ngIf="tutors.length === 0" class="notify-empty">
+          A&uacute;n no se registraron Tutores
+        </div>
+        <ng-container *ngIf="tutors.length > 0">
+          <mat-list-item *ngFor="let tutor of tutors">
+            <img mat-list-icon
+                 src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
+                 alt="">
+            <h4 mat-line>{{tutor.name}} {{tutor.lastName}}</h4>
+            <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{tutor: tutor}">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
+
 </div>
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-tutor="tutor">

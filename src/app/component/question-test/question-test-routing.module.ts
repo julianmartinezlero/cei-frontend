@@ -7,7 +7,7 @@ import {TreatmentService} from './treatment.service';
 import {TestSolvedResultComponent} from './test-solved-result/test-solved-result.component';
 
 const routes: Routes = [
-  // {path: '', redirectTo: 'all', pathMatch: 'full'},
+  {path: '', redirectTo: 'index', pathMatch: 'full'},
   {path: 'index', component: TestListComponent},
   {path: 'create', component: TestFormComponent},
   {path: ':id/solved', component: TestSolvedComponent},

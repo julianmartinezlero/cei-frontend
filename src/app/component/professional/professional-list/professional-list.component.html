@@ -1,32 +1,47 @@
 <!--<app-table-toolbar [title]="title" (new)="create()"></app-table-toolbar>-->
 <div class="table-container">
-  <img class="image-icon" src="/assets/reading.svg">
-  <mat-list>
+<!--  <img class="image-icon" src="/assets/reading.svg">-->
+
+  <mat-card class="card-content mat-elevation-z3">
     <mat-toolbar class="white">
-      <span class="text-primary">
-        Profesionales
-      </span>
-      <span class="spacer-row"></span>
-      <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">
-        <mat-icon>person_add</mat-icon>
-      </button>
+      <mat-toolbar-row>
+        <h2>Profesionales</h2>
+        <span class="spacer-row"></span>
+        <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">
+          <mat-icon>person_add</mat-icon>
+        </button>
+      </mat-toolbar-row>
     </mat-toolbar>
     <mat-divider class="primary"></mat-divider>
-    <div *ngIf="dataSource.data.length === 0" class="notify-empty">
-      A&uacute;n no se registraron Profesionales
-    </div>
-    <ng-container *ngIf="dataSource.data.length > 0">
-      <mat-list-item *ngFor="let tutor of dataSource.data">
-        <img mat-list-icon
-             src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
-             alt="">
-        <h4 mat-line>{{tutor.name}} {{tutor.lastName}}</h4>
-        <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{professional: tutor}">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </mat-list-item>
-    </ng-container>
-  </mat-list>
+    <mat-card-content>
+      <mat-list>
+        <!--    <mat-toolbar class="white">-->
+        <!--      <span class="text-primary">-->
+        <!--        Profesionales-->
+        <!--      </span>-->
+        <!--      <span class="spacer-row"></span>-->
+        <!--      <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">-->
+        <!--        <mat-icon>person_add</mat-icon>-->
+        <!--      </button>-->
+        <!--    </mat-toolbar>-->
+        <!--    <mat-divider class="primary"></mat-divider>-->
+        <div *ngIf="dataSource.data.length === 0" class="notify-empty">
+          A&uacute;n no se registraron Profesionales
+        </div>
+        <ng-container *ngIf="dataSource.data.length > 0">
+          <mat-list-item *ngFor="let tutor of dataSource.data">
+            <img mat-list-icon
+                 src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
+                 alt="">
+            <h4 mat-line>{{tutor.name}} {{tutor.lastName}}</h4>
+            <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{professional: tutor}">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-professional="professional">

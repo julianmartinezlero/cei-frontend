@@ -1,34 +1,42 @@
 <!--<app-table-toolbar [title]="title" [onNew]="true"-->
 <!--                   (new)="create()"></app-table-toolbar>-->
 <div class="table-container">
-  <img class="image-icon" src="/assets/exam.svg">
-  <mat-list>
-    <mat-toolbar class="white">
-      <span class="text-primary">
-        Pruebas
-      </span>
-      <span class="spacer-row"></span>
-      <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">
-        <mat-icon>library_add</mat-icon>
-      </button>
-    </mat-toolbar>
+<!--  <img class="image-icon" src="/assets/exam.svg">-->
+
+  <mat-card class="card-content mat-elevation-z3">
+    <mat-card-header>
+      <mat-card-title>Pruebas</mat-card-title>
+    </mat-card-header>
     <mat-divider class="primary"></mat-divider>
-    <div *ngIf="dataSource.length === 0" class="notify-empty">
-      A&uacute;n no se registraron Pruebas
-    </div>
-    <ng-container *ngIf="dataSource.length > 0">
-      <mat-list-item *ngFor="let test of dataSource; let i = index;">
-        <img mat-list-icon
-             src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
-             alt="User">
-        <h4 mat-line>{{test.code}} {{test.child.name}} {{test.child.lastName}}</h4>
-        <p mat-line> {{test.questionState === false ? 'Pendiente' : 'Concluido'}} </p>
-        <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{te: test}">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </mat-list-item>
-    </ng-container>
-  </mat-list>
+    <mat-card-content>
+      <mat-list>
+    <!--    <mat-toolbar class="white">-->
+    <!--      <span class="text-primary">-->
+    <!--        Pruebas-->
+    <!--      </span>-->
+    <!--      <span class="spacer-row"></span>-->
+    <!--      <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">-->
+    <!--        <mat-icon>library_add</mat-icon>-->
+    <!--      </button>-->
+    <!--    </mat-toolbar>-->
+        <div *ngIf="dataSource.length === 0" class="notify-empty">
+          A&uacute;n no se registraron Pruebas
+        </div>
+        <ng-container *ngIf="dataSource.length > 0">
+          <mat-list-item *ngFor="let test of dataSource; let i = index;">
+            <img mat-list-icon
+                 src="https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg"
+                 alt="User">
+            <h4 mat-line>{{test.code}} {{test.child.name}} {{test.child.lastName}}</h4>
+            <p mat-line> {{test.questionState === false ? 'Pendiente' : 'Concluido'}} </p>
+            <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{te: test}">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-te="te">

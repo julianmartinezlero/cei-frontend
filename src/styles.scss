@@ -1,22 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
-//*:not(.mat-icon){
-//  font-size: 12px !important;
-//}
-//
-//@font-face {
-//  font-family: 'fredoka-one';
-//  src: url('/assets/FredokaOne-Regular.ttf');
-//}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap');
 
-//@font-face {
-//  font-family: 'comic-neue';
-//  src: url('/assets/ComicNeue-Bold.ttf');
-//}
-//*:not(.mat-icon) {
-  //font-family: Roboto, "Helvetica Neue", sans-serif;
-  //font-family: comic-neue !important;
-//}
+*:not(.mat-icon) {
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: normal;
+}
 body {
   margin: 0;
   padding: 0;
@@ -113,21 +102,6 @@ mat-card-actions {
   width: 100%;
 }
 
-mat-card {
-  margin: 21px auto;
-  width: 300px !important;
-
-  mat-form-field {
-    width: 100%;
-  }
-
-  mat-card-actions {
-    display: flex !important;
-    padding: 0 !important;
-    margin: 15px 0 0 0 !important;
-  }
-}
-
 .crud-card {
   width: 500px;
   margin: auto;
@@ -139,10 +113,6 @@ mat-card {
   margin: 0 !important;
   padding: 24px !important;
 }
-
-//.mat-menu-item-highlighted:not([disabled]), .mat-menu-item.cdk-keyboard-focused:not([disabled]), .mat-menu-item.cdk-program-focused:not([disabled]), .mat-menu-item:hover:not([disabled]) {
-//  background: rgb(63, 63, 63);
-//}
 
 mat-dialog-container mat-toolbar-row:not(.delete) {
   background: #4a4a4a;
@@ -162,13 +132,6 @@ table {
     width: max-content;
   }
 
-  //tr:hover {
-  //  cursor: pointer;
-  //  z-index: 999;
-  //  outline: #bfbfbf auto 1px;
-  //  background: #fbfbfb;
-  //}
-
   td {
     button {
       .mat-icon {
@@ -186,9 +149,6 @@ table th.mat-header-cell {
   padding: 0 15px !important;
 }
 
-//input[type="number"] {
-//  text-align: right;
-//}
 
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -242,20 +202,8 @@ nav .mat-tab-links > .mat-tab-link {
   height: inherit;
 }
 
-//.mat-list-base .mat-list-item .mat-list-icon, .mat-list-base .mat-list-option .mat-list-icon {
-//  width: 35px !important;
-//  height: 35px !important;
-//}
 video {
   border-radius: 15px;
-}
-
-app-test-solved {
-  //.mat-dialog-content {
-  //  height: calc(100% - 48px) !important;
-  //  max-height: 100%;
-  //  overflow: hidden auto !important;
-  //}
 }
 
 .cdk-overlay-dark-backdrop {
@@ -275,7 +223,6 @@ button {
 }
 
 .mat-horizontal-content-container {
-  //overflow: hidden;
   padding: 0 0px 12px 0px !important;
 }
 
@@ -307,10 +254,6 @@ img.image-icon {
   padding-bottom: 12px !important;
 }
 .carousel-slide {
-  //width: 100%;
-  //height: 100%;
-  //position: absolute;
-  //z-index: auto;
   background-size: contain !important;
 }
 
@@ -466,15 +409,6 @@ mat-list-item .mat-list-icon{
 }
 
 
-//.green-event::before{
-//  content: "";
-//  display: block;
-//  background: url("/assets/correct.ico") no-repeat;
-//  width: 20px;
-//  height: 20px;
-//  float: left;
-//  margin: 0 6px 0 0;
-//}
 .orange-event{
   @include custom-event-color;
   background: rgba(255, 140, 0, 0.15) !important;
@@ -489,5 +423,14 @@ mat-list-item .mat-list-icon{
   background-color: white;
   color: black;
 }
-
+.card-content{
+  width: 60%;
+  margin: 25px auto;
+  height: calc(100% - 82px);
+  mat-toolbar{
+    margin: -16px 0px 0px -16px !important;
+    width: calc(100% + 32px) !important;
+    border-radius: 10px !important;
+  }
+}
 

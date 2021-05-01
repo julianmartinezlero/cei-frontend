@@ -1,26 +1,45 @@
 <div class="table-container">
-  <img class="image-icon" src="/assets/student-boy.svg">
-  <mat-list>
+<!--  <img class="image-icon" src="/assets/student-boy.svg">-->
+
+  <mat-card class="card-content mat-elevation-z3">
+<!--    <mat-card-header>-->
+<!--      <mat-card-title>Ni&ntilde;os (as)</mat-card-title>-->
+<!--    </mat-card-header>-->
     <mat-toolbar class="white">
-      <span class="text-primary">
-        Ni&ntilde;os (as)
-      </span>
-      <span class="spacer-row"></span>
+      <mat-toolbar-row>
+        <h2>Ni&ntilde;os (as)</h2>
+        <span class="spacer-row"></span>
+<!--        <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">-->
+<!--          <mat-icon>person_add</mat-icon>-->
+<!--        </button>-->
+      </mat-toolbar-row>
     </mat-toolbar>
     <mat-divider class="primary"></mat-divider>
-    <div *ngIf="dataSource.data.length === 0" class="notify-empty">
-      A&uacute;n no se registraron Ni&ntilde;os(as)
-    </div>
-    <ng-container *ngIf="dataSource.data.length > 0">
-      <mat-list-item *ngFor="let child of dataSource.data; let i = index">
-        <img mat-list-icon [src]="child.photo ? child.photo : defaultPhoto" alt="">
-        <h4 mat-line>{{child.name}} {{child.lastName}}</h4>
-        <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{child: child}">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </mat-list-item>
-    </ng-container>
-  </mat-list>
+    <mat-card-content>
+      <mat-list>
+<!--  <mat-list>-->
+<!--    <mat-toolbar class="white">-->
+<!--      <span class="text-primary">-->
+<!--        Ni&ntilde;os (as)-->
+<!--      </span>-->
+<!--      <span class="spacer-row"></span>-->
+<!--    </mat-toolbar>-->
+<!--        <mat-divider class="primary"></mat-divider>-->
+        <div *ngIf="dataSource.data.length === 0" class="notify-empty">
+          A&uacute;n no se registraron Ni&ntilde;os(as)
+        </div>
+        <ng-container *ngIf="dataSource.data.length > 0">
+          <mat-list-item *ngFor="let child of dataSource.data; let i = index">
+            <img mat-list-icon [src]="child.photo ? child.photo : defaultPhoto" alt="">
+            <h4 mat-line>{{child.name}} {{child.lastName}}</h4>
+            <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{child: child}">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-list-item>
+        </ng-container>
+      </mat-list>
+    </mat-card-content>
+  </mat-card>
 </div>
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-child="child">

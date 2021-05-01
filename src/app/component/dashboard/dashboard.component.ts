@@ -16,11 +16,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
   links = ['First', 'Second', 'Third'];
   activeLink = '';
   background = '';
+  mobileQueryListener: () => void;
 
-  constructor(private location: Location,
-              private router: Router) {
-    this.activeLink = this.location.path();
-  }
+  //
+  // constructor(private location: Location,
+  //             private router: Router) {
+  //   // this.activeLink = this.location.path();
+  // }
 
   toggleBackground() {
     this.background = this.background ? '' : 'primary';
@@ -30,17 +32,19 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.links.push(`Link ${this.links.length + 1}`);
   }
 
-  // private _mobileQueryListener: () => void;
-  //
-  // constructor(public sidenav: SideNavService, changeDetectorRef: ChangeDetectorRef, media: MediaMatcher) {
-  //   this.mobileQuery = media.matchMedia('(max-width: 600px)');
-  //   this._mobileQueryListener = () => changeDetectorRef.detectChanges();
-  //   this.mobileQuery.addListener(this._mobileQueryListener);
-  // }
-  //
+  constructor(public sidenav: SideNavService,
+              changeDetectorRef: ChangeDetectorRef,
+              private router: Router,
+              private location: Location,
+              media: MediaMatcher) {
+    this.mobileQuery = media.matchMedia('(max-width: 600px)');
+    this.mobileQueryListener = () => changeDetectorRef.detectChanges();
+    this.mobileQuery.addListener(this.mobileQueryListener);
+  }
+
 
   ngOnDestroy(): void {
-    // this.mobileQuery.removeListener(this._mobileQueryListener);
+    this.mobileQuery.removeListener(this.mobileQueryListener);
   }
 
   hidden() {
