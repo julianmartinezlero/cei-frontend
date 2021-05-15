@@ -2,7 +2,7 @@
 <div mat-dialog-content>
   <div>
     <mat-carousel [useKeyboard]="true" [hideIndicators]="false" [autoplay]="false" [hideArrows]="false" color="primary" [loop]="false">
-      <mat-carousel-slide *ngFor="let img of question.questionAssets" [image]="img.asset" [overlayColor]="color">
+      <mat-carousel-slide *ngFor="let img of question.questionAssets" [image]="getAssets(img.asset)" [overlayColor]="color">
       </mat-carousel-slide>
     </mat-carousel>
   </div>

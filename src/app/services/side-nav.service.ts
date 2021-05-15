@@ -15,7 +15,12 @@ export class SideNavService {
     localStorage.setItem('menu', this.sideMenu ? 'o' : 'i');
   }
 
-  closeMenu() {
+  openNav() {
+    this.sideMenu = true;
+    localStorage.setItem('menu', 'o');
+  }
+
+  closeNav() {
     this.sideMenu = false;
     localStorage.setItem('menu', 'i');
   }

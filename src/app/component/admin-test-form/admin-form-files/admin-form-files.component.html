@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>{{question.question}}</h1>
+<div mat-dialog-content>
+  <div  class="content-assets">
+    <ng-container *ngFor="let a of question.questionAssets">
+      <div class="img-asset-content" matRipple  [ngStyle]="{backgroundImage: getAssets(a.asset)}" (click)="deleteAsset(a.id)">
+<!--        <img  [src]="getAssets(a.asset)" class="img-asset" [alt]="a.asset">-->
+        <button mat-icon-button matTooltip="Eliminar" class="delete" [disableRipple]="true"><mat-icon>delete</mat-icon></button>
+      </div>
+<!--      <div class="img-asset-content">-->
+<!--      </div>-->
+    </ng-container>
+    <div class="img-asset-content" matRipple (click)="file.click()">
+      <button mat-icon-button  matTooltip="Subir" [disableRipple]="true"><mat-icon>upload</mat-icon></button>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button color="primary" (click)="close()">Cerrar</button>
+</div>
+<input type="file" #file id="imgupload" accept="image/*" (change)="onFileChange($event)" style="display:none"/>

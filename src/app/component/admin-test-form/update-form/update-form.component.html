@@ -1,0 +1,40 @@
+<div class="solved-content">
+  <!--  <h1 mat-dialog-title class="mat-elevation-z3"></h1>-->
+  <mat-toolbar class="mat-elevation-z3">
+    <mat-toolbar-row>
+      <button mat-icon-button matTooltip="Cancelar" (click)="closeTest()"><mat-icon>arrow_back</mat-icon></button>
+      <span>Modificar Test</span>
+      <span class="spacer-row"></span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div mat-dialog-content>
+    <form autocomplete="off">
+      <div style="width: 700px;margin: auto;">
+
+        <span class="spacer-row"></span>
+        <!--            <button mat-icon-button (click)="cancel()">-->
+        <!--              <mat-icon>close</mat-icon>-->
+        <!--            </button>-->
+      </div>
+      <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
+        <mat-card-title>{{question.question}}<span style="color: red"> *</span></mat-card-title>
+        <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
+        <mat-card-content>
+          <mat-radio-group aria-label="Select an option" [(ngModel)]="testForm[i].questionOption"
+                           [name]="'questionId' + i">
+            <mat-radio-button *ngFor="let option of question.questionOptions"
+                              [value]="option">{{option.description}}</mat-radio-button>
+          </mat-radio-group>
+          <button mat-button color="primary" *ngIf="question.questionAssets.length > 0" (click)="openResource(question)">Abrir Recursos</button>
+        </mat-card-content>
+      </mat-card>
+    </form>
+
+  </div>
+  <mat-card-actions>
+    <span class="spacer-row"></span>
+    <button type="button" mat-flat-button color="warn" (click)="closeTest()" style="margin-right: 10px">Cancelar</button>
+<!--    <button [disabled]="!testValid()" type="button" mat-flat-button color="primary" (click)="accept()">Aceptar</button>-->
+  </mat-card-actions>
+
+</div>

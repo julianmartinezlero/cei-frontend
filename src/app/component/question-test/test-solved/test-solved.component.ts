@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionTestService} from '../question-test.service';
@@ -11,13 +11,14 @@ import {TestChild} from '../../../interfaces/models/testChild.model';
 import {Location} from '@angular/common';
 import {TestSolvedResultComponent} from '../test-solved-result/test-solved-result.component';
 import {ChildrenService} from '../../children/services/children.service';
+import {SideNavService} from '../../../services/side-nav.service';
 
 @Component({
   selector: 'app-test-solved',
   templateUrl: './test-solved.component.html',
   styleUrls: ['./test-solved.component.scss']
 })
-export class TestSolvedComponent implements OnInit {
+export class TestSolvedComponent implements OnInit, OnDestroy {
 
   title = 'Atras';
   testForm: TestSolved[] = [];
@@ -36,7 +37,8 @@ export class TestSolvedComponent implements OnInit {
               private questionTestService: QuestionTestService,
               private dialogService: DialogService,
               private childService: ChildrenService,
-              private location: Location
+              private location: Location,
+              private sideNavService: SideNavService
               // @Inject(MAT_DIALOG_DATA) private data: any
   ) {
     this.activatedRoute.queryParams.subscribe(data => {
@@ -45,10 +47,15 @@ export class TestSolvedComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.sideNavService.closeNav();
     this.childService.get(this.childId).subscribe(r => {
       this.childSelect = r as Child;
     });
     this.loadQuestion(null);
+  }
+
+  ngOnDestroy(): void {
+    this.sideNavService.openNav();
   }
 
   generateGroupTest() {

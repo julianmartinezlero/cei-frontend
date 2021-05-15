@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {environment} from '../../environments/environment';
 
 @Injectable({
@@ -38,5 +38,13 @@ export class PrincipalService {
 
   getQuery(route, query) {
     return this.http.get(`${this.server}/${this.route}/${route}`, {params: query});
+  }
+
+  postFile(param, data) {
+    const h = new HttpHeaders();
+    h.append('Content-Type', 'multipart/form-data');
+    h.append('Accept', 'application/json');
+
+    return this.http.post(`${this.server}/${this.route}/${param}`, data, {headers: h});
   }
 }

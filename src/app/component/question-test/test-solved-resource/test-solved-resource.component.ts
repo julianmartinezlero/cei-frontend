@@ -1,6 +1,7 @@
 import {Component, Inject, Input, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Question} from '../../../interfaces/models/question';
+import {environment} from '../../../../environments/environment';
 
 @Component({
   selector: 'app-test-solved-resource',
@@ -22,5 +23,7 @@ export class TestSolvedResourceComponent implements OnInit {
   close() {
     this.dialogRef.close();
   }
-
+  getAssets(asset) {
+    return `${environment.server}/question-test/resources/assets/${asset}`;
+  }
 }

@@ -27,6 +27,10 @@ const routes: Routes = [
         path: 'question-test', canActivate: [AuthGuard],
         loadChildren: () => import('./component/question-test/question-test.module').then(r => r.QuestionTestModule)
       },
+      {
+        path: 'form', canActivate: [AuthGuard],
+        loadChildren: () => import('./component/admin-test-form/admin-test-form.module').then(r => r.AdminTestFormModule)
+      },
     ]
   },
   {path: 'login', loadChildren: () => import('./component/login/login.module').then(r => r.LoginModule)},

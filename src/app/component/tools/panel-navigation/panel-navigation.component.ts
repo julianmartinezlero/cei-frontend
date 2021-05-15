@@ -15,9 +15,9 @@ export class PanelNavigationComponent implements OnInit {
     {name: 'Inicio', icon: 'home', route: '/admin/home'},
     {name: 'Tutores', icon: 'account_box', route: '/admin/tutor'},
     {name: 'Niños(as)', icon: 'child_care', route: '/admin/child'},
-    {name: 'Profesionales', icon: 'assignment_ind', route: '/admin/professional'},
-    // {name: 'Pruebas', icon: 'assignment', route: '/admin/question-test'},
-    {name: 'Usuarios', icon: 'verified_user', route: '/admin/user'}
+    {name: 'Usuarios', icon: 'verified_user', route: '/admin/professional'},
+    {name: 'Formulario', icon: 'assignment', route: '/admin/form'},
+    // {name: '', icon: 'verified_user', route: '/admin/user'}
   ];
 
   constructor(public sideService: SideNavService, private router: Router) {
