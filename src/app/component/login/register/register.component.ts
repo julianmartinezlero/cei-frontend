@@ -27,9 +27,9 @@ export class RegisterComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.minLength(3)]],
       ci: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
       cell: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
-      conditions: [false, [Validators.requiredTrue]],
+      // email: [null, [Validators.required, Validators.email]],
+      // password: [null, [Validators.required, Validators.minLength(8)]],
+      // conditions: [false, [Validators.requiredTrue]],
     });
   }
 
@@ -40,15 +40,17 @@ export class RegisterComponent implements OnInit {
     this.authService.postCustom('register', this.tutorForm.value).subscribe((r: any) => {
       sessionStorage.setItem('token', r.access_token);
       this.authService.getCustom('profile').subscribe((p: any) => {
-        sessionStorage.setItem('profile', btoa(JSON.stringify(p[0])));
+        console.log(p);
+        sessionStorage.setItem('profile', btoa(JSON.stringify(p)));
         // this.tutorService.post(this.tutorForm.value).subscribe(res => {
         this.dialogService.toastDialog('success');
-        if (p.professional.position !== null) {
-          this.router.navigate(['/admin/tutor']);
+        if ((p.professional && (p.professional.position === 'Auxiliar'
+          || p.professional.position === 'Encargado'
+          || p.professional.position === 'Administrador'))) {
+          this.router.navigate(['/admin/home']);
         } else {
           this.router.navigate(['/app']);
         }
-        // });
       });
 
     });

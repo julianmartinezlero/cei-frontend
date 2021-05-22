@@ -59,6 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getUser() {
-    return sessionStorage.getItem('profile') ? JSON.parse(atob(sessionStorage.getItem('profile'))).professional.name : '';
+    return '';
+    // return sessionStorage.getItem('profile') ? JSON.parse(atob(sessionStorage.getItem('profile'))).professional.name : '';
   }
 }

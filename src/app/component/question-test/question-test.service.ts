@@ -8,15 +8,15 @@ import {Observable, Subscriber} from 'rxjs';
 export class QuestionTestService extends PrincipalService {
   route = 'question-test';
 
-  getAssets(asset: any) {
-    return this.get(`/resources/assets/${asset}`);
+  updateQuestion(questions) {
+    return this.postCustom(`update/solved`, questions);
   }
 
   uploadAsset(params, file): Observable<any> {
     return this.postFile(`uploadAsset/${params}`, file);
   }
 
-  deleteAsset(id: any): Observable<any>{
+  deleteAsset(id: any): Observable<any> {
     return this.delete(`deleteAsset/${id}`);
   }
 }

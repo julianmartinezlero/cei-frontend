@@ -5,7 +5,7 @@ import {UserChildrenComponent} from './user-children/user-children.component';
 import {TestSolvedComponent} from '../question-test/test-solved/test-solved.component';
 
 const routes: Routes = [
-  {path: '', component: PanelAdminComponent},
+  {path: '', pathMatch: 'full', redirectTo: 'children'},
   {path: 'children', component: UserChildrenComponent},
   {path: 'children/test', component: TestSolvedComponent},
 ];

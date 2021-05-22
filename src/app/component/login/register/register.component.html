@@ -57,41 +57,40 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
-            <mat-label>Correo Electronico</mat-label>
-            <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">
-            <mat-error
-              *ngIf="tutorForm.get('email').hasError('required') || tutorForm.get('email').hasError('email')">
-              Ingrese un correo v&aacute;lido
-            </mat-error>
-          </mat-form-field>
+<!--          <mat-form-field appearance="outline">-->
+<!--            <mat-label>Correo Electronico</mat-label>-->
+<!--            <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">-->
+<!--            <mat-error-->
+<!--              *ngIf="tutorForm.get('email').hasError('required') || tutorForm.get('email').hasError('email')">-->
+<!--              Ingrese un correo v&aacute;lido-->
+<!--            </mat-error>-->
+<!--          </mat-form-field>-->
 
-          <mat-form-field appearance="outline">
-            <mat-label>Contraseña</mat-label>
-            <input formControlName="password" required matInput placeholder="Contraseña"
-                   [type]="hide ? 'password' : 'text'">
-            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide">
-              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-            </button>
-            <mat-error *ngIf="tutorForm.get('password').hasError('required')">
-              Debe Ingresar contrase&ntilde;a
-            </mat-error>
-            <mat-error *ngIf="tutorForm.get('password').hasError('minlength')">
-              La longitud m&iacute;nima es de 8 caracteres
-            </mat-error>
-          </mat-form-field>
-          <div>
-            <mat-checkbox formControlName="conditions">Accepto los Terminos y Condiciones</mat-checkbox>
-          </div>
+<!--          <mat-form-field appearance="outline">-->
+<!--            <mat-label>Contraseña</mat-label>-->
+<!--            <input formControlName="password" required matInput placeholder="Contraseña"-->
+<!--                   [type]="hide ? 'password' : 'text'">-->
+<!--            <button type="button" mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"-->
+<!--                    [attr.aria-pressed]="hide">-->
+<!--              <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>-->
+<!--            </button>-->
+<!--            <mat-error *ngIf="tutorForm.get('password').hasError('required')">-->
+<!--              Debe Ingresar contrase&ntilde;a-->
+<!--            </mat-error>-->
+<!--            <mat-error *ngIf="tutorForm.get('password').hasError('minlength')">-->
+<!--              La longitud m&iacute;nima es de 8 caracteres-->
+<!--            </mat-error>-->
+<!--          </mat-form-field>-->
+<!--          <div>-->
+<!--            <mat-checkbox formControlName="conditions">Accepto los Terminos y Condiciones</mat-checkbox>-->
+<!--          </div>-->
         </mat-card-content>
         <mat-card-actions>
           <button class="custom-button" type="button" color="warn" (click)="cancel()" mat-stroked-button>Cancelar
           </button>
           <span class="spacer-row"></span>
-          <button class="custom-button" type="submit" color="primary" [disabled]="tutorForm.invalid" mat-stroked-button
-                  matStepperNext>
-            Siguiente
+          <button class="custom-button" type="submit" color="primary" [disabled]="tutorForm.invalid" mat-stroked-button>
+            Aceptar
           </button>
         </mat-card-actions>
       </form>

@@ -11,7 +11,6 @@ import {ChildrenFormComponent} from '../children/children-form/children-form.com
 import {ChildrenModule} from '../children/children.module';
 import {TestSolvedComponent} from '../question-test/test-solved/test-solved.component';
 import {QuestionTestModule} from '../question-test/question-test.module';
-import {TestSolvedResultComponent} from '../question-test/test-solved-result/test-solved-result.component';
 
 @NgModule({
   declarations: [

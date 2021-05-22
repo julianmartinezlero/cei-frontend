@@ -43,6 +43,27 @@ mat-card {
   //background: #c9e9ff;
   top: 0;
   z-index: 9;
+
+  input{
+    padding: 5px;
+    border: none;
+  }
+
+  mat-card-title > input {
+    font-size: 17px;
+    width: calc(100% - 24px);
+  }
+
+  mat-card-subtitle > input {
+    width: calc(100% - 10px);
+    color: #929292;
+  }
+
+  mat-radio-button input {
+    width: calc(400px);
+    font-size: 13px;
+  }
+
   mat-card-actions{
     /* width: 700px; */
     display: flex;
