@@ -2,7 +2,7 @@
   <h1 mat-dialog-title>{{titleForm}}</h1>
   <div mat-dialog-content>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Nombres</mat-label>
       <input formControlName="name" required matInput placeholder="Nombres">
       <mat-error *ngIf="childForm.get('name').hasError('required')">
@@ -12,7 +12,7 @@
         Longitud minima de 3 letras
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Apellidos</mat-label>
       <input formControlName="lastName" required matInput placeholder="Apellidos">
       <mat-error *ngIf="childForm.get('lastName').hasError('required')">
@@ -25,7 +25,7 @@
 
     <div class="row">
       <div class="col">
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance">
           <mat-label>CI</mat-label>
             <input formControlName="ci" matInput placeholder="CI">
             <mat-error
@@ -36,7 +36,7 @@
               Solo debe contener Numeros
             </mat-error>
           </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance">
           <mat-label>Genero</mat-label>
             <mat-select formControlName="sex" required placeholder="Genero">
               <mat-option value="Masculino">Masculino</mat-option>
@@ -46,7 +46,7 @@
               Debe Seleccionar un Genero
             </mat-error>
           </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance">
           <mat-label>Fecha de Nacimiento</mat-label>
             <input formControlName="birthDate" (click)="picker.open()" matInput [matDatepicker]="picker"
                    placeholder="Fecha de Nacimiento">

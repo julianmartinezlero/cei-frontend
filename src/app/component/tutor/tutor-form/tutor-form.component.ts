@@ -5,6 +5,7 @@ import {TutorService} from '../services/tutor.service';
 import {Tutor} from '../../../interfaces/models/tutor.model';
 import {DialogService} from '../../alerts/dialog.service';
 import {MatDialogRef} from '@angular/material';
+import {INPUT_APPEARANCE} from '../../../config/appearance.config';
 
 @Component({
   selector: 'app-tutor-form',
@@ -17,6 +18,7 @@ export class TutorFormComponent implements OnInit {
   childFormGroup: FormGroup;
   hide = true;
   children: FormGroup[] = [];
+  appearance = INPUT_APPEARANCE;
 
   constructor(private fb: FormBuilder,
               private router: Router,

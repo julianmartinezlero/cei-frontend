@@ -2,14 +2,14 @@
 <form [formGroup]="testForm" autocomplete="off" (ngSubmit)="accept()">
   <h1 mat-dialog-title>{{titleForm}}</h1>
   <div mat-dialog-content>
-<!--    <mat-form-field appearance="outline">-->
+<!--    <mat-form-field [appearance]="appearance">-->
 <!--      <mat-label>Codigo</mat-label>-->
 <!--      <input formControlName="code" matInput placeholder="Codigo">-->
 <!--      <mat-error *ngIf="testForm.get('code').hasError('required')">-->
 <!--        Ingrese un codigo Valido-->
 <!--      </mat-error>-->
 <!--    </mat-form-field>-->
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Niño(a)</mat-label>
       <mat-select formControlName="childId" required placeholder="Niño(a)">
         <mat-option *ngFor="let child of children" [value]="child.id">{{child.name}} {{child.lastName}}</mat-option>

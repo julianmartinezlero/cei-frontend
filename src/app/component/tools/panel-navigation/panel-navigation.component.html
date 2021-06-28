@@ -1,18 +1,23 @@
 <div class="menu-navigation">
-  <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <!--      <mat-selection-list>-->
-<!--      <button mat-icon-button type="button" (click)="sideService.openMenu()">-->
-<!--        <mat-icon mat-list-icon>menu</mat-icon>-->
-<!--      </button>-->
-      <!--      <div class="img"><img src="/assets/user.svg" alt=""></div>-->
-      <!--      <span *ngIf="authService.getUser()">{{user.name}}</span>-->
-      <span class="spacer-row"></span>
-<!--      <button mat-icon-button [matMenuTriggerFor]="menu">-->
-<!--        <mat-icon>more_vertical</mat-icon>-->
-<!--      </button>-->
-    </mat-toolbar-row>
-  </mat-toolbar>
+<!--  <mat-toolbar color="primary">-->
+<!--    <mat-toolbar-row>-->
+<!--      &lt;!&ndash;      <mat-selection-list>&ndash;&gt;-->
+<!--&lt;!&ndash;      <button mat-icon-button type="button" (click)="sideService.openMenu()">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-icon mat-list-icon>menu</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;      </button>&ndash;&gt;-->
+<!--      &lt;!&ndash;      <div class="img"><img src="/assets/user.svg" alt=""></div>&ndash;&gt;-->
+<!--      &lt;!&ndash;      <span *ngIf="authService.getUser()">{{user.name}}</span>&ndash;&gt;-->
+<!--      <span class="spacer-row"></span>-->
+<!--&lt;!&ndash;      <button mat-icon-button [matMenuTriggerFor]="menu">&ndash;&gt;-->
+<!--&lt;!&ndash;        <mat-icon>more_vertical</mat-icon>&ndash;&gt;-->
+<!--&lt;!&ndash;      </button>&ndash;&gt;-->
+<!--      asdjhasdjhas-->
+<!--    </mat-toolbar-row>-->
+<!--  </mat-toolbar>-->
+
+  <div class="img-panel">
+    <img src="/assets/logo.svg">
+  </div>
 
   <mat-selection-list>
     <button mat-menu-item type="button" *ngFor="let fol of routes" [routerLink]="fol.route" routerLinkActive="active-r">

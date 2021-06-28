@@ -10,11 +10,11 @@
     border-radius: 50%;" alt="">
       </div>
       <mat-card-content>
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance">
           <mat-label>Correo</mat-label>
           <input formControlName="email" matInput placeholder="Correo">
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field [appearance]="appearance">
           <mat-label>Contraseña</mat-label>
           <input formControlName="password" matInput placeholder="Contraseña" [type]="hide ? 'password' : 'text'">
           <button tabindex="-1" type="button" mat-icon-button matSuffix (click)="hide = !hide"

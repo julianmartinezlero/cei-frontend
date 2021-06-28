@@ -1,7 +1,7 @@
 import {ChangeDetectorRef, Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {SideNavService} from '../../services/side-nav.service';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 
 @Component({
@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   getUser() {
-    return '';
-    // return sessionStorage.getItem('profile') ? JSON.parse(atob(sessionStorage.getItem('profile'))).professional.name : '';
+    // return '';
+    return sessionStorage.getItem('profile') ? JSON.parse(atob(sessionStorage.getItem('profile'))).professional.name : '';
   }
 }

@@ -9,6 +9,8 @@ import {PhotoComponent} from '../photo/photo.component';
 import {LoginService} from '../../login/login.service';
 import {Professional} from '../../../interfaces/models/professional.model';
 import {Tutor} from '../../../interfaces/models/tutor.model';
+import * as moment from 'moment';
+import {INPUT_APPEARANCE} from '../../../config/appearance.config';
 
 @Component({
   selector: 'app-children-form',
@@ -16,7 +18,7 @@ import {Tutor} from '../../../interfaces/models/tutor.model';
   styleUrls: ['./children-form.component.scss']
 })
 export class ChildrenFormComponent implements OnInit {
-
+  appearance = INPUT_APPEARANCE;
   title = 'Atras';
   childForm: FormGroup;
   hide = true;
@@ -68,12 +70,14 @@ export class ChildrenFormComponent implements OnInit {
 
   accept() {
     if (this.childForm.valid) {
+      const ch = this.childForm.value;
+      ch.birthDate = moment(ch.birthDate).format('YYYY-MM-DD');
       if (this.childSelect) {
-        this.childrenService.put(this.childSelect.id, this.childForm.value).subscribe(res => {
+        this.childrenService.put(this.childSelect.id, ch).subscribe(res => {
           this.dialogRef.close(true);
         });
       } else {
-        this.childrenService.post(this.childForm.value).subscribe(res => {
+        this.childrenService.post(ch).subscribe(res => {
           this.dialogRef.close(true);
         });
       }

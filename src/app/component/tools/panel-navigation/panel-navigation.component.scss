@@ -1,7 +1,7 @@
 .menu-navigation {
   width: 350px;
   height: 100%;
-  background: #333333;
+  background: white;
   //overflow: hidden auto;
 }
 
@@ -19,13 +19,19 @@
 }
 
 .active-r {
-  background: #3f3f3f;
+  //background: #3f3f3f;
+  //background: #41f0d0;
+  background: #41f0d087;
 }
 
 .mat-menu-item {
-  color: white;
+  //color: #41f0d0;
 }
 
 .mat-icon {
-  color: white;
+  //color: white;
+}
+.img-panel {
+  width: calc(100% - 100px);
+  padding: 20px 50px 20px;
 }

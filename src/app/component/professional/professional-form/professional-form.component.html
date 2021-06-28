@@ -1,7 +1,7 @@
 <form [formGroup]="professionalForm" autocomplete="off" (ngSubmit)="accept()">
   <div mat-dialog-title>{{titleForm}}</div>
   <div mat-dialog-content>
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Nombres</mat-label>
       <input formControlName="name" matInput placeholder="Nombres">
       <mat-error *ngIf="professionalForm.get('name').hasError('required')">
@@ -12,7 +12,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Apellidos</mat-label>
       <input formControlName="lastName" matInput placeholder="Apellidos">
       <mat-error *ngIf="professionalForm.get('lastName').hasError('required')">
@@ -23,7 +23,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>CI</mat-label>
       <input formControlName="ci" matInput placeholder="CI">
       <mat-error *ngIf="professionalForm.get('ci').hasError('required')">
@@ -38,7 +38,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Telf./Cel.</mat-label>
       <input formControlName="cell" required matInput placeholder="Telf./Cel.">
       <mat-error *ngIf="professionalForm.get('cell').hasError('required')">
@@ -53,7 +53,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="!data.disabled && !professionalSelect.id">
+    <mat-form-field [appearance]="appearance" *ngIf="!data.disabled && !professionalSelect.id">
       <mat-label>Correo Electronico</mat-label>
       <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">
       <mat-error
@@ -62,7 +62,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Cargo</mat-label>
       <mat-select formControlName="position" required placeholder="Cargo">
         <mat-option value="Auxiliar">Auxiliar</mat-option>
@@ -72,7 +72,7 @@
         Debe Seleccionar un Cargo
       </mat-error>
     </mat-form-field>
-    <mat-form-field appearance="outline">
+    <mat-form-field [appearance]="appearance">
       <mat-label>Profesion</mat-label>
       <input formControlName="profession" matInput placeholder="Profesion">
       <mat-error *ngIf="professionalForm.get('profession').hasError('required')">
@@ -83,7 +83,7 @@
       </mat-error>
     </mat-form-field>
 
-    <mat-form-field appearance="outline" *ngIf="!data.disabled && !professionalSelect.id">
+    <mat-form-field [appearance]="appearance" *ngIf="!data.disabled && !professionalSelect.id">
       <mat-label>Contraseña</mat-label>
       <input formControlName="password" required matInput placeholder="Contraseña"
              [type]="hide ? 'password' : 'text'">

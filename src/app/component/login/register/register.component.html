@@ -5,7 +5,7 @@
       <form [formGroup]="tutorForm" (ngSubmit)="accept()" autocomplete="off">
         <mat-card-content>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field [appearance]="appearance">
             <mat-label>Nombres</mat-label>
             <input formControlName="name" required matInput placeholder="Nombres">
             <mat-error *ngIf="tutorForm.get('name').hasError('required')">
@@ -16,7 +16,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field [appearance]="appearance">
             <mat-label>Apellidos</mat-label>
             <input formControlName="lastName" required matInput placeholder="Apellidos">
             <mat-error *ngIf="tutorForm.get('lastName').hasError('required')">
@@ -27,7 +27,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field [appearance]="appearance">
             <mat-label>CI</mat-label>
             <input formControlName="ci" required matInput placeholder="CI">
             <mat-error *ngIf="tutorForm.get('ci').hasError('required')">
@@ -42,7 +42,7 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field appearance="outline">
+          <mat-form-field [appearance]="appearance">
             <mat-label>Telf./Cel.</mat-label>
             <input formControlName="cell" required matInput placeholder="Telf./Cel.">
             <mat-error *ngIf="tutorForm.get('cell').hasError('required')">
@@ -57,7 +57,7 @@
             </mat-error>
           </mat-form-field>
 
-<!--          <mat-form-field appearance="outline">-->
+<!--          <mat-form-field [appearance]="appearance">-->
 <!--            <mat-label>Correo Electronico</mat-label>-->
 <!--            <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">-->
 <!--            <mat-error-->
@@ -66,7 +66,7 @@
 <!--            </mat-error>-->
 <!--          </mat-form-field>-->
 
-<!--          <mat-form-field appearance="outline">-->
+<!--          <mat-form-field [appearance]="appearance">-->
 <!--            <mat-label>Contraseña</mat-label>-->
 <!--            <input formControlName="password" required matInput placeholder="Contraseña"-->
 <!--                   [type]="hide ? 'password' : 'text'">-->

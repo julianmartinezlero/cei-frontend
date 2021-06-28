@@ -5,6 +5,7 @@ import {DialogService} from '../../alerts/dialog.service';
 import {ProfessionalService} from '../services/professional.service';
 import {Professional} from '../../../interfaces/models/professional.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {INPUT_APPEARANCE} from '../../../config/appearance.config';
 
 @Component({
   selector: 'app-professional-form',
@@ -28,6 +29,7 @@ export class ProfessionalFormComponent implements OnInit {
     createdAt: null,
     updatedAt: null,
   };
+  appearance = INPUT_APPEARANCE;
 
   constructor(private fb: FormBuilder,
               private router: Router,

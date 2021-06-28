@@ -4,6 +4,8 @@ import {Router} from '@angular/router';
 import {TutorService} from '../../tutor/services/tutor.service';
 import {DialogService} from '../../alerts/dialog.service';
 import {LoginService} from '../login.service';
+import {SideNavService} from '../../../services/side-nav.service';
+import {INPUT_APPEARANCE} from '../../../config/appearance.config';
 
 @Component({
   selector: 'app-register',
@@ -11,7 +13,7 @@ import {LoginService} from '../login.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  appearance = INPUT_APPEARANCE;
   tutorForm: FormGroup;
   hide = true;
   children: FormGroup[] = [];
@@ -20,6 +22,7 @@ export class RegisterComponent implements OnInit {
               private router: Router,
               private tutorService: TutorService,
               private authService: LoginService,
+              private sideService: SideNavService,
               private dialogService: DialogService) {
     this.tutorForm = this.fb.group({
       id: [null],
@@ -48,8 +51,9 @@ export class RegisterComponent implements OnInit {
           || p.professional.position === 'Encargado'
           || p.professional.position === 'Administrador'))) {
           this.router.navigate(['/admin/home']);
+          this.sideService.openNav();
         } else {
-          this.router.navigate(['/app']);
+          this.router.navigate(['/app/children']);
         }
       });
 

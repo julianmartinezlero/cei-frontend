@@ -7,7 +7,7 @@ import {QuestionTestService} from '../question-test.service';
 import {ChildrenService} from '../../children/services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
 import {MatDialogRef} from '@angular/material';
-import * as uuid from 'uuid';
+import {INPUT_APPEARANCE} from '../../../config/appearance.config';
 
 @Component({
   selector: 'app-test-form',
@@ -15,6 +15,7 @@ import * as uuid from 'uuid';
   styleUrls: ['./test-form.component.scss']
 })
 export class TestFormComponent implements OnInit {
+  appearance = INPUT_APPEARANCE;
 
   title = 'Atras';
   testForm: FormGroup;

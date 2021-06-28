@@ -12,7 +12,10 @@
             <button mat-button [matMenuTriggerFor]="menu">{{getUser()}} <mat-icon>account_circle</mat-icon></button>
           </mat-toolbar-row>
         </mat-toolbar>
-
+        <div class="background-panel">
+          <img class="background-img" src="/assets/bg-minimal.jpg" alt="" srcset="">
+          <div class="background-opacity"></div>
+        </div>
         <ng-content></ng-content>
       </mat-sidenav-content>
     </mat-sidenav-container>
