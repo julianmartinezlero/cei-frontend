@@ -332,6 +332,10 @@ img.image-icon {
 mat-list-item .mat-list-icon{
   color: #9e9e9e;
 }
+
+img.mat-list-icon{
+  box-shadow: 0 0 0 1px #ececec;
+}
 // calendar
 .fc {
   text-transform: capitalize;

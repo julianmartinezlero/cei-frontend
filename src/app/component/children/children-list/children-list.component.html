@@ -12,6 +12,9 @@
 <!--        <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">-->
 <!--          <mat-icon>person_add</mat-icon>-->
 <!--        </button>-->
+        <button mat-icon-button color="primary" matTooltip="Filtrar" [matMenuTriggerFor]="menuFilter">
+          <mat-icon>sort</mat-icon>
+        </button>
       </mat-toolbar-row>
     </mat-toolbar>
     <mat-divider class="primary"></mat-divider>
@@ -44,8 +47,16 @@
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-child="child">
     <button mat-menu-item (click)="show(child)">Ver</button>
+    <button mat-menu-item (click)="printFile(child)">Imprimir Kardex</button>
     <button mat-menu-item (click)="createTest(child)">Nuevo Diagnostico</button>
     <button mat-menu-item (click)="openTreatments(child)">Diagnosticos y Tratamientos</button>
-    <button mat-menu-item>Archivar</button>
+    <button mat-menu-item (click)="archive(child)">Archivar</button>
+  </ng-template>
+</mat-menu>
+<mat-menu #menuFilter="matMenu">
+  <ng-template matMenuContent>
+    <button mat-menu-item (click)="filter(true)">Activos</button>
+    <button mat-menu-item (click)="filter(false)">No Activos</button>
+    <button mat-menu-item (click)="filter()">Todos</button>
   </ng-template>
 </mat-menu>

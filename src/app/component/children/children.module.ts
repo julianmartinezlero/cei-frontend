@@ -39,6 +39,7 @@ import {FullCalendarModule} from '@fullcalendar/angular';
 import * as moment from 'moment';
 import { ChildEventDetailsComponent } from './child-event-details/child-event-details.component';
 import {TreatmentSessionService} from './services/treatment-session.service';
+import {PrintPdfService} from '../../services/printPdf.service';
 
 moment().locale('es-Es');
 
@@ -86,6 +87,7 @@ moment().locale('es-Es');
     TutorService,
     TreatmentService,
     TreatmentSessionService,
+    PrintPdfService,
     // { provide: LOCALE_ID, useValue: 'es' },
   ],
   entryComponents: [

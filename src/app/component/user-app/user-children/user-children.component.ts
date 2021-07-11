@@ -10,6 +10,7 @@ import {Router} from '@angular/router';
 import {Location} from '@angular/common';
 import {ChildTreatmentTracingComponent} from '../../children/child-treartment-tracing/child-treatment-tracing.component';
 import {VERTICAL_POSITION} from '../../../../environments/environment';
+import {SideNavService} from '../../../services/side-nav.service';
 
 @Component({
   selector: 'app-user-children',
@@ -23,11 +24,13 @@ export class UserChildrenComponent implements OnInit {
   constructor(private childService: ChildrenService,
               private snack: MatSnackBar,
               private router: Router,
+              private sideService: SideNavService,
               private location: Location,
               private dialogService: DialogService) {
   }
 
   ngOnInit() {
+    this.sideService.closeNav();
     this.childService.getCustom(`ofTutor/all`).subscribe((res: Child[]) => {
       this.children = res;
     });

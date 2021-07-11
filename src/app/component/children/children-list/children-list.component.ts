@@ -11,6 +11,7 @@ import {QuestionTestService} from '../../question-test/question-test.service';
 import {ChildTreatmentsComponent} from '../child-treatments/child-treatments.component';
 import {ChildTreatmentTracingComponent} from '../child-treartment-tracing/child-treatment-tracing.component';
 import {VERTICAL_POSITION} from '../../../../environments/environment';
+import {PrintPdfService} from '../../../services/printPdf.service';
 
 @Component({
   selector: 'app-children-list',
@@ -23,10 +24,12 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
   defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
   now = moment();
   dataSource = new MatTableDataSource<Child>([]);
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+  auxData = [];
+  // @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   constructor(private childrenService: ChildrenService,
               private dialogService: DialogService,
+              private printService: PrintPdfService,
               private snack: MatSnackBar,
               private testService: QuestionTestService,
               private router: Router) {
@@ -39,7 +42,8 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
   all() {
     this.childrenService.get().subscribe((t: Child[]) => {
       this.dataSource = new MatTableDataSource<Child>(t);
-      this.dataSource.sort = this.sort;
+      // this.dataSource.sort = this.sort;
+      this.auxData = t;
     }, error1 => {
       this.dialogService.toastDialog('error');
     });
@@ -94,6 +98,21 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     return this.now.diff(date, 'year');
   }
 
+  printFile(child: Child) {
+    this.testService.getCustom(`testChild/${child.id}`).subscribe((r: any) => {
+      console.log(r);
+      this.printService.printInfoChild(child, child.professional, r);
+    });
+  }
+
+  filter(state?: boolean) {
+    if (state) {
+      this.dataSource = new MatTableDataSource(this.auxData.filter(a => a.isActive === state));
+    } else {
+      this.dataSource = new MatTableDataSource(this.auxData);
+    }
+  }
+
   openTreatments(child: Child) {
     this.dialogService.openDialog(ChildTreatmentsComponent, {
       width: '700px',
@@ -118,6 +137,17 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
       },
     }).subscribe(a => {
       this.openTreatments(a);
+    });
+  }
+
+  archive(child: Child) {
+    this.snack.open('Seguro de Archivar?', 'Aceptar', {
+      duration: 5000,
+    }).onAction().subscribe(() => {
+      child.isActive = false;
+      this.childrenService.put(child.id, child).subscribe(() => {
+        this.ngOnInit();
+      });
     });
   }
 }

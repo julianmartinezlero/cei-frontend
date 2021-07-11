@@ -1,4 +1,3 @@
-import {Tutor} from './tutor.model';
 import {Professional} from './professional.model';
 
 export interface Child {
@@ -14,4 +13,5 @@ export interface Child {
   professional?: Professional;
   photo?: string;
   tests?: any;
+  isActive?: boolean;
 }

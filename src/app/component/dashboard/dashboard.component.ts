@@ -55,7 +55,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   logout() {
     sessionStorage.clear();
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
   }
 
   getUser() {

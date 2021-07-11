@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {TutorService} from '../services/tutor.service';
 import {Tutor} from '../../../interfaces/models/tutor.model';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {INPUT_APPEARANCE} from '../../../config/appearance.config';
 
 @Component({
   selector: 'app-tutor-edit',
@@ -15,15 +16,16 @@ export class TutorEditComponent implements OnInit {
   tutorForm: FormGroup;
   hide = true;
   title = '';
+  appearance = INPUT_APPEARANCE;
   tutorSelect: Tutor = JSON.parse(sessionStorage.getItem('tutor'));
 
   constructor(private fb: FormBuilder,
               private router: Router,
               private tutorService: TutorService,
               private dialogRef: MatDialogRef<TutorEditComponent>,
-              @Inject(MAT_DIALOG_DATA) private date: any ) {
-    this.tutorSelect = this.date.tutor;
-    this.title = this.date.title;
+              @Inject(MAT_DIALOG_DATA) public data: any ) {
+    this.tutorSelect = this.data.tutor;
+    this.title = this.data.title;
   }
 
   ngOnInit() {
@@ -44,7 +46,7 @@ export class TutorEditComponent implements OnInit {
   }
 
   disabledInputs() {
-    if (this.date.disabled && this.date.disabled === true) {
+    if (this.data.disabled && this.data.disabled === true) {
       this.tutorForm.disable();
     }
     if (this.tutorSelect.id) {

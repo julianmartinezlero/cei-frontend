@@ -62,7 +62,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field [appearance]="appearance" *ngIf="!date.disabled && tutorForm.get('email')">
+      <mat-form-field [appearance]="appearance" *ngIf="!data.disabled && tutorForm.get('email')">
         <mat-label>Contraseña</mat-label>
         <input formControlName="password" required matInput placeholder="Contraseña"
                [type]="hide ? 'password' : 'text'">
@@ -78,7 +78,7 @@
         </mat-error>
       </mat-form-field>
 
-      <mat-form-field [appearance]="appearance" *ngIf="!date.disabled  && tutorForm.get('children')">
+      <mat-form-field [appearance]="appearance" *ngIf="!data.disabled  && tutorForm.get('children')">
         <mat-label>Nro de Hijos a registrar</mat-label>
         <input formControlName="children" required matInput placeholder="Nro de Hijos a registrar" type="number">
         <mat-error *ngIf="tutorForm.get('children').hasError('required')">
@@ -91,10 +91,10 @@
 
     </div>
     <div mat-dialog-actions>
-      <button *ngIf="!date.disabled" color="warn" mat-stroked-button matDialogClose>Cancelar</button>
+      <button *ngIf="!data.disabled" color="warn" mat-stroked-button matDialogClose>Cancelar</button>
       <span class="spacer-row"></span>
-      <button *ngIf="!date.disabled" color="primary" type="submit" mat-stroked-button>Guardar</button>
-      <button *ngIf="date.disabled" color="primary" type="button" mat-stroked-button matDialogClose>Cerrar</button>
+      <button *ngIf="!data.disabled" color="primary" type="submit" mat-stroked-button>Guardar</button>
+      <button *ngIf="data.disabled" color="primary" type="button" mat-stroked-button matDialogClose>Cerrar</button>
     </div>
 </form>
 

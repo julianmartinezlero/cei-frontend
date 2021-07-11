@@ -42,12 +42,14 @@ export class AuthInterceptorService implements HttpInterceptor {
     }), catchError((err: HttpErrorResponse) => {
         if (err.status === 401) {
           sessionStorage.clear();
-          this.dialogService.toastDialog('noAuth');
+          this.dialogService.toastDialog('No autorizado');
           this.router.navigate(['/login']);
-        } else if (err.status >= 400 && err.status <= 500) {
-          this.dialogService.toastDialog(err.error.message, 'error');
+        } else if (err.status >= 402 && err.status < 500) {
+          this.dialogService.toastDialog(err.error.message, 'Recurso no encontrado');
+        } else if (err.status >= 500) {
+          this.dialogService.toastDialog(err.error.message, 'Error del servidor');
         } else if (err.status === 0) {
-          this.dialogService.toastDialog('connection');
+          this.dialogService.toastDialog('Error de conexión');
         }
         return throwError(err);
       })
