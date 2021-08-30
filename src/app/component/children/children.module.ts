@@ -40,6 +40,7 @@ import * as moment from 'moment';
 import { ChildEventDetailsComponent } from './child-event-details/child-event-details.component';
 import {TreatmentSessionService} from './services/treatment-session.service';
 import {PrintPdfService} from '../../services/printPdf.service';
+import { ChildrenDialogReportComponent } from './children-dialog-report/children-dialog-report.component';
 
 moment().locale('es-Es');
 
@@ -51,7 +52,8 @@ moment().locale('es-Es');
     PhotoComponent,
     ChildTreatmentsComponent,
     ChildTreatmentTracingComponent,
-    ChildEventDetailsComponent
+    ChildEventDetailsComponent,
+    ChildrenDialogReportComponent
   ],
   imports: [
     CommonModule,
@@ -96,6 +98,7 @@ moment().locale('es-Es');
     ChildTreatmentsComponent,
     ChildTreatmentTracingComponent,
     ChildEventDetailsComponent,
+    ChildrenDialogReportComponent,
   ]
 })
 export class ChildrenModule {

@@ -57,6 +57,10 @@ export class TutorEditComponent implements OnInit {
     }
   }
 
+  isReadonly() {
+    return this.data ? this.data.disabled === true : false;
+  }
+
   accept() {
     if (this.tutorForm.valid) {
       this.tutorService.put(this.tutorSelect.id, this.tutorForm.value).subscribe(res => {

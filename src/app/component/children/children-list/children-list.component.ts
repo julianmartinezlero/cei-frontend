@@ -12,6 +12,7 @@ import {ChildTreatmentsComponent} from '../child-treatments/child-treatments.com
 import {ChildTreatmentTracingComponent} from '../child-treartment-tracing/child-treatment-tracing.component';
 import {VERTICAL_POSITION} from '../../../../environments/environment';
 import {PrintPdfService} from '../../../services/printPdf.service';
+import {ChildrenDialogReportComponent} from '../children-dialog-report/children-dialog-report.component';
 
 @Component({
   selector: 'app-children-list',
@@ -149,5 +150,17 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
         this.ngOnInit();
       });
     });
+  }
+
+  report() {
+    this.dialogService.openDialog(ChildrenDialogReportComponent, {
+      width: '400px',
+    }).subscribe(r => {
+      console.log(r);
+    });
+  }
+
+  archivate() {
+
   }
 }

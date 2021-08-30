@@ -1,0 +1,30 @@
+<div mat-dialog-title>Imprimir Reporte</div>
+<div mat-dialog-content [formGroup]="childForm">
+  <mat-form-field [appearance]="appearance">
+    <mat-label>Fecha de Inicio</mat-label>
+    <input formControlName="dateIni" (click)="picker.open()" matInput [matDatepicker]="picker"
+           placeholder="Fecha Inicial">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="childForm.get('dateIni').hasError('required')">
+      Seleccionar Fecha Inicial
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field [appearance]="appearance">
+    <mat-label>Fecha Fin</mat-label>
+    <input formControlName="dateEnd" (click)="pickerEnd.open()" matInput [matDatepicker]="pickerEnd"
+           placeholder="Fecha Final">
+    <mat-datepicker-toggle matSuffix [for]="pickerEnd"></mat-datepicker-toggle>
+    <mat-datepicker #pickerEnd></mat-datepicker>
+    <mat-error *ngIf="childForm.get('dateEnd').hasError('required')">
+      Seleccionar Fecha Final
+    </mat-error>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions align="end">
+<!--  <span class="spacer-row"></span>-->
+  <button cdkFocusInitial color="primary" (click)="cancel()" mat-stroked-button>Cerrar</button>
+  <button cdkFocusInitial color="primary" (click)="print()" mat-stroked-button>Imprimir</button>
+</div>
+
+

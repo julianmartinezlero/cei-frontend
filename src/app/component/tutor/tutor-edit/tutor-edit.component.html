@@ -4,7 +4,7 @@
 
       <mat-form-field [appearance]="appearance">
         <mat-label>Nombres</mat-label>
-        <input formControlName="name" matInput placeholder="Nombres">
+        <input formControlName="name" [readonly]="isReadonly()" matInput placeholder="Nombres">
         <mat-error *ngIf="tutorForm.get('name').hasError('required')">
           Ingrese un Nombre(s) v&aacute;lido
         </mat-error>
@@ -15,7 +15,7 @@
 
       <mat-form-field [appearance]="appearance">
         <mat-label>Apellidos</mat-label>
-        <input formControlName="lastName" matInput placeholder="Apellidos">
+        <input formControlName="lastName" [readonly]="isReadonly()" matInput placeholder="Apellidos">
         <mat-error *ngIf="tutorForm.get('lastName').hasError('required')">
           Ingrese un Apellido(s) v&aacute;lido
         </mat-error>
@@ -26,7 +26,7 @@
 
       <mat-form-field [appearance]="appearance">
         <mat-label>CI</mat-label>
-        <input formControlName="ci" matInput placeholder="CI">
+        <input formControlName="ci" [readonly]="isReadonly()" matInput placeholder="CI">
         <mat-error *ngIf="tutorForm.get('ci').hasError('required')">
           Ingrese un n&uacute;mero v&aacute;lido
         </mat-error>
@@ -41,7 +41,7 @@
 
       <mat-form-field [appearance]="appearance">
         <mat-label>Telf./Cel.</mat-label>
-        <input formControlName="cell" required matInput placeholder="Telf./Cel.">
+        <input formControlName="cell"  [readonly]="isReadonly()" required matInput placeholder="Telf./Cel.">
         <mat-error *ngIf="tutorForm.get('cell').hasError('required')">
           Ingrese un n&uacute;mero v&aacute;lido
         </mat-error>
@@ -56,7 +56,7 @@
 
       <mat-form-field [appearance]="appearance" *ngIf="tutorForm.get('email')">
         <mat-label>Correo Electronico</mat-label>
-        <input formControlName="email" type="email" required matInput placeholder="Correo Electronico">
+        <input formControlName="email" [readonly]="isReadonly()" type="email" required matInput placeholder="Correo Electronico">
         <mat-error *ngIf="tutorForm.get('email').hasError('required') || tutorForm.get('email').hasError('email')">
           Ingrese un correo v&aacute;lido
         </mat-error>
@@ -64,7 +64,7 @@
 
       <mat-form-field [appearance]="appearance" *ngIf="!data.disabled && tutorForm.get('email')">
         <mat-label>Contraseña</mat-label>
-        <input formControlName="password" required matInput placeholder="Contraseña"
+        <input formControlName="password" [readonly]="isReadonly()" required matInput placeholder="Contraseña"
                [type]="hide ? 'password' : 'text'">
         <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
                 [attr.aria-pressed]="hide">
@@ -80,7 +80,7 @@
 
       <mat-form-field [appearance]="appearance" *ngIf="!data.disabled  && tutorForm.get('children')">
         <mat-label>Nro de Hijos a registrar</mat-label>
-        <input formControlName="children" required matInput placeholder="Nro de Hijos a registrar" type="number">
+        <input formControlName="children" required  [readonly]="isReadonly()" matInput placeholder="Nro de Hijos a registrar" type="number">
         <mat-error *ngIf="tutorForm.get('children').hasError('required')">
           Debe Ingresar un Numero de hijos
         </mat-error>
