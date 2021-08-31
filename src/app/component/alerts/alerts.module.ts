@@ -5,12 +5,22 @@ import {SnackErrorComponent} from './snack-error/snack-error.component';
 import {SnackDeleteComponent} from './snack-delete/snack-delete.component';
 import {SnackSuccessComponent} from './snack-success/snack-success.component';
 import {SnackAlertComponent} from './snack-alert/snack-alert.component';
-import {MatButtonModule, MatCardModule, MatDialogModule, MatIconModule, MatSnackBarModule, MatToolbarModule} from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule, MatInputModule,
+  MatSnackBarModule,
+  MatToolbarModule
+} from '@angular/material';
 import {DialogService} from './dialog.service';
 import {A11yModule} from '@angular/cdk/a11y';
 import {CdkStepperModule} from '@angular/cdk/stepper';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
+import { SearchAlertComponent } from './search-alert/search-alert.component';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -18,7 +28,8 @@ import {CdkTreeModule} from '@angular/cdk/tree';
     SnackErrorComponent,
     SnackDeleteComponent,
     SnackSuccessComponent,
-    SnackAlertComponent
+    SnackAlertComponent,
+    SearchAlertComponent
   ],
   imports: [
     CommonModule,
@@ -32,16 +43,24 @@ import {CdkTreeModule} from '@angular/cdk/tree';
     MatButtonModule,
     MatSnackBarModule,
     MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     DialogService
+  ],
+  exports: [
+    SearchAlertComponent
   ],
   entryComponents: [
     DeleteDialogComponent,
     SnackErrorComponent,
     SnackDeleteComponent,
     SnackSuccessComponent,
-    SnackAlertComponent
+    SnackAlertComponent,
+    SearchAlertComponent,
   ]
 })
 export class AlertsModule {

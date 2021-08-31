@@ -1,8 +1,14 @@
 .login-background {
-  background-image: url('/assets/bg-minimal.jpg');
+  .login-panel{
+    position: absolute;
+    background: #ffffffe6;
+    width: inherit;
+    height: inherit;
+  }
+  background-image: url('/assets/img.jpeg');
   //background-position: center center;
-  background-repeat: no-repeat;
-  background-size: cover;
+  //background-repeat: no-repeat;
+  //background-size: cover;
   min-height: 100vh;
   position: fixed;
   height: 100%;

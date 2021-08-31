@@ -7,17 +7,23 @@
 <!--    </mat-card-header>-->
     <mat-toolbar class="white">
       <mat-toolbar-row>
-        <h2>Ni&ntilde;os (as)</h2>
-        <span class="spacer-row"></span>
-<!--        <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">-->
-<!--          <mat-icon>person_add</mat-icon>-->
-<!--        </button>-->
-        <button mat-icon-button color="primary" matTooltip="Reporte" (click)="report()">
-          <mat-icon>print</mat-icon>
-        </button>
-        <button mat-icon-button color="primary" matTooltip="Filtrar" [matMenuTriggerFor]="menuFilter">
-          <mat-icon>sort</mat-icon>
-        </button>
+        <ng-container *ngIf="searchVisible">
+          <app-search-alert (cancelButton)="cancel()" (searchEmitter)="searchChildren($event)" placeholder="Buscar... Niños(as)"></app-search-alert>
+        </ng-container>
+        <ng-container *ngIf="!searchVisible">
+          <h2>Ni&ntilde;os (as)</h2>
+          <span class="spacer-row"></span>
+          <button mat-icon-button color="primary" matTooltip="Agregar" (click)="search()">
+            <mat-icon>search</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="Reporte" (click)="report()">
+            <mat-icon>print</mat-icon>
+          </button>
+<!--          <button mat-icon-button color="primary" matTooltip="Filtrar" [matMenuTriggerFor]="menuFilter">-->
+<!--            <mat-icon>sort</mat-icon>-->
+<!--          </button>-->
+        </ng-container>
+
       </mat-toolbar-row>
     </mat-toolbar>
     <mat-divider class="primary"></mat-divider>
@@ -31,11 +37,11 @@
 <!--      <span class="spacer-row"></span>-->
 <!--    </mat-toolbar>-->
 <!--        <mat-divider class="primary"></mat-divider>-->
-        <div *ngIf="dataSource.data.length === 0" class="notify-empty">
+        <div *ngIf="dataSource.length === 0" class="notify-empty">
           A&uacute;n no se registraron Ni&ntilde;os(as)
         </div>
-        <ng-container *ngIf="dataSource.data.length > 0">
-          <mat-list-item *ngFor="let child of dataSource.data; let i = index">
+        <ng-container *ngIf="dataSource.length > 0">
+          <mat-list-item *ngFor="let child of dataSource; let i = index">
             <img mat-list-icon [src]="child.photo ? child.photo : defaultPhoto" alt="">
             <h4 mat-line>{{child.name}} {{child.lastName}}</h4>
             <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{child: child}">
@@ -44,6 +50,12 @@
           </mat-list-item>
         </ng-container>
       </mat-list>
+<!--      <mat-paginator [pageSize]="20"-->
+<!--                     [length]="lengthPages"-->
+<!--                     [pageIndex]="params.page - 1"-->
+<!--                     (page)="setPage($event)"-->
+<!--                     aria-label="Select page">-->
+<!--      </mat-paginator>-->
     </mat-card-content>
   </mat-card>
 </div>
@@ -53,14 +65,14 @@
     <button mat-menu-item (click)="printFile(child)">Imprimir Kardex</button>
     <button mat-menu-item (click)="createTest(child)">Nuevo Diagnostico</button>
     <button mat-menu-item (click)="openTreatments(child)">Diagnosticos y Tratamientos</button>
-    <button mat-menu-item (click)="archive(child)">Archivar</button>
-    <button mat-menu-item (click)="archivate()">Archivados</button>
+<!--    <button mat-menu-item (click)="archive(child)">Archivar</button>-->
+<!--    <button mat-menu-item (click)="archivate()">Archivados</button>-->
   </ng-template>
 </mat-menu>
-<mat-menu #menuFilter="matMenu">
-  <ng-template matMenuContent>
-    <button mat-menu-item (click)="filter(true)">Activos</button>
-    <button mat-menu-item (click)="filter(false)">No Activos</button>
-    <button mat-menu-item (click)="filter()">Todos</button>
-  </ng-template>
-</mat-menu>
+<!--<mat-menu #menuFilter="matMenu">-->
+<!--  <ng-template matMenuContent>-->
+<!--    <button mat-menu-item (click)="filter(true)">Activos</button>-->
+<!--    <button mat-menu-item (click)="filter(false)">No Activos</button>-->
+<!--    <button mat-menu-item (click)="filter()">Todos</button>-->
+<!--  </ng-template>-->
+<!--</mat-menu>-->

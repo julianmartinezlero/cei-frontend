@@ -1,8 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {MatSnackBar, MatSort, MatTableDataSource} from '@angular/material';
+import {Component, OnInit} from '@angular/core';
+import {MatSnackBar} from '@angular/material';
 import {DialogService} from '../../alerts/dialog.service';
-import {Router} from '@angular/router';
-import {CrudComponent} from '../../../interfaces/crudComponent.interface';
+import {ActivatedRoute, Router} from '@angular/router';
 import {ChildrenService} from '../services/children.service';
 import {Child} from '../../../interfaces/models/child.model';
 import * as moment from 'moment';
@@ -19,19 +18,26 @@ import {ChildrenDialogReportComponent} from '../children-dialog-report/children-
   templateUrl: './children-list.component.html',
   styleUrls: ['./children-list.component.scss']
 })
-export class ChildrenListComponent implements OnInit, CrudComponent {
+export class ChildrenListComponent implements OnInit {
 
   title = 'Niños(as)';
   defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
   now = moment();
-  dataSource = new MatTableDataSource<Child>([]);
+  dataSource: Child[] = [];
   auxData = [];
-  // @ViewChild(MatSort, {static: true}) sort: MatSort;
+  searchVisible = false;
+  params = {
+    page: 1,
+    limit: null,
+  };
+  lengthPages = 0;
+
 
   constructor(private childrenService: ChildrenService,
               private dialogService: DialogService,
               private printService: PrintPdfService,
               private snack: MatSnackBar,
+              private routerActive: ActivatedRoute,
               private testService: QuestionTestService,
               private router: Router) {
   }
@@ -42,16 +48,11 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
 
   all() {
     this.childrenService.get().subscribe((t: Child[]) => {
-      this.dataSource = new MatTableDataSource<Child>(t);
-      // this.dataSource.sort = this.sort;
+      this.dataSource = t;
       this.auxData = t;
     }, error1 => {
       this.dialogService.toastDialog('error');
     });
-  }
-
-  create() {
-    this.router.navigate([this.childrenService.route + '/create']);
   }
 
   delete(ele: Child) {
@@ -74,7 +75,6 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     }).subscribe(res => {
       console.log(res);
     });
-    // this.router.navigate([this.childrenService.route + '/show']);
   }
 
   createTest(child: Child) {
@@ -95,10 +95,6 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     this.router.navigate([this.childrenService.route + '/edit']);
   }
 
-  getAge(date) {
-    return this.now.diff(date, 'year');
-  }
-
   printFile(child: Child) {
     this.testService.getCustom(`testChild/${child.id}`).subscribe((r: any) => {
       console.log(r);
@@ -106,18 +102,9 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     });
   }
 
-  filter(state?: boolean) {
-    if (state) {
-      this.dataSource = new MatTableDataSource(this.auxData.filter(a => a.isActive === state));
-    } else {
-      this.dataSource = new MatTableDataSource(this.auxData);
-    }
-  }
-
   openTreatments(child: Child) {
     this.dialogService.openDialog(ChildTreatmentsComponent, {
       width: '700px',
-      // height: '',
       data: {
         child
       }
@@ -141,26 +128,40 @@ export class ChildrenListComponent implements OnInit, CrudComponent {
     });
   }
 
-  archive(child: Child) {
-    this.snack.open('Seguro de Archivar?', 'Aceptar', {
-      duration: 5000,
-    }).onAction().subscribe(() => {
-      child.isActive = false;
-      this.childrenService.put(child.id, child).subscribe(() => {
-        this.ngOnInit();
-      });
-    });
-  }
+  // archive(child: Child) {
+  //   this.snack.open('Seguro de Archivar?', 'Aceptar', {
+  //     duration: 5000,
+  //   }).onAction().subscribe(() => {
+  //     child.isActive = false;
+  //     this.childrenService.put(child.id, child).subscribe(() => {
+  //       this.ngOnInit();
+  //     });
+  //   });
+  // }
 
   report() {
     this.dialogService.openDialog(ChildrenDialogReportComponent, {
       width: '400px',
     }).subscribe(r => {
-      console.log(r);
+      if (r) {
+        this.childrenService.getInPeriodSolved(r.dateIni, r. dateEnd).subscribe((s: any) => {
+          this.dataSource = s;
+        });
+      }
     });
   }
 
-  archivate() {
+  search() {
+    this.searchVisible = true;
+  }
 
+  cancel() {
+    this.searchVisible = false;
+    this.all();
+  }
+
+  searchChildren(evt: any) {
+    this.dataSource = this.auxData
+      .filter(a => a.name.toLowerCase().includes(evt.toLowerCase()) || a.lastName.toLowerCase().includes(evt.toLowerCase()));
   }
 }

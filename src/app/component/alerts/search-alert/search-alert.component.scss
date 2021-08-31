@@ -1,0 +1,37 @@
+.search-results {
+  //background: red;
+  width: calc(100% - 33px);
+  height: 50px;
+  position: absolute;
+  top: 14px;
+  display: inline-flex;
+
+  .search {
+    //top: 5px;
+    position: absolute;
+    right: 0;
+  }
+
+  .cancel {
+    position: absolute;
+    //top: 5px;
+    left: 0;
+  }
+
+  input {
+    font-size: 16px;
+    background: 0 0;
+    color: currentColor;
+    border: none;
+    outline: 0;
+    padding: 0;
+    margin: 0;
+    width: calc(100% - 84px);
+    vertical-align: bottom;
+    text-align: inherit;
+    right: 44px;
+    position: absolute;
+    height: 100%;
+    top: -7px;
+  }
+}

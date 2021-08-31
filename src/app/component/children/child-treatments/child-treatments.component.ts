@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {Child} from '../../../interfaces/models/child.model';
 import {QuestionTestService} from '../../question-test/question-test.service';
 import {TestChild} from '../../../interfaces/models/testChild.model';
+import {PrintPdfService} from '../../../services/printPdf.service';
 
 @Component({
   selector: 'app-child-treatments',
@@ -16,6 +17,7 @@ export class ChildTreatmentsComponent implements OnInit {
   constructor(
     private testService: QuestionTestService,
     private dialogRef: MatDialogRef<ChildTreatmentsComponent>,
+    private printService: PrintPdfService,
     @Inject(MAT_DIALOG_DATA) private data: any) {
     this.child = this.data.child;
   }
@@ -64,5 +66,10 @@ export class ChildTreatmentsComponent implements OnInit {
       testSelect: this.testSelect,
       child: this.child
     });
+  }
+
+  printDiacritics() {
+    console.log(this.testSelect);
+    this.printService.printTestChild(this.testSelect.child, this.testSelect.child.professional, this.testSelect.treatmentChildren);
   }
 }

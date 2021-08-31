@@ -5,6 +5,7 @@ import {Tutor} from '../interfaces/models/tutor.model';
 import * as moment from 'moment';
 import {Professional} from '../interfaces/models/professional.model';
 import {TestChild} from '../interfaces/models/testChild.model';
+import {TreatmentChild} from '../interfaces/models/treatmentChild.model';
 moment.locale('es');
 
 // tslint:disable-next-line:only-arrow-functions
@@ -61,6 +62,56 @@ export class PrintPdfService {
     this.doc.save(`${child.name}_${child.lastName}_${new Date().getTime()}.pdf`);
 
   }
+
+  printTestChild(child: Child, tutor: Professional, tests: TreatmentChild[]) {
+    this.doc = new jsPDF('p', 'mm', 'letter', true);
+    // this.doc.setFont('courier', 'bold');
+
+    this.doc.setFontSize(15);
+    // @ts-ignore
+    this.doc.textCenter('KARDEX NIÑO', {align: 'center', font: 'OpenSansBold'}, 0, 18);
+    // @ts-ignore
+    // this.doc.textCenter(subtitle, {align: 'center'}, 0, 24);
+    this.doc.rect(10, 10, this.doc.internal.pageSize.width - 20, this.doc.internal.pageSize.height - 20);
+    this.doc.setFontSize(12);
+    this.doc.addImage(IMG_LOGO, 'JPEG', 12, 12, 24, 20);
+    this.doc.addImage(child.photo, 'JPEG', this.doc.internal.pageSize.width - 62, 12, 50, 50);
+    this.doc.rect(this.doc.internal.pageSize.width - 62, 12, 50, 50);
+
+    this.doc.text('Nombres: ' + child.name.toUpperCase(), 20, 50);
+    this.doc.text('Apellidos: ' + child.lastName.toUpperCase(), 20, 57);
+    this.doc.text('Edad: ' + moment(new Date()).diff(moment(child.birthDate), 'years'), 20, 64);
+    this.doc.text('Fecha de Nacimiento: ' + moment(child.birthDate).format('DD-MMMM-YYYY').toUpperCase(), 20, 71);
+    this.doc.text(`Tutor / Responsable:  ${tutor.name.toUpperCase()} ${tutor.lastName.toUpperCase()}`, 20, 78);
+
+    let pos = 100;
+    for (let i = 0; i < tests.length; i++) {
+      if (i === 0) {
+        this.doc.setFontSize(14);
+        // this.doc.setFont('OpenSansBold');
+        // console.log(this.doc.getFontList());
+        this.doc.text(`Descripcion`, 20, pos);
+        const separateText = this.doc.splitTextToSize(tests[i].treatment.text, 180);
+        this.doc.setFontSize(12);
+        this.doc.text(separateText, 20, pos + 20);
+        this.doc.setFontSize(14);
+        this.doc.text(`Recomendaciones para la intervención`, 20, pos + 50);
+        pos = pos + 50;
+      } else {
+        // this.doc.setFontSize(12);
+        const separateText = this.doc.splitTextToSize(tests[i].treatment.text.replace(/\n\s+/g, ''), 180);
+        this.doc.setFontSize(12);
+        this.doc.text(separateText, 20, pos);
+        // this.doc.text(tests[i].treatment.text.split(' '), 20, pos);
+      }
+
+      pos = pos + 20;
+    }
+
+    this.doc.save(`${child.name}_${child.lastName}_${new Date().getTime()}.pdf`);
+
+  }
+
 }
 
 // tslint:disable-next-line:max-line-length

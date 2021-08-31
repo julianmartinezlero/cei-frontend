@@ -78,4 +78,8 @@ export class DialogService {
       width: this.width,
     }).afterClosed();
   }
+
+  openCustomSnack(s: any, config?: MatDialogConfig) {
+    return this.snack.openFromComponent(s, config);
+  }
 }

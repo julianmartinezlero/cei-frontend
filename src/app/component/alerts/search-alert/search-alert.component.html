@@ -1,0 +1,9 @@
+<div class="search-results">
+  <button class="cancel" (click)="cancel()" mat-icon-button type="button">
+    <mat-icon>close</mat-icon>
+  </button>
+  <input class="input-search" type="text" (ngModelChange)="accept()" #searchInput [placeholder]="placeholder" [(ngModel)]="searchModel" name="searchModel">
+  <button class="search" mat-icon-button type="button" (click)="accept()">
+    <mat-icon>search</mat-icon>
+  </button>
+</div>
