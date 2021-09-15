@@ -9,17 +9,24 @@
     </mat-toolbar-row>
   </mat-toolbar>
   <mat-divider></mat-divider>
-  <div *ngIf="children.length > 0">
-    <mat-card class="child mat-elevation-z1" *ngFor="let child of children">
-      <img mat-card-image [src]="child.photo ? child.photo : defaultPhoto" alt="Photo of a Shiba Inu">
-      <mat-card-actions>
-        <button mat-flat-button disableRipple>{{child.name}} {{child.lastName}}</button>
-        <span class="spacer-row"></span>
-        <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{child: child}">
-          <mat-icon>more_vert</mat-icon>
-        </button>
-      </mat-card-actions>
-    </mat-card>
+  <div *ngIf="children.length > 0" class="container">
+    <div class="row">
+      <div *ngFor="let child of children" class="col-4">
+        <mat-card class="child mat-elevation-z1 " >
+          <img mat-card-image [src]="child.photo ? child.photo : defaultPhoto" alt="Photo of a Shiba Inu">
+          <mat-card-actions>
+            <button mat-flat-button disableRipple style="text-overflow: ellipsis;
+    overflow: hidden;
+    /* width: 100%; */
+    white-space: nowrap;">{{child.name}} {{child.lastName}}</button>
+            <span class="spacer-row"></span>
+            <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{child: child}">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+          </mat-card-actions>
+        </mat-card>
+      </div>
+    </div>
   </div>
   <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-child="child">
