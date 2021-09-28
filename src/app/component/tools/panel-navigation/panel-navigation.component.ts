@@ -11,7 +11,7 @@ import {Router} from '@angular/router';
 export class PanelNavigationComponent implements OnInit {
   // user: User;
   // items = [];
-  private routes = [
+  routes = [
     {name: 'Inicio', icon: 'home', route: '/admin/home'},
     {name: 'Usuarios', icon: 'verified_user', route: '/admin/professional'},
     {name: 'Tutores', icon: 'account_box', route: '/admin/tutor'},
