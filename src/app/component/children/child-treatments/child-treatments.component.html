@@ -1,4 +1,4 @@
-<div mat-dialog-title>Diagnosticos y Tratamientos</div>
+<div mat-dialog-title>Diagnosticos e Intervenciones</div>
 <div mat-dialog-content>
   <mat-drawer-container class="treatment-container">
     <mat-drawer mode="side" opened >
@@ -20,7 +20,7 @@
           <mat-list-item *ngFor="let tr of testSelect.treatmentChildren">{{tr.treatment.text}}</mat-list-item>
         </mat-list>
         <div style="text-align: center;" *ngIf="testSelect">
-          <button type="button" mat-flat-button color="primary" (click)="showTreatment()">Tratamiento</button>
+          <button type="button" mat-flat-button color="primary" (click)="showTreatment()">Intervenciones</button>
           <button type="button" mat-flat-button color="primary" (click)="printDiacritics()">Imprimir</button>
         </div>
         <div style="text-align: center;" *ngIf="!testSelect">

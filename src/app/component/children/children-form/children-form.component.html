@@ -59,17 +59,22 @@
       </div>
       <div class="col">
         <div class="img">
-          <img *ngIf="childForm.get('photo').value" [src]="childForm.get('photo').value">
+          <div class="container">
+            <img *ngIf="childForm.get('photo').value" [src]="childForm.get('photo').value">
+          </div>
 <!--          <div class="panel"></div>-->
-          <button type="button" mat-fab (click)="takePhoto()" class="camera mat-elevation-z0">
-            <mat-icon>photo_camera</mat-icon>
-          </button>
-          <div class="wrapper mat-elevation-z0 file-camera" matRipple [matRippleColor]="'#ffffff26'">
-            <div class="file-upload">
-              <input type="file" accept="image/png,image/jpeg,image/jpg" (change)="onFileChange($event)">
-              <mat-icon>file_upload</mat-icon>
+          <div class="container">
+            <button type="button" mat-fab (click)="takePhoto()" class="camera mat-elevation-z0">
+              <mat-icon>photo_camera</mat-icon>
+            </button>
+            <div class="wrapper mat-elevation-z0 file-camera" matRipple [matRippleColor]="'#ffffff26'">
+              <div class="file-upload">
+                <input type="file" accept="image/png,image/jpeg,image/jpg" (change)="onFileChange($event)">
+                <mat-icon>file_upload</mat-icon>
+              </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>

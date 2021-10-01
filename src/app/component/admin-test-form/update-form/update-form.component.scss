@@ -2,6 +2,18 @@ mat-card {
   margin: 21px auto;
   width: 700px !important;
 }
+.position-n{
+  position: absolute;
+  font-size: 300px;
+  z-index: 0;
+  width: 100%;
+  text-align: center;
+  color: #858585;
+  opacity: 0.1;
+}
+.container{
+  background: red;
+}
 
 .custom-header {
   height: 20px;
@@ -51,7 +63,7 @@ mat-card {
 
   mat-card-title > input {
     font-size: 17px;
-    width: calc(100% - 24px);
+    width: calc(100% - 50px);
   }
 
   mat-card-subtitle > input {

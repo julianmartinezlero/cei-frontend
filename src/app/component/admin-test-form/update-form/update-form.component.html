@@ -17,22 +17,27 @@
         <!--            </button>-->
       </div>
       <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
-        <mat-card-title>
-          <span style="color: red"> * </span>
-          <input type="text" [(ngModel)]="question.question" [name]="question.id + 'question'">
-        </mat-card-title>
-        <mat-card-subtitle>
-          <input type="text" [(ngModel)]="question.details" [name]="question.id + 'detail'">
-        </mat-card-subtitle>
-        <mat-card-content>
-          <mat-radio-group aria-label="Select an option">
-            <mat-radio-button *ngFor="let option of question.questionOptions; let i = index" disabled
-                              [value]="option">
-              <input type="text" [(ngModel)]="option.description" [name]="option.id + 'option'">
-            </mat-radio-button>
-          </mat-radio-group>
-          <button mat-button color="primary" *ngIf="question.questionAssets.length > 0" (click)="openResource(question)">Abrir Recursos</button>
-        </mat-card-content>
+<!--        <div class="position-n">{{i + 1}}</div>-->
+
+          <mat-card-title>
+            <span>{{i + 1}}.-</span>
+            <span style="color: red"> * </span>
+            <input type="text" [(ngModel)]="question.question" [name]="question.id + 'question'">
+          </mat-card-title>
+          <mat-card-subtitle>
+            <input type="text" [(ngModel)]="question.details" [name]="question.id + 'detail'">
+          </mat-card-subtitle>
+          <mat-card-content>
+            <mat-radio-group aria-label="Select an option">
+              <mat-radio-button *ngFor="let option of question.questionOptions; let i = index" disabled
+                                [value]="option">
+                <input type="text" [(ngModel)]="option.description" [name]="option.id + 'option'">
+              </mat-radio-button>
+            </mat-radio-group>
+            <p>Recursos: {{question?.questionAssets?.length ? question?.questionAssets?.length : 0}}</p>
+            <button mat-button color="primary" (click)="openResource(question)">Abrir Recursos</button>
+          </mat-card-content>
+
       </mat-card>
     </form>
 
