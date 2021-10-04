@@ -79,3 +79,9 @@ mat-drawer {
     top: 0;
   }
 }
+.content{
+  position: absolute;
+  width: 100%;
+  height: calc(100% - 65px);
+  overflow: auto;
+}
