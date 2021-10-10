@@ -73,7 +73,9 @@ export class ChildrenListComponent implements OnInit {
     this.dialogService.openDialog(ChildrenShowComponent, {
       width: '700px',
     }).subscribe(res => {
-      console.log(res);
+      if (res) {
+        this.openTestTracing(res);
+      }
     });
   }
 
@@ -124,20 +126,9 @@ export class ChildrenListComponent implements OnInit {
         child: dates.child
       },
     }).subscribe(a => {
-      this.openTreatments(a);
+      this.show(a);
     });
   }
-
-  // archive(child: Child) {
-  //   this.snack.open('Seguro de Archivar?', 'Aceptar', {
-  //     duration: 5000,
-  //   }).onAction().subscribe(() => {
-  //     child.isActive = false;
-  //     this.childrenService.put(child.id, child).subscribe(() => {
-  //       this.ngOnInit();
-  //     });
-  //   });
-  // }
 
   report() {
     this.dialogService.openDialog(ChildrenDialogReportComponent, {

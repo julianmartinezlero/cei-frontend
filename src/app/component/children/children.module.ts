@@ -19,7 +19,7 @@ import {
     MatSelectModule,
     MatSidenavModule,
     MatSortModule,
-    MatTableModule,
+    MatTableModule, MatTabsModule,
     MatToolbarModule,
     MatTooltipModule, MatTreeModule
 } from '@angular/material';
@@ -86,6 +86,7 @@ moment().locale('es-Es');
         MatTreeModule,
         AlertsModule,
         MatPaginatorModule,
+        MatTabsModule,
     ],
   providers: [
     ChildrenService,

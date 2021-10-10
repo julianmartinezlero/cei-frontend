@@ -1,7 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {Child} from '../../../interfaces/models/child.model';
 import {Router} from '@angular/router';
-import {MatDialogRef} from '@angular/material';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {TestChild} from '../../../interfaces/models/testChild.model';
+import {QuestionTestService} from '../../question-test/question-test.service';
+import {PrintPdfService} from '../../../services/printPdf.service';
 
 @Component({
   selector: 'app-children-show',
@@ -23,17 +26,68 @@ export class ChildrenShowComponent implements OnInit {
     ci: null,
     photo: null
   };
-
-  constructor(private router: Router, private dialogRef: MatDialogRef<ChildrenShowComponent>) {
-  }
-
-  ngOnInit() {
-
+  // child: Child;
+  tests: TestChild[] = [];
+  testSelect: TestChild;
+  constructor(private router: Router,
+              private dialogRef: MatDialogRef<ChildrenShowComponent>,
+              private testService: QuestionTestService,
+              private printService: PrintPdfService) {
   }
 
   cancel() {
     sessionStorage.removeItem('child');
     this.dialogRef.close();
     // this.router.navigate(['/child']);
+  }
+
+  ngOnInit() {
+    this.testService.getCustom(`testChild/${this.childSelect.id}`).subscribe((r: any) => {
+      this.tests = r;
+      this.testSelect = this.tests.length > 0 ? this.tests[0] : null;
+    });
+  }
+
+  setTest(test) {
+    this.testSelect = test;
+  }
+  getClass() {
+    if (this.testSelect) {
+      return this.getRange(this.testSelect.totalValue);
+    } else {
+      return 'white';
+    }
+  }
+  getRange(total) {
+    if (total >= 0 && total <= 0.69) {
+      return 'green';
+    }
+    if (total >= 0.70 && total <= 1.19) {
+      return 'yellow';
+    }
+    if (total >= 1.20 && total <= 1.70) {
+      return 'orange';
+    }
+    if (total >= 1.71 && total <= 3) {
+      return 'red';
+    }
+  }
+  isActive(test: TestChild) {
+    if (this.testSelect) {
+      return test.id === this.testSelect.id ? this.getClass() : '';
+    } else {
+      return '';
+    }
+  }
+
+  showTreatment() {
+    this.dialogRef.close({
+      testSelect: this.testSelect,
+      child: this.childSelect
+    });
+  }
+
+  printDiacritics() {
+    this.printService.printTestChild(this.testSelect.child, this.testSelect.child.professional, this.testSelect.treatmentChildren);
   }
 }

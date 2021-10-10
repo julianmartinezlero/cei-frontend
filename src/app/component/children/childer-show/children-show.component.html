@@ -1,22 +1,62 @@
 <div mat-dialog-title>{{titleForm}}</div>
 <div mat-dialog-content>
-  <div class="details">
-    <div class="details-child">
-      <img [src]="childSelect.photo ? childSelect.photo : defaultPhoto" mat-card-image alt="" srcset="">
-    </div>
-    <div class="details-child">
-      <b>Nombre</b>
-      <p>{{childSelect.name}}</p>
-      <b>Apellido</b>
-      <p>{{childSelect.lastName}}</p>
-      <b>Ci</b>
-      <p>{{childSelect.ci ? childSelect.ci : 'No definido'}}</p>
-      <b>Genero</b>
-      <p>{{childSelect.sex}}</p>
-      <b>Fecha de Nacimiento</b>
-      <p>{{childSelect.birthDate}}</p>
-    </div>
-  </div>
+  <mat-tab-group>
+    <mat-tab label="Datos del Niño">
+      <div class="details">
+        <div class="details-child">
+          <img [src]="childSelect.photo ? childSelect.photo : defaultPhoto" mat-card-image alt="" srcset="">
+        </div>
+        <div class="details-child">
+          <b>Nombre</b>
+          <p>{{childSelect.name}}</p>
+          <b>Apellido</b>
+          <p>{{childSelect.lastName}}</p>
+          <b>Ci</b>
+          <p>{{childSelect.ci ? childSelect.ci : 'No definido'}}</p>
+          <b>Genero</b>
+          <p>{{childSelect.sex}}</p>
+          <b>Fecha de Nacimiento</b>
+          <p>{{childSelect.birthDate}}</p>
+        </div>
+      </div>
+    </mat-tab>
+    <mat-tab label="Diagnosticos e Intervenciones">
+      <div class="treatment-container">
+        <div class="nav-container">
+
+                    <div class="menu-side">
+                      <mat-list *ngIf="tests.length > 0">
+                        <mat-list-item *ngFor="let tr of tests" (click)="setTest(tr)" matRipple [ngClass]="isActive(tr)">
+                          <mat-icon mat-list-icon>assignment</mat-icon>
+                          <h4 mat-line>{{tr.code}}</h4>
+                          <p mat-line> {{tr.createdAt | date: 'mediumDate'}} </p>
+                        </mat-list-item>
+
+                      </mat-list>
+                    </div>
+
+        </div>
+        <div class="content">
+
+                    <div class="content-side" [ngClass]="getClass()">
+                      <mat-list *ngIf="testSelect">
+                        <mat-list-item *ngFor="let tr of testSelect.treatmentChildren">{{tr.treatment.text}}</mat-list-item>
+                      </mat-list>
+                      <div style="text-align: center;" *ngIf="testSelect">
+                        <button type="button" mat-flat-button color="primary" (click)="showTreatment()">Intervenciones</button>
+                        <button type="button" mat-flat-button color="primary" (click)="printDiacritics()">Imprimir</button>
+                      </div>
+                      <div style="text-align: center;padding: 176px;" *ngIf="!testSelect">
+                        <div>No Existen Diagnosticos</div>
+                      </div>
+                    </div>
+
+        </div>
+      </div>
+
+    </mat-tab>
+  </mat-tab-group>
+
 </div>
 <div mat-dialog-actions>
   <span class="spacer-row"></span>
