@@ -42,6 +42,7 @@ import {TreatmentSessionService} from './services/treatment-session.service';
 import {PrintPdfService} from '../../services/printPdf.service';
 import { ChildrenDialogReportComponent } from './children-dialog-report/children-dialog-report.component';
 import {AlertsModule} from '../alerts/alerts.module';
+import { GroupChildrenComponent } from './group-children/group-children.component';
 
 moment().locale('es-Es');
 
@@ -54,7 +55,8 @@ moment().locale('es-Es');
     ChildTreatmentsComponent,
     ChildTreatmentTracingComponent,
     ChildEventDetailsComponent,
-    ChildrenDialogReportComponent
+    ChildrenDialogReportComponent,
+    GroupChildrenComponent
   ],
     imports: [
         CommonModule,

@@ -3,7 +3,7 @@ import {MatSnackBar} from '@angular/material';
 import {DialogService} from '../../alerts/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ChildrenService} from '../services/children.service';
-import {Child} from '../../../interfaces/models/child.model';
+import {Child, GroupChildren} from '../../../interfaces/models/child.model';
 import * as moment from 'moment';
 import {ChildrenShowComponent} from '../childer-show/children-show.component';
 import {QuestionTestService} from '../../question-test/question-test.service';
@@ -12,6 +12,7 @@ import {ChildTreatmentTracingComponent} from '../child-treartment-tracing/child-
 import {VERTICAL_POSITION} from '../../../../environments/environment';
 import {PrintPdfService} from '../../../services/printPdf.service';
 import {ChildrenDialogReportComponent} from '../children-dialog-report/children-dialog-report.component';
+import {DEFAULT_PICTURE} from '../../../config/appearance.config';
 
 @Component({
   selector: 'app-children-list',
@@ -21,7 +22,7 @@ import {ChildrenDialogReportComponent} from '../children-dialog-report/children-
 export class ChildrenListComponent implements OnInit {
 
   title = 'Niños(as)';
-  defaultPhoto = 'https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/s32-c-fbw=1/photo.jpg';
+  defaultPhoto = DEFAULT_PICTURE;
   now = moment();
   dataSource: Child[] = [];
   auxData = [];
@@ -30,6 +31,8 @@ export class ChildrenListComponent implements OnInit {
     page: 1,
     limit: null,
   };
+  groupChildren: GroupChildren[] = [];
+  group = false;
   lengthPages = 0;
 
 
@@ -44,6 +47,7 @@ export class ChildrenListComponent implements OnInit {
 
   ngOnInit() {
     this.all();
+    this.loadChildrenRange();
   }
 
   all() {
@@ -68,7 +72,7 @@ export class ChildrenListComponent implements OnInit {
     });
   }
 
-  show(child: Child) {
+  show(child: Child | any) {
     sessionStorage.setItem('child', JSON.stringify(child));
     this.dialogService.openDialog(ChildrenShowComponent, {
       width: '700px',
@@ -79,7 +83,7 @@ export class ChildrenListComponent implements OnInit {
     });
   }
 
-  createTest(child: Child) {
+  createTest(child: Child | any) {
     this.snack.open('Seguro de Proceder?, es irreversible!', 'Aceptar', {
       duration: 5000,
       verticalPosition: VERTICAL_POSITION,
@@ -97,7 +101,7 @@ export class ChildrenListComponent implements OnInit {
     this.router.navigate([this.childrenService.route + '/edit']);
   }
 
-  printFile(child: Child) {
+  printFile(child: Child | any) {
     this.testService.getCustom(`testChild/${child.id}`).subscribe((r: any) => {
       console.log(r);
       this.printService.printInfoChild(child, child.professional, r);
@@ -154,5 +158,15 @@ export class ChildrenListComponent implements OnInit {
   searchChildren(evt: any) {
     this.dataSource = this.auxData
       .filter(a => a.name.toLowerCase().includes(evt.toLowerCase()) || a.lastName.toLowerCase().includes(evt.toLowerCase()));
+  }
+
+  private loadChildrenRange() {
+    this.childrenService.get(`classification/children`).subscribe((a: any) => {
+      this.groupChildren = a;
+    });
+  }
+
+  setViewGroup() {
+    this.group = !this.group;
   }
 }

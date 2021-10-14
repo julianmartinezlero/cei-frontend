@@ -1,7 +1,7 @@
 <div class="table-container">
 <!--  <img class="image-icon" src="/assets/student-boy.svg">-->
 
-  <mat-card class="card-content mat-elevation-z3">
+  <mat-card *ngIf="!group" class="card-content mat-elevation-z3">
 <!--    <mat-card-header>-->
 <!--      <mat-card-title>Ni&ntilde;os (as)</mat-card-title>-->
 <!--    </mat-card-header>-->
@@ -15,6 +15,9 @@
           <span class="spacer-row"></span>
           <button mat-icon-button color="primary" matTooltip="Agregar" (click)="search()">
             <mat-icon>search</mat-icon>
+          </button>
+          <button mat-icon-button color="primary" matTooltip="vista Agrupada" (click)="setViewGroup()">
+            <mat-icon>dashboard</mat-icon>
           </button>
           <button mat-icon-button color="primary" matTooltip="Reporte" (click)="report()">
             <mat-icon>print</mat-icon>
@@ -58,6 +61,11 @@
 <!--      </mat-paginator>-->
     </mat-card-content>
   </mat-card>
+  <app-group-children *ngIf="group" [groupChildren]="groupChildren"
+                      (viewBtn)="setViewGroup()"
+                      (printFileBtn)="printFile($event)"
+                      (showBtn)="show($event)"
+                      (testBtn)="createTest($event)"></app-group-children>
 </div>
 <mat-menu #menu="matMenu">
   <ng-template matMenuContent let-child="child">

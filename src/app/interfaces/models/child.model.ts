@@ -15,3 +15,8 @@ export interface Child {
   tests?: any;
   isActive?: boolean;
 }
+
+export interface GroupChildren {
+  children: Child[];
+  title: string;
+}

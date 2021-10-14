@@ -1,0 +1,29 @@
+.group{
+  background: #ffffffbd;
+  height: calc(100% - 65px);
+  position: absolute;
+  width: 100%;
+  overflow: hidden;
+}
+mat-toolbar{
+  background: white;
+  border-bottom: solid 1px #bdbdbd;
+}
+//.horizontal-divider:first-child {
+//  position: absolute;
+//  /* background: #bdbdbd; */
+//  width: inherit;
+//  height: 1000px;
+//  border-left: solid 1px #bdbdbd;
+//}
+.col-3:not(:last-child) .horizontal-divider {
+  position: absolute;
+  /* background: #bdbdbd; */
+  width: inherit;
+  height: 1000px;
+  border-right: solid 1px #bdbdbd;
+}
+h3{
+  color: #757575;
+  font-size: 15px;
+}

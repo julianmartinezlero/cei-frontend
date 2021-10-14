@@ -1,0 +1,45 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    Vista Agrupada
+    <span class="spacer-row"></span>
+    <button mat-icon-button color="primary" matTooltip="Vista Desagrupada" (click)="setView()">
+      <mat-icon>dashboard</mat-icon>
+    </button>
+  </mat-toolbar-row>
+</mat-toolbar>
+<div class="group">
+  <div class="row">
+    <ng-container *ngFor="let group of groupChildren">
+      <div class="col-3" >
+        <div class="horizontal-divider">
+          <h3>{{group.title}}</h3>
+          <mat-list>
+            <div *ngIf="groupChildren.length === 0" class="notify-empty">
+              A&uacute;n no se registraron Ni&ntilde;os(as)
+            </div>
+            <ng-container *ngIf="groupChildren.length > 0">
+              <mat-list-item *ngFor="let child of group.children; let i = index">
+                <img mat-list-icon [src]="child.photo ? child.photo : defaultPhoto" alt="">
+                <h4 mat-line>{{child.name}} {{child.lastName}}</h4>
+                <button mat-icon-button [mat-menu-trigger-for]="menu" [matMenuTriggerData]="{child: child}">
+                  <mat-icon>more_vert</mat-icon>
+                </button>
+              </mat-list-item>
+            </ng-container>
+          </mat-list>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-child="child">
+    <button mat-menu-item (click)="show(child)">Ver</button>
+    <button mat-menu-item (click)="printFile(child)">Imprimir Kardex</button>
+    <button mat-menu-item (click)="createTest(child)">Nuevo Diagnostico</button>
+    <!--    <button mat-menu-item (click)="openTreatments(child)">Diagnosticos e Intervenciones</button>-->
+    <!--    <button mat-menu-item (click)="archive(child)">Archivar</button>-->
+    <!--    <button mat-menu-item (click)="archivate()">Archivados</button>-->
+  </ng-template>
+</mat-menu>
