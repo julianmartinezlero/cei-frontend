@@ -138,6 +138,7 @@ export class ChildrenListComponent implements OnInit {
     this.dialogService.openDialog(ChildrenDialogReportComponent, {
       width: '400px',
     }).subscribe(r => {
+      console.log(r);
       if (r) {
         this.childrenService.getInPeriodSolved(r.dateIni, r. dateEnd).subscribe((s: any) => {
           this.dataSource = s;

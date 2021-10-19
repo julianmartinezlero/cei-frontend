@@ -16,14 +16,22 @@ mat-toolbar{
 //  height: 1000px;
 //  border-left: solid 1px #bdbdbd;
 //}
-.col-3:not(:last-child) .horizontal-divider {
-  position: absolute;
-  /* background: #bdbdbd; */
-  width: inherit;
-  height: 1000px;
-  border-right: solid 1px #bdbdbd;
-}
+//.col-3:not(:last-child) .horizontal-divider {
+//  position: absolute;
+//  /* background: #bdbdbd; */
+//  width: inherit;
+//  height: 1000px;
+//  border-right: solid 1px #bdbdbd;
+//}
 h3{
   color: #757575;
   font-size: 15px;
+}
+.content-row{
+  width: 320px !important;
+  display: inline-flex;
+  padding: 10px;
+}
+.content-row:not(:last-child){
+  border-right: solid 1px #c7c7c7;
 }

@@ -40,7 +40,7 @@ td.mat-cell, th.mat-cell {
 
 .table-container {
   width: 100%;
-  height: calc(100% - 67px);
+  height: 100%;
   overflow: auto;
   //padding-top: 15px;
   //margin-top: 64px;
@@ -320,8 +320,11 @@ img.image-icon {
 }
 /* width */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 7px;
+  height: 7px;
+  /* border-radius: 79px; */
 }
+
 
 /* Track */
 ::-webkit-scrollbar-track {
@@ -330,7 +333,8 @@ img.image-icon {
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #8888886b;
+  background: #afafaf;
+  border-radius: 50px;
 }
 
 /* Handle on hover */
