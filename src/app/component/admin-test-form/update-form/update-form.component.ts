@@ -1,17 +1,12 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnDestroy, OnInit} from '@angular/core';
 import {TestChild} from '../../../interfaces/models/testChild.model';
 import {Question} from '../../../interfaces/models/question';
-import {Child} from '../../../interfaces/models/child.model';
 import {FormBuilder} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {QuestionTestService} from '../../question-test/question-test.service';
-import {DialogService} from '../../alerts/dialog.service';
 import {ChildrenService} from '../../children/services/children.service';
 import {Location} from '@angular/common';
 import {SideNavService} from '../../../services/side-nav.service';
-import {TestAcceptComponent} from '../../question-test/test-accept/test-accept.component';
-import {TestSolvedResultComponent} from '../../question-test/test-solved-result/test-solved-result.component';
-import {TestSolvedResourceComponent} from '../../question-test/test-solved-resource/test-solved-resource.component';
 import {AdminFormFilesComponent} from '../admin-form-files/admin-form-files.component';
 import {MatDialog, MatSnackBar} from '@angular/material';
 
@@ -41,8 +36,15 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.closeNav().then(a => {
+      setTimeout(() => {
+        this.loadQuestion(null);
+      }, 200);
+    });
+  }
+
+  async closeNav() {
     this.sideNavService.closeNav();
-    this.loadQuestion(null);
   }
 
   ngOnDestroy(): void {

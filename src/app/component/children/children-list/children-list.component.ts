@@ -13,6 +13,7 @@ import {VERTICAL_POSITION} from '../../../../environments/environment';
 import {PrintPdfService} from '../../../services/printPdf.service';
 import {ChildrenDialogReportComponent} from '../children-dialog-report/children-dialog-report.component';
 import {DEFAULT_PICTURE} from '../../../config/appearance.config';
+import {SideNavService} from '../../../services/side-nav.service';
 
 @Component({
   selector: 'app-children-list',
@@ -42,6 +43,7 @@ export class ChildrenListComponent implements OnInit {
               private snack: MatSnackBar,
               private routerActive: ActivatedRoute,
               private testService: QuestionTestService,
+              private sideService: SideNavService,
               private router: Router) {
   }
 
@@ -169,5 +171,10 @@ export class ChildrenListComponent implements OnInit {
 
   setViewGroup() {
     this.group = !this.group;
+    if (this.sideService.sideMenu) {
+      this.sideService.closeNav();
+    } else {
+      this.sideService.openNav();
+    }
   }
 }

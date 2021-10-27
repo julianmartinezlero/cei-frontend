@@ -28,7 +28,7 @@ h3{
   font-size: 15px;
 }
 .content-row{
-  width: 320px !important;
+  width: calc(100% / 5) !important;
   display: inline-flex;
   padding: 10px;
 }

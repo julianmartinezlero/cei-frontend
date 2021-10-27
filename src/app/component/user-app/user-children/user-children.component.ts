@@ -54,7 +54,9 @@ export class UserChildrenComponent implements OnInit {
     this.dialogService.openDialog(ChildrenShowComponent, {
       width: '700px',
     }).subscribe(res => {
-      console.log(res);
+      if (res) {
+        this.openTestTracing(res);
+      }
     });
   }
 

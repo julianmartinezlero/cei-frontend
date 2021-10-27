@@ -8,13 +8,13 @@
   </mat-toolbar-row>
 </mat-toolbar>
 <div class="group" style="overflow: auto">
-  <div style="width: 1706px;
+  <div style="width: calc(100% - 10px);
     height: calc(100% - 20px);
     margin: 10px !important;
     display: flex;">
     <ng-container *ngFor="let group of groupChildren">
       <div class="content-row" >
-        <div class="horizontal-divider" style="width: inherit">
+        <div class="horizontal-divider" style="width: 100%">
           <h3>{{group.title}}</h3>
           <mat-list>
             <div *ngIf="groupChildren.length === 0" class="notify-empty">
