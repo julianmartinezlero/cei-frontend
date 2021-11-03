@@ -5,7 +5,8 @@ import {TreatmentAsset} from './treatmentAsset';
 export interface Treatment {
   id: number;
   range: number;
-  text;
+  text: string;
+  shortText: string;
   sessions?: number;
   treatmentChildren: TreatmentChild[];
   treatmentAssets: TreatmentAsset[];

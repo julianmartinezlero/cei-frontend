@@ -89,18 +89,19 @@ export class ChildTreatmentTracingComponent implements OnInit, AfterViewInit {
   }
 
   private async mapDataToEvents(data: TreatmentChildSession[]) {
+    const now = moment();
     return data
       .map(t => {
       return {
         start: t.dateIni,
         end: t.dateIni,
-        title: t.treatment.text,
+        title: t.treatment.shortText,
         state: t.state,
         session: t,
         display: 'background',
-        classNames: ['custom-event-color', t.classColor, (t.state === true ? 'event-complete' : '')],
+        classNames: ['custom-event-color', t.classColor,
+          (t.state === true ? 'event-complete' : ( now > moment(t.dateIni) ? 'event-incomplete' : ''))],
       };
     });
   }
-
 }
