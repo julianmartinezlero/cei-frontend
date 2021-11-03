@@ -89,7 +89,7 @@ export class ChildTreatmentTracingComponent implements OnInit, AfterViewInit {
   }
 
   private async mapDataToEvents(data: TreatmentChildSession[]) {
-    const now = moment();
+    const now = moment(moment().format('YYYY-MM-DD'));
     return data
       .map(t => {
       return {
