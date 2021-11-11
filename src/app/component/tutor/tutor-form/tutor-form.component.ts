@@ -33,7 +33,7 @@ export class TutorFormComponent implements OnInit {
       cell: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(8)]],
-      children: [null, [Validators.required, Validators.max(12), Validators.min(1)]]
+      children: [50],
     });
     this.childFormGroup = this.fb.group({
       completeChild: [null, Validators.required]

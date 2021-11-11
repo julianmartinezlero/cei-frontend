@@ -83,11 +83,20 @@ export class ChildrenShowComponent implements OnInit {
   showTreatment() {
     this.dialogRef.close({
       testSelect: this.testSelect,
-      child: this.childSelect
+      child: this.childSelect,
+      treatment: true
     });
   }
 
   printDiacritics() {
     this.printService.printTestChild(this.testSelect.child, this.testSelect.child.professional, this.testSelect.treatmentChildren);
+  }
+
+  showResult() {
+    this.dialogRef.close({
+      testSelect: this.testSelect,
+      child: this.childSelect,
+      result: true,
+    });
   }
 }

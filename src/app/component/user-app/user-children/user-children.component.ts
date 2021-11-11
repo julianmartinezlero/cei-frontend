@@ -11,6 +11,7 @@ import {Location} from '@angular/common';
 import {ChildTreatmentTracingComponent} from '../../children/child-treartment-tracing/child-treatment-tracing.component';
 import {VERTICAL_POSITION} from '../../../../environments/environment';
 import {SideNavService} from '../../../services/side-nav.service';
+import {TestShowResultComponent} from '../../question-test/test-show-result/test-show-result.component';
 
 @Component({
   selector: 'app-user-children',
@@ -49,13 +50,18 @@ export class UserChildrenComponent implements OnInit {
     });
   }
 
-  show(child: Child) {
+  show(child: Child | any) {
     sessionStorage.setItem('child', JSON.stringify(child));
     this.dialogService.openDialog(ChildrenShowComponent, {
       width: '700px',
     }).subscribe(res => {
       if (res) {
-        this.openTestTracing(res);
+        if (res.treatment) {
+          this.show(res);
+        }
+        if (res.result) {
+          this.showResult(res, child);
+        }
       }
     });
   }
@@ -96,6 +102,22 @@ export class UserChildrenComponent implements OnInit {
       },
     }).subscribe(a => {
       this.openTreatments(a);
+    });
+  }
+
+  private showResult(a: any, child) {
+    // sessionStorage.setItem('child', JSON.stringify(child));
+    this.dialogService.openDialog(TestShowResultComponent, {
+      width: '100%',
+      height: '100%',
+      data: {
+        childId: a.child.id,
+        testId: a.testSelect.id,
+      }
+    }).subscribe(res => {
+      if (res === 'open') {
+        this.show(child);
+      }
     });
   }
 }

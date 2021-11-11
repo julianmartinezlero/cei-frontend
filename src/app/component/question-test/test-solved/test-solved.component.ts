@@ -12,6 +12,7 @@ import {Location} from '@angular/common';
 import {TestSolvedResultComponent} from '../test-solved-result/test-solved-result.component';
 import {ChildrenService} from '../../children/services/children.service';
 import {SideNavService} from '../../../services/side-nav.service';
+import {TestUploadResourceComponent} from '../test-upload-resource/test-upload-resource.component';
 
 @Component({
   selector: 'app-test-solved',
@@ -64,6 +65,7 @@ export class TestSolvedComponent implements OnInit, OnDestroy {
         id: null,
         questionId: r,
         test: null,
+        resourceUrl: null,
         questionOption: null,
         createdAt: new Date(),
         updatedAt: new Date()
@@ -129,6 +131,18 @@ export class TestSolvedComponent implements OnInit, OnDestroy {
       return r.questionOption;
     }).length === 12;
   }
+
+  uploadResource(testSolved: TestSolved) {
+    this.dialogService.openDialog(TestUploadResourceComponent, {
+      width: '500px',
+      height: '500px',
+      data:  testSolved,
+    }).subscribe(r => {
+      if (r) {
+        testSolved.resourceUrl = r;
+      }
+    });
+  }
 }
 
 export interface TestSolved {
@@ -136,6 +150,7 @@ export interface TestSolved {
   questionId: any;
   test: any;
   questionOption: any;
+  resourceUrl: string;
   createdAt: Date;
   updatedAt: Date;
 }

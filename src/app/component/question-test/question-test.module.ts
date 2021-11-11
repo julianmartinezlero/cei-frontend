@@ -5,21 +5,21 @@ import {QuestionTestRoutingModule} from './question-test-routing.module';
 import {TestListComponent} from './test-list/test-list.component';
 import {QuestionTestService} from './question-test.service';
 import {
-  MatButtonModule,
-  MatCardModule,
-  MatDatepickerModule,
-  MatDialogModule,
-  MatFormFieldModule,
-  MatIconModule,
-  MatInputModule,
-  MatListModule,
-  MatMenuModule,
-  MatRadioModule,
-  MatSelectModule,
-  MatSortModule,
-  MatTableModule,
-  MatToolbarModule,
-  MatTooltipModule
+    MatButtonModule,
+    MatCardModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatRadioModule, MatRippleModule,
+    MatSelectModule,
+    MatSortModule,
+    MatTableModule,
+    MatToolbarModule,
+    MatTooltipModule
 } from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
 import {TestFormComponent} from './test-form/test-form.component';
@@ -33,6 +33,8 @@ import {TestAcceptComponent} from './test-accept/test-accept.component';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
 import {TestSolvedResultComponent} from './test-solved-result/test-solved-result.component';
 import {TreatmentService} from './treatment.service';
+import { TestUploadResourceComponent } from './test-upload-resource/test-upload-resource.component';
+import { TestShowResultComponent } from './test-show-result/test-show-result.component';
 
 @NgModule({
   declarations: [
@@ -41,33 +43,36 @@ import {TreatmentService} from './treatment.service';
     TestSolvedComponent,
     TestSolvedResourceComponent,
     TestAcceptComponent,
-    TestSolvedResultComponent
+    TestSolvedResultComponent,
+    TestUploadResourceComponent,
+    TestShowResultComponent
   ],
-  imports: [
-    CommonModule,
-    QuestionTestRoutingModule,
-    ReactiveFormsModule,
-    FormsModule,
-    MatTableModule,
-    ToolsModule,
-    MatSortModule,
-    MatIconModule,
-    MatButtonModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatTooltipModule,
-    MatRadioModule,
-    MatListModule,
-    MatDialogModule,
-    MatMenuModule,
-    MatToolbarModule,
-    MatCarouselModule.forRoot(),
-    FlexModule,
-    GridModule
-  ],
+    imports: [
+        CommonModule,
+        QuestionTestRoutingModule,
+        ReactiveFormsModule,
+        FormsModule,
+        MatTableModule,
+        ToolsModule,
+        MatSortModule,
+        MatIconModule,
+        MatButtonModule,
+        MatCardModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatSelectModule,
+        MatDatepickerModule,
+        MatTooltipModule,
+        MatRadioModule,
+        MatListModule,
+        MatDialogModule,
+        MatMenuModule,
+        MatToolbarModule,
+        MatCarouselModule.forRoot(),
+        FlexModule,
+        GridModule,
+        MatRippleModule
+    ],
   providers: [
     QuestionTestService,
     TreatmentService,
@@ -77,6 +82,8 @@ import {TreatmentService} from './treatment.service';
   entryComponents: [
     TestSolvedResourceComponent,
     TestAcceptComponent,
+    TestUploadResourceComponent,
+    TestShowResultComponent,
   ],
   exports: [
     TestSolvedComponent,

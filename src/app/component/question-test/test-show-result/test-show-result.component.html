@@ -1,8 +1,8 @@
 <div class="solved-content">
-<!--  <h1 mat-dialog-title class="mat-elevation-z3"></h1>-->
+  <!--  <h1 mat-dialog-title class="mat-elevation-z3"></h1>-->
   <mat-toolbar class="mat-elevation-z3">
     <mat-toolbar-row>
-      <span>Resolviendo Test</span>
+      <span>Detalles del Test</span>
       <span class="spacer-row"></span>
       <button mat-icon-button matTooltip="Cancelar" (click)="closeTest()"><mat-icon>close</mat-icon></button>
     </mat-toolbar-row>
@@ -40,7 +40,7 @@
     </mat-card>
 
 
-    <form autocomplete="off">
+    <form autocomplete="off" *ngIf="questions">
       <div style="width: 700px;margin: auto;">
 
         <span class="spacer-row"></span>
@@ -48,28 +48,32 @@
         <!--              <mat-icon>close</mat-icon>-->
         <!--            </button>-->
       </div>
-      <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
-        <mat-card-title>{{question.question}}<span style="color: red"> *</span></mat-card-title>
-        <mat-card-subtitle>{{question.details}}</mat-card-subtitle>
+      <mat-card *ngFor="let question of questions.testResults; let i = index;" class="customQuestion">
+        <mat-card-title>{{question.question.question}}<span style="color: red"> *</span></mat-card-title>
+        <mat-card-subtitle>{{question.question.details}}</mat-card-subtitle>
         <mat-card-content>
-          <mat-radio-group aria-label="Select an option" [(ngModel)]="testForm[i].questionOption"
-                           [name]="'questionId' + i">
-            <mat-radio-button *ngFor="let option of question.questionOptions"
-                              [value]="option">{{option.description}}</mat-radio-button>
-          </mat-radio-group>
+          <div class="row">
+            <div class="col-6">
+              <mat-radio-group aria-label="Select an option">
+                <mat-radio-button [disabled]="true">{{question.questionOption.description}}</mat-radio-button>
+              </mat-radio-group>
+            </div>
+            <div class="col-6" *ngIf="question.resourceUrl">
+              <img [src]="getSrc(question.resourceUrl)" alt="">
+            </div>
+
+          </div>
+
         </mat-card-content>
-        <mat-card-actions align="start">
-          <button mat-flat-button color="primary" style="margin-right: 10px" *ngIf="question.questionAssets.length > 0" (click)="openResource(question)"><mat-icon>folder</mat-icon> Abrir Recursos</button>
-          <button mat-flat-button color="primary" (click)="uploadResource(testForm[i])"><mat-icon>cloud_upload</mat-icon> Subir Recursos</button> <span *ngIf="testForm[i].resourceUrl" class="file-content">{{testForm[i].resourceUrl}}</span>
-        </mat-card-actions>
+
       </mat-card>
     </form>
 
   </div>
-  <mat-card-actions>
-    <span class="spacer-row"></span>
-    <button type="button" mat-flat-button color="warn" (click)="closeTest()" style="margin-right: 10px">Cancelar</button>
-    <button [disabled]="!testValid()" type="button" mat-flat-button color="primary" (click)="accept()">Aceptar</button>
-  </mat-card-actions>
+<!--  <mat-card-actions>-->
+<!--    <span class="spacer-row"></span>-->
+<!--&lt;!&ndash;    <button type="button" mat-flat-button color="warn" (click)="closeTest()" style="margin-right: 10px">Cancelar</button>&ndash;&gt;-->
+<!--&lt;!&ndash;    <button [disabled]="!testValid()" type="button" mat-flat-button color="primary" (click)="accept()">Aceptar</button>&ndash;&gt;-->
+<!--  </mat-card-actions>-->
 
 </div>

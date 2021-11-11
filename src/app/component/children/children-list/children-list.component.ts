@@ -14,6 +14,7 @@ import {PrintPdfService} from '../../../services/printPdf.service';
 import {ChildrenDialogReportComponent} from '../children-dialog-report/children-dialog-report.component';
 import {DEFAULT_PICTURE} from '../../../config/appearance.config';
 import {SideNavService} from '../../../services/side-nav.service';
+import {TestShowResultComponent} from '../../question-test/test-show-result/test-show-result.component';
 
 @Component({
   selector: 'app-children-list',
@@ -80,7 +81,12 @@ export class ChildrenListComponent implements OnInit {
       width: '700px',
     }).subscribe(res => {
       if (res) {
-        this.openTestTracing(res);
+        if (res.treatment) {
+          this.show(res);
+        }
+        if (res.result) {
+          this.showResult(res, child);
+        }
       }
     });
   }
@@ -176,5 +182,21 @@ export class ChildrenListComponent implements OnInit {
     } else {
       this.sideService.openNav();
     }
+  }
+
+  private showResult(a: any, child) {
+    // sessionStorage.setItem('child', JSON.stringify(child));
+    this.dialogService.openDialog(TestShowResultComponent, {
+      width: '100%',
+      height: '100%',
+      data: {
+        childId: a.child.id,
+        testId: a.testSelect.id,
+      }
+    }).subscribe(res => {
+      if (res === 'open') {
+        this.show(child);
+      }
+    });
   }
 }

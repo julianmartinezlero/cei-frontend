@@ -7,10 +7,10 @@
           <img [src]="childSelect.photo ? childSelect.photo : defaultPhoto" mat-card-image alt="" srcset="">
         </div>
         <div class="details-child">
-          <b>Nombre</b>
-          <p>{{childSelect.name}}</p>
-          <b>Apellido</b>
-          <p>{{childSelect.lastName}}</p>
+          <b>Nombre y Apellido</b>
+          <p>{{childSelect.name}} {{childSelect.lastName}}</p>
+          <b>Unidad Educativa</b>
+          <p>{{childSelect.education}}</p>
           <b>Ci</b>
           <p>{{childSelect.ci ? childSelect.ci : 'No definido'}}</p>
           <b>Genero</b>
@@ -45,6 +45,7 @@
                       <div style="text-align: center;" *ngIf="testSelect">
                         <button type="button" mat-flat-button color="primary" (click)="showTreatment()">Intervenciones</button>
                         <button type="button" mat-flat-button color="primary" (click)="printDiacritics()">Imprimir</button>
+                        <button type="button" mat-flat-button color="primary" (click)="showResult()">Respuestas</button>
                       </div>
                       <div style="text-align: center;padding: 176px;" *ngIf="!testSelect">
                         <div>No Existen Diagnosticos</div>

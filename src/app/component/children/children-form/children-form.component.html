@@ -22,6 +22,16 @@
         Longitud minima de 3 letras
       </mat-error>
     </mat-form-field>
+    <mat-form-field [appearance]="appearance">
+      <mat-label>Unidad Educativa</mat-label>
+      <input formControlName="education" required matInput placeholder="Unidad Educatica">
+      <mat-error *ngIf="childForm.get('education').hasError('required')">
+        una unidad educativa
+      </mat-error>
+      <mat-error *ngIf="childForm.get('education').hasError('minlength')">
+        Longitud minima de 3 letras
+      </mat-error>
+    </mat-form-field>
 
     <div class="row">
       <div class="col">

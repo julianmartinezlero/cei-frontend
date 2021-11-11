@@ -41,7 +41,7 @@ export class TutorListComponent implements OnInit, CrudComponent {
     this.tutorService.get().subscribe((t: Tutor[]) => {
       this.tutors = t;
     }, error1 => {
-      this.dialogService.toastDialog('error');
+      // this.dialogService.toastDialog('error');
     });
   }
 

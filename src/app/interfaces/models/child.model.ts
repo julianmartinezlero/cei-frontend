@@ -14,6 +14,7 @@ export interface Child {
   photo?: string;
   tests?: any;
   isActive?: boolean;
+  education?: string;
 }
 
 export interface GroupChildren {

@@ -19,4 +19,8 @@ export class QuestionTestService extends PrincipalService {
   deleteAsset(id: any): Observable<any> {
     return this.delete(`deleteAsset/${id}`);
   }
+
+  uploadResource(formData: FormData) {
+    return this.postCustom(`upload/resource`, formData);
+  }
 }

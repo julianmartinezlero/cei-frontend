@@ -80,16 +80,16 @@
             </mat-error>
           </mat-form-field>
 
-          <mat-form-field [appearance]="appearance">
-            <mat-label>Nro de Hijos a registrar</mat-label>
-            <input formControlName="children" required matInput placeholder="Nro de Hijos a registrar" type="number">
-            <mat-error *ngIf="tutorForm.get('children').hasError('required')">
-              Debe Ingresar un Numero de hijos
-            </mat-error>
-            <mat-error *ngIf="tutorForm.get('children').hasError('min')||tutorForm.get('children').hasError('max')">
-              Ingrese un n&uacute;mero entre 1 y 12
-            </mat-error>
-          </mat-form-field>
+<!--          <mat-form-field [appearance]="appearance">-->
+<!--            <mat-label>Nro de Hijos a registrar</mat-label>-->
+<!--            <input formControlName="children" required matInput placeholder="Nro de Hijos a registrar" type="number">-->
+<!--            <mat-error *ngIf="tutorForm.get('children').hasError('required')">-->
+<!--              Debe Ingresar un Numero de hijos-->
+<!--            </mat-error>-->
+<!--            <mat-error *ngIf="tutorForm.get('children').hasError('min')||tutorForm.get('children').hasError('max')">-->
+<!--              Ingrese un n&uacute;mero entre 1 y 12-->
+<!--            </mat-error>-->
+<!--          </mat-form-field>-->
         </div>
 
         <div mat-dialog-actions>

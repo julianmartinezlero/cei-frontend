@@ -5,6 +5,7 @@ export interface Question {
   details: null;
   questionOptions?: QuestionOption[];
   questionAssets?: QuestionOptionAsset[];
+  resourceUrl?: string;
 }
 
 export interface QuestionOption {

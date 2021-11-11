@@ -37,6 +37,7 @@ export class ChildrenFormComponent implements OnInit {
     photo: null,
     createdAt: null,
     updatedAt: null,
+    education: null,
   };
   professionalId;
   tutor: Tutor;
@@ -55,6 +56,7 @@ export class ChildrenFormComponent implements OnInit {
       id: this.childSelect ? this.childSelect.id : null,
       name: [this.childSelect ? this.childSelect.name : null, [Validators.required, Validators.minLength(3)]],
       lastName: [this.childSelect ? this.childSelect.lastName : null, [Validators.required, Validators.minLength(3)]],
+      education: [this.childSelect ? this.childSelect.education : null, [Validators.required, Validators.minLength(3)]],
       ci: [this.childSelect ? this.childSelect.ci : null,
         [Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
       sex: [{value: this.childSelect ? this.childSelect.sex : null, disabled: false}, Validators.required],

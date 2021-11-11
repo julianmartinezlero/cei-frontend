@@ -11,6 +11,7 @@ mat-card {
 
 .mat-toolbar-row, .mat-toolbar-single-row {
   background: white;
+  color: black;
 }
 
 .custom-card {
@@ -55,9 +56,10 @@ mat-card {
 }
 
 .mat-dialog-content{
-  height: calc(100% - 175px) !important;
+  height: calc(100% - 114px) !important;
   max-height: 100%;
   overflow: hidden auto !important;
+  background: #ededed;
 }
 .mat-toolbar {
   border-bottom: solid 1px #8da2b1;
@@ -71,4 +73,10 @@ mat-card {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.mat-card-content{
+  img{
+    width: 100%;
+    border-radius: 5px;
+  }
 }
