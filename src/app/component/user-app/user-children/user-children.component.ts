@@ -57,7 +57,7 @@ export class UserChildrenComponent implements OnInit {
     }).subscribe(res => {
       if (res) {
         if (res.treatment) {
-          this.show(res);
+          this.openTestTracing(res);
         }
         if (res.result) {
           this.showResult(res, child);
@@ -101,7 +101,7 @@ export class UserChildrenComponent implements OnInit {
         child: dates.child
       },
     }).subscribe(a => {
-      this.openTreatments(a);
+      this.show(a);
     });
   }
 

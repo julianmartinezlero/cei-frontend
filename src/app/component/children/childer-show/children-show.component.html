@@ -39,11 +39,22 @@
         <div class="content">
 
                     <div class="content-side" [ngClass]="getClass()">
-                      <mat-list *ngIf="testSelect">
-                        <mat-list-item *ngFor="let tr of testSelect.treatmentChildren">{{tr.treatment.text}}</mat-list-item>
+                      <div *ngIf="testSelect">
+                        <h3 class="title-test">{{getText(testSelect.totalValue)}}</h3>
+                      </div>
+                      <div>
+                        <mat-list *ngIf="testSelect">
+                          <mat-list-item *ngFor="let tr of testSelect.treatmentChildren.slice(0, 1)">{{tr.treatment.text}}</mat-list-item>
+                        </mat-list>
+                      </div>
+                      <div>
+                        <h4 style="text-align: center;">Tareas recomendadas para la intervencion del niño(a)</h4>
+                      </div>
+                      <mat-list *ngIf="testSelect" class="list-treatment">
+                        <mat-list-item *ngFor="let tr of testSelect.treatmentChildren.slice(1, 6)">{{tr.treatment.text}}</mat-list-item>
                       </mat-list>
                       <div style="text-align: center;" *ngIf="testSelect">
-                        <button type="button" mat-flat-button color="primary" (click)="showTreatment()">Intervenciones</button>
+                        <button type="button" mat-flat-button color="primary" (click)="showTreatment()">Tratamiento</button>
                         <button type="button" mat-flat-button color="primary" (click)="printDiacritics()">Imprimir</button>
                         <button type="button" mat-flat-button color="primary" (click)="showResult()">Respuestas</button>
                       </div>

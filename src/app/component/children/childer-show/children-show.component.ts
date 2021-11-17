@@ -99,4 +99,19 @@ export class ChildrenShowComponent implements OnInit {
       result: true,
     });
   }
+
+  getText(total) {
+    if (total >= 0 && total <= 0.69) {
+      return 'Sin Riego';
+    }
+    if (total >= 0.70 && total <= 1.19) {
+      return 'Riesgo Leve';
+    }
+    if (total >= 1.20 && total <= 1.70) {
+      return 'Riesgo Medio';
+    }
+    if (total >= 1.71 && total <= 3) {
+      return 'Riesgo Alto';
+    }
+  }
 }

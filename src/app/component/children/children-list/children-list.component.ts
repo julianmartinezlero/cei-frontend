@@ -82,9 +82,8 @@ export class ChildrenListComponent implements OnInit {
     }).subscribe(res => {
       if (res) {
         if (res.treatment) {
-          this.show(res);
-        }
-        if (res.result) {
+          this.openTestTracing(res);
+        } else if (res.result) {
           this.showResult(res, child);
         }
       }
