@@ -64,6 +64,11 @@ export class TestShowResultComponent implements OnInit {
   getSrc(resourceUrl: string) {
     return `${environment.server}/question-test/resource/solved/${resourceUrl}`;
   }
+
+  isVideo(archivo) {
+    const a = archivo.split('.');
+    return a[1] === 'mp4';
+  }
 }
 export interface TestResolved {
   code: string;

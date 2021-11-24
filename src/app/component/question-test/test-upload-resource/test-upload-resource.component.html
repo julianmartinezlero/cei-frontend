@@ -3,12 +3,18 @@
 
   <div class="container-photo">
     <div class="photo">
-      <img class="photo-loader" *ngIf="archivo" [src]="archivo" alt="">
+      <ng-container *ngIf="archivo">
+        <img class="photo-loader" *ngIf="isVideo() === false" [src]="archivo" alt="">
+        <video class="photo-loader" *ngIf="isVideo() === true">
+          <source [src]="archivo" type="video/mp4">
+        </video>
+      </ng-container>
+
 <!--      <div class="photo-loader" *ngIf="archivo" [ngStyle]="getUrlArchivo()"></div>-->
       <div class="wrapper file-camera" matRipple [matRippleColor]="'#ffffff26'">
         <div class="file-upload" matTooltip="Subir recurso">
           <!--<div>Presiona en <div><mat-icon>upload</mat-icon></div> para adjuntar su archivo</div>-->
-          <input type="file" id="archivo" accept="image/jpeg,image/jpg,image/png" (change)="onFileChange($event)">
+          <input type="file" id="archivo" accept="image/jpeg,image/jpg,image/png,video/mp4" (change)="onFileChange($event)">
           <mat-icon>file_upload</mat-icon>
         </div>
       </div>

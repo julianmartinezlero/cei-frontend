@@ -21,7 +21,6 @@ export class TestUploadResourceComponent implements OnInit {
               private matDialogRef: MatDialogRef<TestUploadResourceComponent>,
               private testService: QuestionTestService) {
     this.formfile =  new FormControl('file', [Validators.required]);
-    console.log(this.data);
     if (this.data.resourceUrl) {
       this.archivo = `${this.urlServer}/question-test/resource/solved/${this.data.resourceUrl}`;
     }
@@ -37,46 +36,16 @@ export class TestUploadResourceComponent implements OnInit {
     this.visible = true;
     const formData = new FormData();
     const [file] = event.target.files;
-
-    // @ts-ignore
-    const _URL = window.URL || window.webkitURL;
-    let img;
-
-    img = new Image();
-    img.onload = (e) => {
-      const i = e.target;
-      formData.append('file', file, file.name);
-      this.testService.uploadResource(formData).subscribe((a: any) => {
-        this.archivo = `${this.urlServer}/question-test/resource/solved/${a.data.filename}`;
-        this.fotoUrl = a.data.filename;
-        this.visible = false;
-      });
-
-
-    };
-    img.onerror = () => {
-      // this.snack.open(`Error al subir al imagen`,'', SNACK_CONFIG);
+    formData.append('file', file, file.name);
+    this.testService.uploadResource(formData).subscribe((a: any) => {
+      this.archivo = `${this.urlServer}/question-test/resource/solved/${a.data.filename}`;
+      this.fotoUrl = a.data.filename;
       this.visible = false;
-    };
-    img.src = _URL.createObjectURL(file);
+    });
   }
 
-  getUrlArchivo() {
-    return {
-      backgroundImage: `url(${this.archivo})`
-    };
+  isVideo() {
+    const a = this.archivo.split('.');
+    return a[1] === 'mp4';
   }
-
-  // getStyleCTemplate() {
-  //   if (this.archivo) {
-  //     return {
-  //       backgroundImage: 'linear-gradient(#ffffff, #ffffff),url(/assets/imagenes/photo-template.jpeg)'
-  //     };
-  //   } else {
-  //     return {
-  //       backgroundImage: ``,
-  //     };
-  //   }
-  //
-  // }
 }

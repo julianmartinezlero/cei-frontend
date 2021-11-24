@@ -59,7 +59,10 @@
               </mat-radio-group>
             </div>
             <div class="col-6" *ngIf="question.resourceUrl">
-              <img [src]="getSrc(question.resourceUrl)" alt="">
+              <img [src]="getSrc(question.resourceUrl)" *ngIf="isVideo(question.resourceUrl) === false" alt="imagen">
+              <video  *ngIf="isVideo(question.resourceUrl) === true" controls>
+                <source [src]="getSrc(question.resourceUrl)" type="video/mp4">
+              </video>
             </div>
 
           </div>
