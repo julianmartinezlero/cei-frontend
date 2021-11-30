@@ -31,8 +31,8 @@ export class TutorFormComponent implements OnInit {
       lastName: [null, [Validators.required, Validators.minLength(3)]],
       ci: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
       cell: [null, [Validators.required, Validators.minLength(7), Validators.maxLength(10), Validators.pattern('[0-9]*')]],
-      email: [null, [Validators.required, Validators.email]],
-      password: [null, [Validators.required, Validators.minLength(8)]],
+      // email: [null, [Validators.required, Validators.email]],
+      // password: [null, [Validators.required, Validators.minLength(8)]],
       children: [50],
     });
     this.childFormGroup = this.fb.group({
@@ -87,6 +87,8 @@ export class TutorFormComponent implements OnInit {
 
   endRegister() {
     const t: Tutor = this.tutorForm.value;
+    t.password = t.ci;
+    t.email = t.cell;
     this.tutorService.postCustom('create', t).subscribe(res => {
       this.dialogRef.close(true);
     });
