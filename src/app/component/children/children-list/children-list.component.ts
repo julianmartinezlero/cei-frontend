@@ -25,17 +25,11 @@ export class ChildrenListComponent implements OnInit {
 
   title = 'Niños(as)';
   defaultPhoto = DEFAULT_PICTURE;
-  now = moment();
   dataSource: Child[] = [];
   auxData = [];
   searchVisible = false;
-  params = {
-    page: 1,
-    limit: null,
-  };
   groupChildren: GroupChildren[] = [];
-  group = false;
-  lengthPages = 0;
+  group: 'group' | 'noGroup';
 
 
   constructor(private childrenService: ChildrenService,
@@ -46,11 +40,21 @@ export class ChildrenListComponent implements OnInit {
               private testService: QuestionTestService,
               private sideService: SideNavService,
               private router: Router) {
+    this.routerActive.queryParams.subscribe(a => {
+      this.group = a.group;
+    });
   }
 
   ngOnInit() {
     this.all();
     this.loadChildrenRange();
+    if (this.group === undefined) {
+      this.router.navigate([], {
+        queryParams: {
+          group: 'noGroup'
+        }
+      });
+    }
   }
 
   all() {
@@ -175,12 +179,18 @@ export class ChildrenListComponent implements OnInit {
   }
 
   setViewGroup() {
-    this.group = !this.group;
-    if (this.sideService.sideMenu) {
-      this.sideService.closeNav();
-    } else {
-      this.sideService.openNav();
-    }
+    this.group = this.group === 'group' ? 'noGroup' : 'group';
+    this.router.navigate([], {
+      queryParams: {
+        group: this.group
+      }
+    }).then(() => {
+      if (this.group === 'group') {
+        this.sideService.closeNav();
+      } else {
+        this.sideService.openNav();
+      }
+    });
   }
 
   private showResult(a: any, child) {
