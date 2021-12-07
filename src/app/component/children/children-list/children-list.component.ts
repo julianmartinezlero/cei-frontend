@@ -139,7 +139,6 @@ export class ChildrenListComponent implements OnInit {
             styles: {
               fillColor: this.getRange(d),
               halign: 'right',
-              border: [true, true, true, true]
             }
           };
         }));

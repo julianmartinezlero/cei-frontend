@@ -36,7 +36,7 @@ export class PrintPdfService {
     this.doc = new jsPDF('p', 'mm', 'letter', true);
     this.doc.setFontSize(15);
     // @ts-ignore
-    this.doc.textCenter('KARDEX NIÑO', {align: 'center', font: 'OpenSansBold'}, 0, 18);
+    this.doc.textCenter('KARDEX DE SEGUIMIENTO', {align: 'center', font: 'OpenSansBold'}, 0, 18);
     // @ts-ignore
     // this.doc.textCenter(subtitle, {align: 'center'}, 0, 24);
     this.doc.rect(10, 10, this.doc.internal.pageSize.width - 20, this.doc.internal.pageSize.height - 20);
@@ -79,7 +79,7 @@ export class PrintPdfService {
 
     this.doc.setFontSize(15);
     // @ts-ignore
-    this.doc.textCenter('KARDEX NIÑO', {align: 'center', font: 'OpenSansBold'}, 0, 18);
+    this.doc.textCenter('DIAGNÓSTICO', {align: 'center', font: 'OpenSansBold'}, 0, 18);
     // @ts-ignore
     // this.doc.textCenter(subtitle, {align: 'center'}, 0, 24);
     this.doc.rect(10, 10, this.doc.internal.pageSize.width - 20, this.doc.internal.pageSize.height - 20);
