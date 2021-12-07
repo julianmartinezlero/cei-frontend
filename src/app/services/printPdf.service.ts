@@ -1,11 +1,12 @@
 import {Injectable} from '@angular/core';
 import jsPDF from 'jspdf';
 import {Child} from '../interfaces/models/child.model';
-import {Tutor} from '../interfaces/models/tutor.model';
 import * as moment from 'moment';
 import {Professional} from '../interfaces/models/professional.model';
 import {TestChild} from '../interfaces/models/testChild.model';
 import {TreatmentChild} from '../interfaces/models/treatmentChild.model';
+import 'jspdf-autotable';
+
 moment.locale('es');
 
 // tslint:disable-next-line:only-arrow-functions
@@ -31,7 +32,7 @@ export class PrintPdfService {
 
   doc: jsPDF;
 
-  printInfoChild(child: Child, tutor: Professional, tests: TestChild[]) {
+  printInfoChild(child: Child, tutor: Professional, tests: TestChild[], head, body) {
     this.doc = new jsPDF('p', 'mm', 'letter', true);
     this.doc.setFontSize(15);
     // @ts-ignore
@@ -50,14 +51,23 @@ export class PrintPdfService {
     this.doc.text('Fecha de Nacimiento: ' + moment(child.birthDate).format('DD-MMMM-YYYY').toUpperCase(), 20, 71);
     this.doc.text(`Tutor / Responsable:  ${tutor.name.toUpperCase()} ${tutor.lastName.toUpperCase()}`, 20, 78);
 
-    let pos = 100;
+    let pos = 90;
     for (let i = 0; i < tests.length; i++) {
-      this.doc.setFontSize(13);
-      this.doc.text(`Prueba N° ${i + 1}`, 20, pos);
-      this.doc.setFontSize(12);
-      this.doc.text(`Cod. ${tests[i].code}     Evaluador: ${tests[i].professional.name} ${tests[i].professional.lastName}`, 20, pos + 10);
-      pos = pos + 20;
+      this.doc.setFontSize(11);
+      this.doc.text(`Test N° ${i + 1}`, 20, pos);
+      this.doc.text(`Cod. ${tests[i].code}     Evaluador: ${tests[i].professional.name} ${tests[i].professional.lastName}`, 20, pos + 7);
+      pos = pos + 16;
     }
+
+    // @ts-ignore
+    this.doc.autoTable({
+      head: [head],
+      body,
+      headStyles: {
+        fillColor: [102, 100, 236],
+      },
+      startY: pos + 5,
+    });
 
     this.doc.save(`${child.name}_${child.lastName}_${new Date().getTime()}.pdf`);
 
@@ -112,6 +122,32 @@ export class PrintPdfService {
 
   }
 
+  printChildren(dataSource: Child[]) {
+    this.doc = new jsPDF('p', 'mm', 'letter', true);
+    this.doc.setFontSize(15);
+    // @ts-ignore
+    this.doc.textCenter('Lista de Niños(as)', {align: 'center', font: 'OpenSansBold'}, 0, 22);
+    // @ts-ignore
+    this.doc.rect(10, 10, this.doc.internal.pageSize.width - 20, this.doc.internal.pageSize.height - 20);
+    this.doc.setFontSize(12);
+    this.doc.addImage(IMG_LOGO, 'JPEG', 12, 12, 24, 20);
+    // @ts-ignore
+    this.doc.autoTable({
+      head: [['#', 'Nombre y Apellido', 'Fecha de Nacimiento', 'Tutor / Responsable']],
+      body: dataSource.map((child, index) => [
+          index + 1,
+          `${child.name} ${child.lastName}`,
+          child.birthDate,
+          `${child.professional.name} ${child.professional.lastName}`
+      ]),
+      headStyles: {
+        fillColor: [102, 100, 236],
+      },
+      startY: 40,
+    });
+
+    this.doc.save('reporte_ninos.pdf');
+  }
 }
 
 // tslint:disable-next-line:max-line-length

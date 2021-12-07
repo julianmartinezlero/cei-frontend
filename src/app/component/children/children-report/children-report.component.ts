@@ -17,7 +17,6 @@ export class ChildrenReportComponent implements OnInit {
     this.testService.get(`${this.childId}/allResolved`).subscribe((a: any) => {
       this.tests = a;
       this.maxLengthTest(this.tests);
-      console.log(this.questions);
     });
   }
 

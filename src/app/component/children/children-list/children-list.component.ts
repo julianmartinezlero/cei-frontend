@@ -14,7 +14,7 @@ import {PrintPdfService} from '../../../services/printPdf.service';
 import {ChildrenDialogReportComponent} from '../children-dialog-report/children-dialog-report.component';
 import {DEFAULT_PICTURE} from '../../../config/appearance.config';
 import {SideNavService} from '../../../services/side-nav.service';
-import {TestShowResultComponent} from '../../question-test/test-show-result/test-show-result.component';
+import {TestResolved, TestShowResultComponent} from '../../question-test/test-show-result/test-show-result.component';
 import {ChildrenReportComponent} from '../children-report/children-report.component';
 
 @Component({
@@ -115,10 +115,62 @@ export class ChildrenListComponent implements OnInit {
 
   printFile(child: Child | any) {
     this.testService.getCustom(`testChild/${child.id}`).subscribe((r: any) => {
-      console.log(r);
-      this.printService.printInfoChild(child, child.professional, r);
+      this.testService.get(`${child.id}/allResolved`).subscribe((a: any) => {
+        const t = this.maxLengthTest(a);
+        this.printService.printInfoChild(child, child.professional, r, t.head, t.body);
+      });
     });
   }
+
+  maxLengthTest(tests: TestResolved[]) {
+    if (tests.length > 0) {
+      const head = ['#', 'Pregunta'];
+      tests.forEach((a, index) => {
+        head.push(`Test ${index + 1}`);
+      });
+      const questions = tests[0].testResults.map(a => a.question);
+      for (const question of questions) {
+        question.result = tests.map(a => a.testResults.find(b => b.question.id === question.id).questionOption.value);
+      }
+      const qMap = questions.map((a, index) => {
+        return [index + 1, a.question].concat(a.result.map(d => {
+          return {
+            content: d,
+            styles: {
+              fillColor: this.getRange(d),
+              halign: 'right',
+              border: [true, true, true, true]
+            }
+          };
+        }));
+      });
+      return {
+        head,
+        body: qMap
+      };
+    } else {
+      return {
+        head: [],
+        body: []
+      };
+    }
+  }
+
+  getRange(total) {
+    if (total === 0) {
+      return '#baffba';
+    }
+    if (total === 1) {
+      return '#ffffc8';
+    }
+    if (total  === 2) {
+      return '#ffda97';
+    }
+    if (total === 3) {
+      return '#ffc9c9';
+    }
+  }
+
 
   openTreatments(child: Child) {
     this.dialogService.openDialog(ChildTreatmentsComponent, {
@@ -210,14 +262,7 @@ export class ChildrenListComponent implements OnInit {
     });
   }
 
-  paper() {
-    this.dialogService.openDialog(ChildrenReportComponent,{
-      width: '100%',
-      height: '100%',
-    }).subscribe(r => {
-      if (r) {
-        console.log(r);
-      }
-    });
+  printChildren() {
+    this.printService.printChildren(this.dataSource);
   }
 }
