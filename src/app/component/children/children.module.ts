@@ -43,6 +43,7 @@ import {PrintPdfService} from '../../services/printPdf.service';
 import { ChildrenDialogReportComponent } from './children-dialog-report/children-dialog-report.component';
 import {AlertsModule} from '../alerts/alerts.module';
 import { GroupChildrenComponent } from './group-children/group-children.component';
+import { ChildrenReportComponent } from './children-report/children-report.component';
 
 moment().locale('es-Es');
 
@@ -56,7 +57,8 @@ moment().locale('es-Es');
     ChildTreatmentTracingComponent,
     ChildEventDetailsComponent,
     ChildrenDialogReportComponent,
-    GroupChildrenComponent
+    GroupChildrenComponent,
+    ChildrenReportComponent
   ],
     imports: [
         CommonModule,
@@ -105,6 +107,7 @@ moment().locale('es-Es');
     ChildTreatmentTracingComponent,
     ChildEventDetailsComponent,
     ChildrenDialogReportComponent,
+    ChildrenReportComponent,
   ]
 })
 export class ChildrenModule {

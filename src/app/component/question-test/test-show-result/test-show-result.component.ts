@@ -3,17 +3,9 @@ import {TestChild} from '../../../interfaces/models/testChild.model';
 import {Question, QuestionOption} from '../../../interfaces/models/question';
 import {Child} from '../../../interfaces/models/child.model';
 import {FormBuilder} from '@angular/forms';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {QuestionTestService} from '../question-test.service';
-import {DialogService} from '../../alerts/dialog.service';
 import {ChildrenService} from '../../children/services/children.service';
-import {Location} from '@angular/common';
-import {SideNavService} from '../../../services/side-nav.service';
-import {TestAcceptComponent} from '../test-accept/test-accept.component';
-import {TestSolvedResultComponent} from '../test-solved-result/test-solved-result.component';
-import {TestSolvedResourceComponent} from '../test-solved-resource/test-solved-resource.component';
-import {TestUploadResourceComponent} from '../test-upload-resource/test-upload-resource.component';
-import {TestSolved} from '../test-solved/test-solved.component';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {environment} from '../../../../environments/environment';
 
@@ -81,4 +73,5 @@ export interface TestResult {
   resourceUrl: string;
   question: Question;
   questionOption: QuestionOption;
+  [key: string]: any;
 }

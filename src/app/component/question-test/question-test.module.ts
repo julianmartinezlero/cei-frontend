@@ -5,21 +5,22 @@ import {QuestionTestRoutingModule} from './question-test-routing.module';
 import {TestListComponent} from './test-list/test-list.component';
 import {QuestionTestService} from './question-test.service';
 import {
-    MatButtonModule,
-    MatCardModule,
-    MatDatepickerModule,
-    MatDialogModule,
-    MatFormFieldModule,
-    MatIconModule,
-    MatInputModule,
-    MatListModule,
-    MatMenuModule,
-    MatRadioModule, MatRippleModule,
-    MatSelectModule,
-    MatSortModule,
-    MatTableModule,
-    MatToolbarModule,
-    MatTooltipModule
+  MatButtonModule,
+  MatCardModule,
+  MatDatepickerModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatMenuModule,
+  MatRadioModule,
+  MatRippleModule,
+  MatSelectModule,
+  MatSortModule,
+  MatTableModule,
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 import {ToolsModule} from '../tools/tools.module';
 import {TestFormComponent} from './test-form/test-form.component';
@@ -33,8 +34,9 @@ import {TestAcceptComponent} from './test-accept/test-accept.component';
 import {MatCarouselModule} from '@ngmodule/material-carousel';
 import {TestSolvedResultComponent} from './test-solved-result/test-solved-result.component';
 import {TreatmentService} from './treatment.service';
-import { TestUploadResourceComponent } from './test-upload-resource/test-upload-resource.component';
-import { TestShowResultComponent } from './test-show-result/test-show-result.component';
+import {TestUploadResourceComponent} from './test-upload-resource/test-upload-resource.component';
+import {TestShowResultComponent} from './test-show-result/test-show-result.component';
+import {ColorRangeDirective} from '../children/children-report/children-report.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { TestShowResultComponent } from './test-show-result/test-show-result.com
     TestAcceptComponent,
     TestSolvedResultComponent,
     TestUploadResourceComponent,
-    TestShowResultComponent
+    TestShowResultComponent,
+    ColorRangeDirective,
   ],
     imports: [
         CommonModule,
@@ -88,7 +91,8 @@ import { TestShowResultComponent } from './test-show-result/test-show-result.com
   exports: [
     TestSolvedComponent,
     TestSolvedResultComponent,
-    TestSolvedResourceComponent
+    TestSolvedResourceComponent,
+    ColorRangeDirective
   ]
 })
 export class QuestionTestModule {

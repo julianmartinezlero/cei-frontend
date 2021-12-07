@@ -34,8 +34,8 @@
   <mat-menu #menu="matMenu">
     <ng-template matMenuContent let-child="child">
       <button mat-menu-item (click)="show(child)">Ver</button>
-      <button mat-menu-item (click)="createTest(child)">Nuevo Diagnostico</button>
-      <button mat-menu-item (click)="openTreatments(child)">Diagnosticos e Intervenciones</button>
+      <button mat-menu-item (click)="createTest(child)">Nuevo Diagnóstico</button>
+      <button mat-menu-item (click)="openTreatments(child)">Diagnósticos e Intervenciones</button>
     </ng-template>
   </mat-menu>
   <div style="text-align: center" *ngIf="children.length === 0">

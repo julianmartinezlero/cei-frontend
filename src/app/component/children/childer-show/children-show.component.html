@@ -13,14 +13,14 @@
           <p>{{childSelect.education}}</p>
           <b>Ci</b>
           <p>{{childSelect.ci ? childSelect.ci : 'No definido'}}</p>
-          <b>Genero</b>
+          <b>G&eacute;nero</b>
           <p>{{childSelect.sex}}</p>
           <b>Fecha de Nacimiento</b>
           <p>{{childSelect.birthDate}}</p>
         </div>
       </div>
     </mat-tab>
-    <mat-tab label="Diagnosticos e Intervenciones">
+    <mat-tab label="Diagnósticos e Intervenciones">
       <div class="treatment-container">
         <div class="nav-container">
 
@@ -47,7 +47,7 @@
                           <mat-list-item *ngFor="let tr of testSelect.treatmentChildren.slice(0, 1)">{{tr.treatment.text}}</mat-list-item>
                         </mat-list>
                       </div>
-                      <div>
+                      <div *ngIf="testSelect">
                         <h4 style="text-align: center;">TAREAS RECOMENDADAS PARA LA INTERVENCI&Oacute;N DEL NI&Ntilde;O(A)</h4>
                       </div>
                       <mat-list *ngIf="testSelect" class="list-treatment">
@@ -59,7 +59,7 @@
                         <button type="button" mat-flat-button color="primary" (click)="showResult()">Respuestas</button>
                       </div>
                       <div style="text-align: center;padding: 176px;" *ngIf="!testSelect">
-                        <div>No Existen Diagnosticos</div>
+                        <div>No Existen Diagnósticos</div>
                       </div>
                     </div>
 
@@ -67,7 +67,11 @@
       </div>
 
     </mat-tab>
+    <mat-tab label="Evolución">
+      <app-children-report [childId]="childSelect.id"></app-children-report>
+    </mat-tab>
   </mat-tab-group>
+
 
 </div>
 <div mat-dialog-actions>

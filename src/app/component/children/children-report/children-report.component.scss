@@ -1,0 +1,17 @@
+.number{
+  text-align: end;
+}
+div {
+  width: 100%;
+  table{
+    width: calc(100% - 1px);
+    border-collapse: collapse;
+    border: none;
+    tr{
+      border-bottom: solid 1px #e0e0e0;
+    }
+    tr:nth-child(even){
+      background-color: #f2f2f2;
+    }
+  }
+}

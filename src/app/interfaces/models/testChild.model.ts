@@ -2,6 +2,7 @@ import {Child} from './child.model';
 import {Professional} from './professional.model';
 import {TreatmentChild} from './treatmentChild.model';
 import {TreatmentChildSession} from './TreatmentChildSession.model';
+import {Question} from './question';
 
 export interface TestChild {
   id: number;
@@ -17,4 +18,5 @@ export interface TestChild {
   tutorId?: number;
   createdAt?: any;
   updatedAt?: any;
+  testResult: Question[];
 }

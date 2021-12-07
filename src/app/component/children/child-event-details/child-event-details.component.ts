@@ -17,6 +17,8 @@ export class ChildEventDetailsComponent implements OnInit {
   resources: FilesResource[];
   dataSource: MatTreeNestedDataSource<FilesResource>;
   treeControl: NestedTreeControl<FilesResource>;
+  texts: string[] = [];
+
   hasChild = (_: number, node: FilesResource) => !!node.tree && node.tree.length > 0;
   constructor(@Inject(MAT_DIALOG_DATA) private data: any,
               private dialogRef: MatDialogRef<ChildEventDetailsComponent>,
@@ -31,18 +33,19 @@ export class ChildEventDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.loadResource();
+    this.texts = this.session.treatment.text.split(',').map(text => `* ${text.trim()}`);
   }
 
   completeSession() {
-    this.snack.open('Marcar como Completado?', 'Aceptar', {
-      duration: 5000,
-      verticalPosition: VERTICAL_POSITION,
-      panelClass: 'white-snack',
-    }).onAction().subscribe(() => {
+    // this.snack.open('Marcar como Completado?', 'Aceptar', {
+    //   duration: 5000,
+    //   verticalPosition: VERTICAL_POSITION,
+    //   panelClass: 'white-snack',
+    // }).onAction().subscribe(() => {
       this.treatmentSessionService.updateSession(this.session.id).subscribe(a => {
         this.dialogRef.close(true);
       });
-    });
+    // });
   }
 
   loadResource() {

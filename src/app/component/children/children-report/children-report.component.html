@@ -1,0 +1,18 @@
+<div>
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Pregunta</th>
+        <th *ngFor="let a of tests;let i = index">Test {{i + 1}}</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let q of questions; let i = index">
+        <td>{{i+ 1}}</td>
+        <td>{{q.question}}</td>
+        <td *ngFor="let res of q.result" class="number" [appColorRange]="res">{{res}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

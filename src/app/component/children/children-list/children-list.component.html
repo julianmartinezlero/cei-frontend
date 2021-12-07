@@ -22,6 +22,9 @@
           <button mat-icon-button color="primary" matTooltip="Reporte" (click)="report()">
             <mat-icon>filter_list</mat-icon>
           </button>
+          <button mat-icon-button color="primary" matTooltip="Resumen" (click)="paper()">
+            <mat-icon>insert_drive_file</mat-icon>
+          </button>
 <!--          <button mat-icon-button color="primary" matTooltip="Filtrar" [matMenuTriggerFor]="menuFilter">-->
 <!--            <mat-icon>sort</mat-icon>-->
 <!--          </button>-->
@@ -71,8 +74,8 @@
   <ng-template matMenuContent let-child="child">
     <button mat-menu-item (click)="show(child)">Ver</button>
     <button mat-menu-item (click)="printFile(child)">Imprimir Kardex</button>
-    <button mat-menu-item (click)="createTest(child)">Nuevo Diagnostico</button>
-<!--    <button mat-menu-item (click)="openTreatments(child)">Diagnosticos e Intervenciones</button>-->
+    <button mat-menu-item (click)="createTest(child)">Nuevo Diagnóstico</button>
+<!--    <button mat-menu-item (click)="openTreatments(child)">Diagnósticos e Intervenciones</button>-->
 <!--    <button mat-menu-item (click)="archive(child)">Archivar</button>-->
 <!--    <button mat-menu-item (click)="archivate()">Archivados</button>-->
   </ng-template>

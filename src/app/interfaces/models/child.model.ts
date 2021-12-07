@@ -1,4 +1,5 @@
 import {Professional} from './professional.model';
+import {TestChild} from './testChild.model';
 
 export interface Child {
   id?: number;
@@ -12,7 +13,7 @@ export interface Child {
   tutor?: Professional;
   professional?: Professional;
   photo?: string;
-  tests?: any;
+  tests?: TestChild[];
   isActive?: boolean;
   education?: string;
 }

@@ -6,6 +6,7 @@ export interface Question {
   questionOptions?: QuestionOption[];
   questionAssets?: QuestionOptionAsset[];
   resourceUrl?: string;
+  [key: string]: any;
 }
 
 export interface QuestionOption {

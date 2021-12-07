@@ -15,6 +15,7 @@ import {ChildrenDialogReportComponent} from '../children-dialog-report/children-
 import {DEFAULT_PICTURE} from '../../../config/appearance.config';
 import {SideNavService} from '../../../services/side-nav.service';
 import {TestShowResultComponent} from '../../question-test/test-show-result/test-show-result.component';
+import {ChildrenReportComponent} from '../children-report/children-report.component';
 
 @Component({
   selector: 'app-children-list',
@@ -205,6 +206,17 @@ export class ChildrenListComponent implements OnInit {
     }).subscribe(res => {
       if (res === 'open') {
         this.show(child);
+      }
+    });
+  }
+
+  paper() {
+    this.dialogService.openDialog(ChildrenReportComponent,{
+      width: '100%',
+      height: '100%',
+    }).subscribe(r => {
+      if (r) {
+        console.log(r);
       }
     });
   }
