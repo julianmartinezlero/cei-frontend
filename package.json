@@ -36,7 +36,7 @@
     "ngx-useful-swiper": "^10.0.1",
     "ngx-webcam": "^0.2.6",
     "rxjs": "~6.4.0",
-    "swiper": "^6.4.9",
+    "swiper": "^6.5.1",
     "tslib": "^1.9.0",
     "uuid": "^3.3.3",
     "zone.js": "~0.9.1"
