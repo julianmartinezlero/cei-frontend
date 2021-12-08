@@ -80,8 +80,6 @@ export class PrintPdfService {
     this.doc.setFontSize(15);
     // @ts-ignore
     this.doc.textCenter('DIAGNÓSTICO', {align: 'center', font: 'OpenSansBold'}, 0, 18);
-    // @ts-ignore
-    // this.doc.textCenter(subtitle, {align: 'center'}, 0, 24);
     this.doc.rect(10, 10, this.doc.internal.pageSize.width - 20, this.doc.internal.pageSize.height - 20);
     this.doc.setFontSize(12);
     this.doc.addImage(IMG_LOGO, 'JPEG', 12, 12, 24, 20);
@@ -98,24 +96,21 @@ export class PrintPdfService {
     for (let i = 0; i < tests.length; i++) {
       if (i === 0) {
         this.doc.setFontSize(14);
-        // this.doc.setFont('OpenSansBold');
-        // console.log(this.doc.getFontList());
-        this.doc.text(`Descripcion`, 20, pos);
+        this.doc.text(`Descripción`, 20, pos);
         const separateText = this.doc.splitTextToSize(tests[i].treatment.text, 180);
         this.doc.setFontSize(12);
-        this.doc.text(separateText, 20, pos + 20);
+        this.doc.text(separateText, 20, pos + 10);
         this.doc.setFontSize(14);
-        this.doc.text(`Recomendaciones para la intervención`, 20, pos + 50);
-        pos = pos + 50;
+        this.doc.text(`Recomendaciones para la intervención`, 20, pos + 25);
+        pos = pos + 35;
       } else {
-        // this.doc.setFontSize(12);
-        const separateText = this.doc.splitTextToSize(tests[i].treatment.text.replace(/\n\s+/g, ''), 180);
+        const separateText = (this.doc.splitTextToSize(tests[i].treatment.text.replace(/\n\s+/g, ''), 180)).filter(a => a.length > 0);
         this.doc.setFontSize(12);
+        const dim = this.doc.getTextDimensions(separateText);
         this.doc.text(separateText, 20, pos);
-        // this.doc.text(tests[i].treatment.text.split(' '), 20, pos);
+        pos = pos + dim.h + 3;
       }
 
-      pos = pos + 20;
     }
 
     this.doc.save(`${child.name}_${child.lastName}_${new Date().getTime()}.pdf`);
