@@ -32,7 +32,7 @@
             <mat-radio-group aria-label="Select an option">
               <mat-radio-button *ngFor="let option of question.questionOptions; let j = index" disabled
                                 [value]="option">
-                <input type="text" [(ngModel)]="option.description" [name]=" i + j + 'option' + random()">
+                <input type="text" [(ngModel)]="option.description" name="{{i}}option{{j}}option">
               </mat-radio-button>
               <button mat-flat-button color="primary" (click)="addOption(i)"><mat-icon>add</mat-icon>Nueva opción</button>
             </mat-radio-group>
