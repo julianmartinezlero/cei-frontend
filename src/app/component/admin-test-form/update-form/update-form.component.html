@@ -22,23 +22,26 @@
           <mat-card-title>
             <span>{{i + 1}}.-</span>
             <span style="color: red"> * </span>
-            <input type="text" [(ngModel)]="question.question" [name]="question.id + 'question'">
+            <input type="text" [(ngModel)]="question.question" [name]="i + 'question'">
+            <button mat-icon-button style="position: absolute;right: 6px;top: 6px;" (click)="removeQuestion(i)"><mat-icon>close</mat-icon></button>
           </mat-card-title>
           <mat-card-subtitle>
-            <input type="text" [(ngModel)]="question.details" [name]="question.id + 'detail'">
+            <input type="text" [(ngModel)]="question.details" [name]="i + 1 + 'detail'">
           </mat-card-subtitle>
           <mat-card-content>
             <mat-radio-group aria-label="Select an option">
-              <mat-radio-button *ngFor="let option of question.questionOptions; let i = index" disabled
+              <mat-radio-button *ngFor="let option of question.questionOptions; let j = index" disabled
                                 [value]="option">
-                <input type="text" [(ngModel)]="option.description" [name]="option.id + 'option'">
+                <input type="text" [(ngModel)]="option.description" [name]=" i + j + 'option' + random()">
               </mat-radio-button>
+              <button mat-flat-button color="primary" (click)="addOption(i)"><mat-icon>add</mat-icon>Nueva opción</button>
             </mat-radio-group>
             <p>Recursos: {{question?.questionAssets?.length ? question?.questionAssets?.length : 0}}</p>
             <button mat-button color="primary" (click)="openResource(question)">Abrir Recursos</button>
           </mat-card-content>
 
       </mat-card>
+      <button *ngIf="questions" (click)="addQuestion()" mat-flat-button color="primary" class="customQuestion">Nueva Pregunta</button>
     </form>
 
   </div>

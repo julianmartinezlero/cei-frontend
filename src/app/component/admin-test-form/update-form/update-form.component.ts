@@ -94,6 +94,37 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
       }
     });
   }
+
+  addQuestion() {
+    console.log(this.questions);
+    this.questions.push({
+      id: null,
+      question: 'Escribe tu pregunta',
+      details: 'Escribe una descripción',
+      questionType: null,
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
+  }
+
+  removeQuestion(i: number) {
+    this.questions.splice(i, 1);
+  }
+
+  addOption(i: number) {
+    if (this.questions[i].questionOptions === undefined) {
+      this.questions[i].questionOptions = [];
+    }
+    this.questions[i].questionOptions.push({
+      id: null,
+      value: 1,
+      description: 'Escribe tu opción',
+    });
+  }
+
+  random() {
+    return new Date().getTime();
+  }
 }
 
 export interface TestSolved {

@@ -1,8 +1,8 @@
 export interface Question {
-  id?: null;
-  question: null;
-  questionType: null;
-  details: null;
+  id?: number;
+  question: any;
+  questionType: any;
+  details: any;
   questionOptions?: QuestionOption[];
   questionAssets?: QuestionOptionAsset[];
   resourceUrl?: string;
@@ -10,10 +10,10 @@ export interface Question {
 }
 
 export interface QuestionOption {
-  id?: null;
-  value: null;
-  description: null;
-  questionId: null;
+  id?: number;
+  value: number;
+  description: string;
+  questionId?: number;
 }
 
 export interface QuestionOptionAsset {
