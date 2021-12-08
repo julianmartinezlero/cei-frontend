@@ -2,26 +2,25 @@
   <mat-card class="card-content mat-elevation-z5">
       <mat-toolbar class="white">
         <mat-toolbar-row>
-          <h2>Tutores</h2>
-          <span class="spacer-row"></span>
-          <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">
-            <mat-icon>person_add</mat-icon>
-          </button>
+          <ng-container *ngIf="searchVisible">
+            <app-search-alert (cancelButton)="cancel()" (searchEmitter)="searchUser($event)" placeholder="Buscar... Tutores"></app-search-alert>
+          </ng-container>
+          <ng-container *ngIf="!searchVisible">
+            <h2>Tutores</h2>
+            <span class="spacer-row"></span>
+            <button mat-icon-button color="primary" matTooltip="Agregar" (click)="search()">
+              <mat-icon>search</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">
+              <mat-icon>person_add</mat-icon>
+            </button>
+          </ng-container>
+
         </mat-toolbar-row>
       </mat-toolbar>
     <mat-divider class="primary"></mat-divider>
     <mat-card-content>
       <mat-list>
-<!--        <mat-toolbar class="white">-->
-<!--          <span class="text-primary">-->
-<!--            Tutores-->
-<!--          </span>-->
-<!--          <span class="spacer-row"></span>-->
-<!--          <button mat-icon-button color="primary" matTooltip="Agregar" (click)="create()">-->
-<!--            <mat-icon>person_add</mat-icon>-->
-<!--          </button>-->
-<!--        </mat-toolbar>-->
-<!--        <mat-divider class="primary"></mat-divider>-->
         <div *ngIf="tutors.length === 0" class="notify-empty">
           A&uacute;n no se registraron Tutores
         </div>

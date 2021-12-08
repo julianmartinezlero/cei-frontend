@@ -21,6 +21,8 @@ export class TutorListComponent implements OnInit, CrudComponent {
   title = 'Tutores';
   state = true;
   tutors: Tutor[] = [];
+  aux: Tutor[] = [];
+  searchVisible = false;
 
   constructor(private tutorService: TutorService,
               private childService: ChildrenService,
@@ -40,6 +42,7 @@ export class TutorListComponent implements OnInit, CrudComponent {
   all() {
     this.tutorService.get().subscribe((t: Tutor[]) => {
       this.tutors = t;
+      this.aux = t;
     }, error1 => {
       // this.dialogService.toastDialog('error');
     });
@@ -109,5 +112,18 @@ export class TutorListComponent implements OnInit, CrudComponent {
         tutor,
       },
     });
+  }
+
+  cancel() {
+    this.tutors = this.aux;
+    this.searchVisible = false;
+  }
+
+  searchUser($event: any) {
+    this.tutors = this.aux.filter(t => t.name.toLowerCase().includes($event.toString().toLowerCase()));
+  }
+
+  search() {
+    this.searchVisible = true;
   }
 }

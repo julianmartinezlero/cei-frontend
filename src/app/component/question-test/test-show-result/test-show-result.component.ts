@@ -8,6 +8,8 @@ import {QuestionTestService} from '../question-test.service';
 import {ChildrenService} from '../../children/services/children.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {environment} from '../../../../environments/environment';
+import {TestUploadResourceComponent} from '../test-upload-resource/test-upload-resource.component';
+import {DialogService} from '../../alerts/dialog.service';
 
 @Component({
   selector: 'app-test-show-result',
@@ -30,6 +32,7 @@ export class TestShowResultComponent implements OnInit {
               private router: Router,
               private questionTestService: QuestionTestService,
               private childService: ChildrenService,
+              private dialogService: DialogService,
               private dialogRef: MatDialogRef<TestShowResultComponent>,
               @Inject(MAT_DIALOG_DATA) private data: any
   ) {
@@ -60,6 +63,21 @@ export class TestShowResultComponent implements OnInit {
   isVideo(archivo) {
     const a = archivo.split('.');
     return a[1] === 'mp4';
+  }
+
+  uploadResource(a) {
+    this.dialogService.openDialog(TestUploadResourceComponent, {
+      width: '500px',
+      height: '500px',
+      data:  a,
+    }).subscribe(r => {
+      if (r) {
+        a.resourceUrl = r;
+        this.questionTestService.put(`solved/update/${a.id}`, a).subscribe((b: any) => {
+          this.ngOnInit();
+        });
+      }
+    });
   }
 }
 export interface TestResolved {

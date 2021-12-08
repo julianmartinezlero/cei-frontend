@@ -34,11 +34,7 @@
 
     <form autocomplete="off" *ngIf="questions">
       <div style="width: 700px;margin: auto;">
-
         <span class="spacer-row"></span>
-        <!--            <button mat-icon-button (click)="cancel()">-->
-        <!--              <mat-icon>close</mat-icon>-->
-        <!--            </button>-->
       </div>
       <mat-card *ngFor="let question of questions.testResults; let i = index;" class="customQuestion">
         <mat-card-title>{{question.question.question}}<span style="color: red"> *</span></mat-card-title>
@@ -50,11 +46,18 @@
                 <mat-radio-button [disabled]="true">{{question.questionOption.description}}</mat-radio-button>
               </mat-radio-group>
             </div>
-            <div class="col-6" *ngIf="question.resourceUrl">
-              <img [src]="getSrc(question.resourceUrl)" *ngIf="isVideo(question.resourceUrl) === false" alt="imagen">
-              <video  *ngIf="isVideo(question.resourceUrl) === true" controls>
-                <source [src]="getSrc(question.resourceUrl)" type="video/mp4">
-              </video>
+            <div class="col-6" >
+
+              <ng-container *ngIf="question.resourceUrl">
+                <img [src]="getSrc(question.resourceUrl)" *ngIf="isVideo(question.resourceUrl) === false" alt="imagen">
+                <video  *ngIf="isVideo(question.resourceUrl) === true" controls>
+                  <source [src]="getSrc(question.resourceUrl)" type="video/mp4">
+                </video>
+              </ng-container>
+              <ng-container>
+                <button mat-flat-button color="primary" (click)="uploadResource(question)"><mat-icon>cloud_upload</mat-icon> Subir Recursos</button>
+              </ng-container>
+
             </div>
 
           </div>
@@ -65,10 +68,4 @@
     </form>
 
   </div>
-<!--  <mat-card-actions>-->
-<!--    <span class="spacer-row"></span>-->
-<!--&lt;!&ndash;    <button type="button" mat-flat-button color="warn" (click)="closeTest()" style="margin-right: 10px">Cancelar</button>&ndash;&gt;-->
-<!--&lt;!&ndash;    <button [disabled]="!testValid()" type="button" mat-flat-button color="primary" (click)="accept()">Aceptar</button>&ndash;&gt;-->
-<!--  </mat-card-actions>-->
-
 </div>

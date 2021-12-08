@@ -24,7 +24,9 @@ import {VERTICAL_POSITION} from '../../../../environments/environment';
 })
 export class ProfessionalListComponent implements OnInit, CrudComponent {
   title = 'Profesionales';
+  searchVisible = false;
   dataSource = new MatTableDataSource<Professional>([]);
+  aux = new MatTableDataSource<Professional>([]);
 
   constructor(
     private professionalService: ProfessionalService,
@@ -40,6 +42,7 @@ export class ProfessionalListComponent implements OnInit, CrudComponent {
   all() {
     this.professionalService.get().subscribe((t: Professional[]) => {
       this.dataSource = new MatTableDataSource<Professional>(t);
+      this.aux = new MatTableDataSource<Professional>(t);
     });
   }
 
@@ -98,4 +101,20 @@ export class ProfessionalListComponent implements OnInit, CrudComponent {
     });
   }
 
+  cancel() {
+    this.dataSource = new MatTableDataSource<Professional>(this.aux.data);
+    this.searchVisible = false;
+  }
+
+  searchUser($event: any) {
+    this.dataSource = new MatTableDataSource<Professional>(this.aux.data.filter(
+      (value: Professional) => {
+        return value.name.toLowerCase().includes($event.toString().toLowerCase());
+      }
+    ));
+  }
+
+  search() {
+    this.searchVisible = !this.searchVisible;
+  }
 }
