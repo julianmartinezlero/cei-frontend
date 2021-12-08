@@ -9,13 +9,16 @@
   </mat-toolbar>
   <div mat-dialog-content>
     <form autocomplete="off">
-      <div style="width: 700px;margin: auto;">
-
-        <span class="spacer-row"></span>
-        <!--            <button mat-icon-button (click)="cancel()">-->
-        <!--              <mat-icon>close</mat-icon>-->
-        <!--            </button>-->
-      </div>
+      <mat-card style="width: 700px;margin: auto;">
+        <mat-card-title>Nota</mat-card-title>
+        <mat-card-content>
+          <p>Debe tomar en cuenta el puntaje de cada opci&oacute;n, donde:</p>
+          <p><b>0</b> es bueno.</p>
+          <p><b>1</b> es regular</p>
+          <p><b>2</b> es malo</p>
+          <p><b>3</b> es muy malo</p>
+        </mat-card-content>
+      </mat-card>
       <mat-card *ngFor="let question of questions; let i = index;" class="customQuestion">
 <!--        <div class="position-n">{{i + 1}}</div>-->
 
@@ -31,10 +34,11 @@
           <mat-card-content>
             <mat-radio-group aria-label="Select an option">
               <mat-radio-button *ngFor="let option of question.questionOptions; let j = index" disabled
-                                [value]="option">
+                                [value]="option">Puntaje: {{option.value}}
                 <input type="text" [(ngModel)]="option.description" name="{{i}}option{{j}}option">
+                <button mat-icon-button type="button" (click)="deleteOption(question, j)"><mat-icon>do_not_disturb_on</mat-icon></button>
               </mat-radio-button>
-              <button mat-flat-button color="primary" (click)="addOption(i)"><mat-icon>add</mat-icon>Nueva opción</button>
+              <button mat-flat-button color="primary" *ngIf="question.questionOptions.length < 4" (click)="addOption(i)"><mat-icon>add</mat-icon>Nueva opción</button>
             </mat-radio-group>
             <p>Recursos: {{question?.questionAssets?.length ? question?.questionAssets?.length : 0}}</p>
             <button mat-button color="primary" (click)="openResource(question)">Abrir Recursos</button>

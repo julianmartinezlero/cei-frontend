@@ -101,6 +101,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
       id: null,
       question: 'Escribe tu pregunta',
       details: 'Escribe una descripción',
+      questionOptions: [],
       questionType: null,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -112,18 +113,23 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   }
 
   addOption(i: number) {
-    if (this.questions[i].questionOptions === undefined) {
-      this.questions[i].questionOptions = [];
-    }
-    this.questions[i].questionOptions.push({
-      id: null,
-      value: 1,
-      description: 'Escribe tu opción',
-    });
+   let total =  3;
+   while (total >= 0) {
+     if (!this.questions[i].questionOptions.find(a => a.value === total)) {
+       this.questions[i].questionOptions.push({
+         id: null,
+         value: total,
+         description: 'Escribe tu opción',
+       });
+       break;
+     }
+     total--;
+   }
+   this.questions[i].questionOptions = this.questions[i].questionOptions.sort((a, b) => b.value - a.value);
   }
 
-  random() {
-    return new Date().getTime();
+  deleteOption(question: Question, j: number) {
+    question.questionOptions.splice(j, 1);
   }
 }
 
