@@ -18,7 +18,6 @@ import {MatDialog, MatSnackBar} from '@angular/material';
 export class UpdateFormComponent implements OnInit, OnDestroy {
 
   title = 'Atras';
-  testForm: TestSolved[] = [];
   hide = true;
   test: TestChild;
   questions: Question[];
@@ -51,25 +50,17 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
     this.sideNavService.openNav();
   }
 
-  generateGroupTest() {
-    this.questions.forEach(r => {
-      this.testForm.push({
-        id: null,
-        questionId: r,
-        test: null,
-        questionOption: null,
-        createdAt: new Date(),
-        updatedAt: new Date()
-      });
-    });
-  }
-
   accept() {
     this.snack.open('Seguro de Guardar?', 'ACEPTAR', {
       duration: 5000,
     }).onAction().subscribe(() => {
-      this.questionTestService.updateQuestion(this.testForm).subscribe(a => {
+      this.questionTestService.updateQuestion(this.questions.slice(0, 12)).subscribe(a => {
         this.loadQuestion(null);
+        if (this.questions.length > 12) {
+          localStorage.setItem('test', JSON.stringify(this.questions));
+        } else {
+          localStorage.removeItem('test');
+        }
       });
     });
   }
@@ -77,7 +68,12 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   loadQuestion(id) {
     this.questionTestService.getCustom(`${id}/solved`).subscribe((res: Question[]) => {
       this.questions = res;
-      this.generateGroupTest();
+      if (localStorage.getItem('test')) {
+        const questions: Question[] = JSON.parse(localStorage.getItem('test'));
+        if (questions.length > 12) {
+          this.questions = this.questions.concat(questions.slice(12, questions.length));
+        }
+      }
     });
   }
 
@@ -96,13 +92,13 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   }
 
   addQuestion() {
-    console.log(this.questions);
     this.questions.push({
-      id: null,
+      id: new Date().getTime(),
       question: 'Escribe tu pregunta',
       details: 'Escribe una descripción',
       questionOptions: [],
-      questionType: null,
+      questionAssets: [],
+      questionType: 'verbal',
       createdAt: new Date(),
       updatedAt: new Date(),
     });
@@ -117,7 +113,7 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
    while (total >= 0) {
      if (!this.questions[i].questionOptions.find(a => a.value === total)) {
        this.questions[i].questionOptions.push({
-         id: null,
+         id: new Date().getTime(),
          value: total,
          description: 'Escribe tu opción',
        });
@@ -131,13 +127,4 @@ export class UpdateFormComponent implements OnInit, OnDestroy {
   deleteOption(question: Question, j: number) {
     question.questionOptions.splice(j, 1);
   }
-}
-
-export interface TestSolved {
-  id: number;
-  questionId: any;
-  test: any;
-  questionOption: any;
-  createdAt: Date;
-  updatedAt: Date;
 }

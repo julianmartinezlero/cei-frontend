@@ -26,7 +26,7 @@ export class TestSolvedComponent implements OnInit, OnDestroy {
   hide = true;
   test: TestChild;
   titleForm = 'Resolver Prubea';
-  questions: Question[];
+  questions: Question[] = [];
   testId: number;
   childSelect: Child;
   childId: number;
@@ -79,12 +79,13 @@ export class TestSolvedComponent implements OnInit, OnDestroy {
     }).subscribe(accept => {
       if (accept === true) {
         let total = 0;
-        this.testForm.forEach(q => {
+        const back = this.testForm.slice(0, 12);
+        back.forEach(q => {
           total += q.questionOption.value;
         });
         total = total / 12;
         this.questionTestService.postCustom('solved/save', {
-          solution: this.testForm,
+          solution: back,
           child: this.childSelect,
           totalValue: total
         }).subscribe((r: any) => {
@@ -105,6 +106,12 @@ export class TestSolvedComponent implements OnInit, OnDestroy {
   loadQuestion(id) {
     this.questionTestService.getCustom(`${id}/solved`).subscribe((res: Question[]) => {
       this.questions = res;
+      if (localStorage.getItem('test')) {
+        const questions: Question[] = JSON.parse(localStorage.getItem('test'));
+        if (questions.length > 12) {
+          this.questions = this.questions.concat(questions.slice(12, questions.length));
+        }
+      }
       this.generateGroupTest();
     });
   }
@@ -129,7 +136,7 @@ export class TestSolvedComponent implements OnInit, OnDestroy {
   testValid() {
     return this.testForm.filter(r => {
       return r.questionOption;
-    }).length === 12;
+    }).length === this.questions.length;
   }
 
   uploadResource(testSolved: TestSolved) {

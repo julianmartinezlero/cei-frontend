@@ -40,8 +40,8 @@
               </mat-radio-button>
               <button mat-flat-button color="primary" *ngIf="question.questionOptions.length < 4" (click)="addOption(i)"><mat-icon>add</mat-icon>Nueva opción</button>
             </mat-radio-group>
-            <p>Recursos: {{question?.questionAssets?.length ? question?.questionAssets?.length : 0}}</p>
-            <button mat-button color="primary" (click)="openResource(question)">Abrir Recursos</button>
+            <p *ngIf="i < 12">Recursos: {{question?.questionAssets?.length ? question?.questionAssets?.length : 0}}</p>
+            <button *ngIf=" i < 12" mat-button color="primary" (click)="openResource(question)">Abrir Recursos</button>
           </mat-card-content>
 
       </mat-card>
