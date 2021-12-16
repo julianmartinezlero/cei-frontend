@@ -2,11 +2,13 @@
   RESULTADOS DEL TEST
 </h1>
 <div mat-dialog-content [ngClass]="getClass()">
-  <div>
     <mat-list *ngIf="test">
-      <mat-list-item *ngFor="let tr of test.treatmentChildren">{{tr.treatment.text}}</mat-list-item>
+      <mat-list-item *ngFor="let tr of test.treatmentChildren.slice(0, 1)">{{tr.treatment.text}}</mat-list-item>
     </mat-list>
-  </div>
+    <mat-divider></mat-divider>
+    <mat-list *ngIf="test">
+      <mat-list-item *ngFor="let tr of treatment" class="item">{{tr}}</mat-list-item>
+    </mat-list>
 </div>
 <div mat-dialog-actions>
   <span class="spacer-row"></span>

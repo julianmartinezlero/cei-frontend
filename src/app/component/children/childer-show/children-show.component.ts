@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {TestChild} from '../../../interfaces/models/testChild.model';
 import {QuestionTestService} from '../../question-test/question-test.service';
 import {PrintPdfService} from '../../../services/printPdf.service';
+import {TreatmentChild} from '../../../interfaces/models/treatmentChild.model';
 
 @Component({
   selector: 'app-children-show',
@@ -29,6 +30,7 @@ export class ChildrenShowComponent implements OnInit {
   // child: Child;
   tests: TestChild[] = [];
   testSelect: TestChild;
+  treatment: string [] = [];
   constructor(private router: Router,
               private dialogRef: MatDialogRef<ChildrenShowComponent>,
               private testService: QuestionTestService,
@@ -45,6 +47,9 @@ export class ChildrenShowComponent implements OnInit {
     this.testService.getCustom(`testChild/${this.childSelect.id}`).subscribe((r: any) => {
       this.tests = r;
       this.testSelect = this.tests.length > 0 ? this.tests[0] : null;
+      this.treatment = this.testSelect.treatmentChildren.slice(1, 6).map(t => {
+        return t.treatment.text.split(', ').filter( d => !d.includes('Otros ejercicio'));
+      }).reduce((a, b) => a.concat(b), []);
     });
   }
 

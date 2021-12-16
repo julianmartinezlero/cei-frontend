@@ -11,8 +11,7 @@ import {QuestionTestService} from '../question-test.service';
 })
 export class TestSolvedResultComponent implements OnInit {
   test: TestChild = null;
-  treatment: any;
-
+  treatment: string[] = [];
   constructor(private treatmentService: TreatmentService,
               private testService: QuestionTestService,
               @Inject(MAT_DIALOG_DATA) private data: any) {
@@ -20,7 +19,9 @@ export class TestSolvedResultComponent implements OnInit {
   }
 
   ngOnInit() {
-
+    this.treatment = this.test.treatmentChildren.slice(1, 6).map(t => {
+      return t.treatment.text.split(', ').filter( d => !d.includes('Otros ejercicio'));
+    }).reduce((a, b) => a.concat(b), []);
   }
 
   getClass() {

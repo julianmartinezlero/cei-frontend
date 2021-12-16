@@ -5,7 +5,7 @@ mat-list-item{
   height: auto;
   //margin-bottom: 15px;
 }
-mat-list-item:not(:first-child){
+mat-list-item.item {
   font-size: 14px;
   margin-left: 32px;
   width: auto;
